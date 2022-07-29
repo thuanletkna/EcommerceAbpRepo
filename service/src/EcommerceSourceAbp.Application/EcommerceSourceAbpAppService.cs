@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using EcommerceSourceAbp.Localization;
+using Volo.Abp;
 using Volo.Abp.Application.Services;
 
 namespace EcommerceSourceAbp;
@@ -10,6 +11,7 @@ namespace EcommerceSourceAbp;
  */
 public abstract class EcommerceSourceAbpAppService : ApplicationService
 {
+    protected UserFriendlyException NotFoundException => new UserFriendlyException(L["Error:NotFound"]);
     protected EcommerceSourceAbpAppService()
     {
         LocalizationResource = typeof(EcommerceSourceAbpResource);
