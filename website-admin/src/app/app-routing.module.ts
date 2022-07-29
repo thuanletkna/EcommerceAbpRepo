@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+  {
+    path: 'category',
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule),
+  },
 ];
 
 @NgModule({
