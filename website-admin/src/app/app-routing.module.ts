@@ -1,4 +1,4 @@
-import { AuthGuard } from '@abp/ng.core';
+import { AuthGuard, PermissionGuard } from '@abp/ng.core';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankLayoutComponent } from './shared/layout/blank-layout.component';
@@ -12,6 +12,10 @@ const routes: Routes = [
         {
             path: 'category',
             loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule),
+            canActivate: [AuthGuard, PermissionGuard],
+                data: {
+                    requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
+                },
         },
         
         {

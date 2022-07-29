@@ -7,6 +7,7 @@ import { blogIcon, newsIcon } from '../../consts/item-custem';
     templateUrl: './aside.component.html',
 })
 export class AsideComponent extends AppBaseComponent implements OnInit {
+    isCollapsed = false;
     menus = [
         {
             level: 1,

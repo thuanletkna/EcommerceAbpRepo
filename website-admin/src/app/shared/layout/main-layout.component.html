@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header>
 <div id="layoutSidenav">
   <div nav-menu id="layoutSidenav_nav"></div>
   <div id="layoutSidenav_content" (click)="sideNavClick()">
@@ -6,4 +6,86 @@
       <router-outlet></router-outlet>
     </main>
   </div>
-</div>
+</div> -->
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Ant Design Of Angular</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngFor="let menu of menus">
+      <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/welcome">Welcome</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Monitor</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Workplace</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li> -->
+      <li *ngIf="!menu.children && menu.isPermission" nz-menu-item [nzPaddingLeft]="menu.level * 24"
+                [nzDisabled]="menu.disabled" [nzSelected]="menu.selected" [routerLink]="menu.route">
+                <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
+                <span>{{ menu.title }}</span>
+            </li>
+            <li *ngIf="menu.children && menu.isPermission" nz-submenu [nzPaddingLeft]="menu.level * 24"
+                [nzOpen]="menu.open" [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzDisabled]="menu.disabled" (click)="onClickMenu(menu)">
+                <ul>
+                    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }"></ng-container>
+                </ul>
+            </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+        </span>
+        <span class="">{{profile?.fullName || currentUser?.userName}}</span>
+
+          <!-- <img class="avatar" width="42px" height="42px" [src]="getResourceById(profile?.profileImage)"
+            (error)="avatarError($event)" alt="" nz-dropdown [nzDropdownMenu]="menu"> -->
+
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item (click)="redirectAccount()">
+                <i nz-icon nzType="info-circle" nzTheme="outline"></i>
+                Thông tin tài khoản
+              </li>
+              <li nz-menu-item (click)="logout()">
+                <i nz-icon nzType="logout" nzTheme="outline"></i>
+                Logout
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

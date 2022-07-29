@@ -13,9 +13,10 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
 import { IOptionPopup, MessageBoxComponent } from './components/messagebox/messagebox.component';
 import { Status, NatsStatus } from './enums';
-import { NcsPermissions } from './consts/ncs-permissions';
 import { TypeOfEvent } from './enums/typeofevent';
 import { MasterTable } from './enums/mastertable';
+import { EcommerceSourceAbpPermissions } from './consts/ecommerce-permissions';
+
 // import { MatDialog } from '@angular/material/dialog';
 
 export class AppBaseComponent {
@@ -101,7 +102,7 @@ avatarError(event) {
 
     const nextYear = new Date().getFullYear() + 2;
     let startYear = 2000;
-    if (this.getGrantedPolicy(NcsPermissions.ViewUnlimitedYear.Default)) {
+    if (this.getGrantedPolicy(EcommerceSourceAbpPermissions.ViewUnlimitedYear.Default)) {
         // startYear = environment.application.startYear;
     } else {
         startYear = new Date().getFullYear() - 5;

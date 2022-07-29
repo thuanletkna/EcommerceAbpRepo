@@ -23,6 +23,7 @@ import { AppHeaderService } from './shared/layout/app-header.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { DeleteOutline, PlusOutline, CloseOutline } from '@ant-design/icons-angular/icons';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 registerLocaleData(en);
 const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
@@ -31,6 +32,7 @@ const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    OverlayModule,
     NzIconModule.forRoot(icons),
     CoreModule.forRoot({
       environment,

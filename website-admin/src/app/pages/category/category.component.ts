@@ -1,7 +1,7 @@
 import { Component, Injector, ViewChild } from "@angular/core";
 import { AppBaseComponent } from "src/app/shared/app-base.component";
 import { DatatableComponent, DatatableOption } from "src/app/shared/components/datatable/datatable.component";
-import { NcsPermissions } from "src/app/shared/consts/ncs-permissions";
+import {  EcommerceSourceAbpPermissions } from "src/app/shared/consts/ecommerce-permissions";
 import { Status } from "src/app/shared/enums";
 import { TypeOfEvent } from "src/app/shared/enums/typeofevent";
 import { CategoryGetRequestInputDto } from "src/app/shared/models/category/category-get-request-input.dto";
@@ -16,7 +16,7 @@ export class CategoryComponent extends AppBaseComponent {
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
     get canAdd(): boolean {
-        return this.getGrantedPolicy(NcsPermissions.EmailOfEvent.Create);
+        return this.getGrantedPolicy(EcommerceSourceAbpPermissions.Category.Create);
     }
 
     keyword: string;
@@ -58,7 +58,7 @@ export class CategoryComponent extends AppBaseComponent {
                 },
                 name: this.l('AbpUi::Edit'),
                 color: 'primary',
-                permission: NcsPermissions.EmailOfEvent.View,
+                permission: EcommerceSourceAbpPermissions.Category.View,
             }
         ],
     };

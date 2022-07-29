@@ -4,6 +4,12 @@ public static class EcommerceSourceAbpPermissions
 {
     public const string GroupName = "EcommerceSourceAbp";
 
-    //Add your own permission names. Example:
-    //public const string MyPermission1 = GroupName + ".MyPermission1";
+    public class Category
+    {
+        public const string Default = GroupName + ".Category";
+        public const string Create = Default + ".Create";
+        public const string View = Default + ".View";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using EcommerceSourceAbp.Entities;
+using EcommerceSourceAbp.Users;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -57,7 +58,12 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<News> Newses { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<NewsTag> NewsTags { get; set; }
-    public DbSet<MetaSeo> MetaSeos { get; set; }
+    public DbSet<ECommerceProfile> ECommerceProfiles { get; set; }
+    public DbSet<PasswordReset> PasswordResets { get; set; }
+    public DbSet<Province> Provinces { get; set; }
+    public DbSet<Ward> Wards { get; set; }
+    public DbSet<District> Districts { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
     {
@@ -110,6 +116,31 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<MetaSeo>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "MetaSeos", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<ECommerceProfile>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "ECommerceProfiles", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Ward>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Wards", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Province>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Provinces", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<District>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Districts", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<AppUser>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "AppUsers", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

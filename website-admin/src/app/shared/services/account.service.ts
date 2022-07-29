@@ -12,7 +12,7 @@ export class AccountService extends AppListService<
     IParamFilterUser
 > {
     constructor(protected readonly restService: RestService) {
-        super(restService, 'system');
+        super(restService, 'Account');
     }
 
     myProfile(): Observable<ProfileModel> {
