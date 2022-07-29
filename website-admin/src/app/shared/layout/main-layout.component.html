@@ -20,7 +20,7 @@
         <h1>Ant Design Of Angular</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngFor="let menu of menus">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngFor="let menu of menus" >
       <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" >
         <ul>
           <li nz-menu-item nzMatchRouter>
@@ -41,6 +41,9 @@
           </li>
         </ul>
       </li> -->
+
+
+
       <li *ngIf="!menu.children && menu.isPermission" nz-menu-item [nzPaddingLeft]="menu.level * 24"
                 [nzDisabled]="menu.disabled" [nzSelected]="menu.selected" [routerLink]="menu.route">
                 <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
@@ -62,9 +65,11 @@
                nz-icon
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
+            <!-- <div class="d-inline-flex align-items-center logo">
+              <img src="assets/images/TBW-logo.svg" width="150">
+            </div> -->
         </span>
-        <span class="">{{profile?.fullName || currentUser?.userName}}</span>
-
+        <span class="" nz-dropdown [nzDropdownMenu]="menu">{{profile?.fullName || currentUser?.userName}}</span>
           <!-- <img class="avatar" width="42px" height="42px" [src]="getResourceById(profile?.profileImage)"
             (error)="avatarError($event)" alt="" nz-dropdown [nzDropdownMenu]="menu"> -->
 

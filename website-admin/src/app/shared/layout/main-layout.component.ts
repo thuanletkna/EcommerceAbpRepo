@@ -1,9 +1,11 @@
+import { AuthGuard } from '@abp/ng.core';
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { AppBaseComponent } from '../app-base.component';
+import { CommonHelper } from '../consts/common-helper';
 import { ProfileModel } from '../models/profile.model';
 import { AccountService } from '../services/account.service';
 import { AsideComponent } from './template-parts/aside.component';
-
+declare var $: any;
 @Component({
   templateUrl: './main-layout.component.html',
 })
@@ -32,8 +34,8 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
       icon: 'user',
       selected: false,
       open: false,
-      isPermission: true,
-      // isPermission:
+       isPermission: true,
+      // isPermission: [AuthGuard],
       //     this.getGrantedPolicy('AbpIdentity.Users') ||
       //     this.getGrantedPolicy('AbpIdentity.Roles'),
       children: [
@@ -42,8 +44,8 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
           title: 'Quản lý người dùng',
           icon: 'user',
           selected: false,
-          route: '/user',
-          isPermission: true,
+          route: '/identity/user',
+          isPermission: [AuthGuard],
           // isPermission: this.getGrantedPolicy('AbpIdentity.Users'),
         },
         {
@@ -51,8 +53,8 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
           title: 'Vai trò',
           icon: 'check',
           selected: false,
-          route: '/role',
-          isPermission: true,
+          route: '/identity/roles',
+          isPermission: [AuthGuard],
           // isPermission: this.getGrantedPolicy('AbpIdentity.Roles'),
         },
       ],
@@ -64,7 +66,7 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
       selected: false,
       route: '/category',
       // isPermission: true,
-      isPermission: this.getGrantedPolicy('EcommerceSourceAbpPermissions.Category'),
+      isPermission: [AuthGuard],
       
     },
   ];
@@ -114,4 +116,31 @@ redirectAccount() {
   this.redirectTo('/account');
 }
 
+ngAfterViewInit(): void {
+  $('#app')
+      .find('.ant-spin-nested-loading')
+      .first()
+      .find('div')
+      .first()
+      .addClass('spin-content');
+  setTimeout(() => {
+      //TO DO remove after page home imp api
+      CommonHelper.removeElementSpin();
+  }, 2000);
+
+  // $('.scrollbar-macosx').scrollbar();
+}
+
+
+// onMouseoverMenu() {
+//   if(!this.isCollapsed) return;
+//   this.isCollapsed = false;
+//   // this.aside?.initMenu(this.isCollapsed);
+// }
+
+// onMouseleaveMenu() {
+//   if(this.isCollapsed) return;
+//   this.isCollapsed = true;
+//   // this.aside?.initMenu(this.isCollapsed);
+// }
 }

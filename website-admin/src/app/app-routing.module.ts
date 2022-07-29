@@ -12,10 +12,10 @@ const routes: Routes = [
         {
             path: 'category',
             loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule),
-            canActivate: [AuthGuard, PermissionGuard],
-                data: {
-                    requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
-                },
+            canActivate: [AuthGuard],
+                // data: {
+                //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
+                // },
         },
         
         {
