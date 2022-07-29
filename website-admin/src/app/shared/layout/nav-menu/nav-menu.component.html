@@ -1,0 +1,65 @@
+<nav class="sidenav shadow-right sidenav-light">
+  <a class="navbar-brand d-flex align-items-center w-100" routerLink="/">
+    <img alt="hoan my" class="logo-header" src="assets/images/logo-header.svg" />
+  </a>
+  <div class="sidenav-menu">
+    <div class="nav accordion" id="accordionSidenav">
+      <ng-container *ngFor="let parent of menuItems; index as j">
+        <ng-container *ngIf="parent.items?.length; else isLink">
+          <ng-container *ngIf="showMenuItem(parent)">
+            <a
+              class="nav-link collapsed"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseChild' + j"
+              aria-expanded="false"
+              [attr.aria-controls]="'collapseChild' + j"
+            >
+              <div class="nav-link-icon">
+                <div class="{{ parent.icon }}"></div>
+              </div>
+              {{ parent.name }}
+              <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" [id]="'collapseChild' + j" data-bs-parent="#accordionSidenav">
+              <nav class="sidenav-menu-nested nav">
+                <ng-container *ngFor="let child of parent.items">
+                  <a
+                    *ngIf="showMenuItem(child)"
+                    class="nav-link sub-menu"
+                    [routerLink]="child.route"
+                    routerLinkActive="active"
+                  >
+                    {{ child.name }}
+                  </a>
+                </ng-container>
+              </nav>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-template #isLink>
+          <a
+            *ngIf="showMenuItem(parent)"
+            class="nav-link"
+            [routerLink]="parent.route"
+            routerLinkActive="active"
+          >
+            <div class="nav-link-icon">
+              <div class="{{ parent.icon }}"></div>
+            </div>
+            {{ parent.name }}
+          </a>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+  <!-- Sidenav Footer-->
+  <div class="sidenav-footer">
+    <div class="sidenav-footer-content w-100">
+      <div class="sidenav-footer-subtitle">Email:</div>
+      <div class="sidenav-footer-title d-flex align-items-center justify-content-between">
+        <b>{{ currentUser.name || currentUser.userName }}</b>
+        <button mat-icon-button (click)="logOut()" class="btn"><mat-icon>logout</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</nav>

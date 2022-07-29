@@ -8,7 +8,6 @@ import {
 } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { Injector } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
@@ -17,6 +16,7 @@ import { Status, NatsStatus } from './enums';
 import { NcsPermissions } from './consts/ncs-permissions';
 import { TypeOfEvent } from './enums/typeofevent';
 import { MasterTable } from './enums/mastertable';
+// import { MatDialog } from '@angular/material/dialog';
 
 export class AppBaseComponent {
   protected readonly permissionService: PermissionService;
@@ -28,7 +28,7 @@ export class AppBaseComponent {
   protected readonly activeRoute: ActivatedRoute;
   protected readonly configState: ConfigStateService;
   protected readonly sessionState: SessionStateService;
-  protected readonly matDialog: MatDialog;
+  // protected readonly matDialog: MatDialog;
 
   get hasLoggedIn(): boolean {
     return this.oAuthService.hasValidAccessToken();
@@ -53,6 +53,14 @@ export class AppBaseComponent {
     return result.sort((a,b) => b - a);
   }
 
+  public getResourceById(path: string, resolution?: string) {
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    return `${environment.s3Config.publishUrl}/${path}`;
+}
+avatarError(event) {
+  if (event) event.target.src = './assets/images/user-default.png';
+}
   get listTypeOfEvent(): number[] {
     const result = [];
     for (const typeofevent in TypeOfEvent) {
@@ -123,7 +131,7 @@ export class AppBaseComponent {
     this.activeRoute = injector.get(ActivatedRoute);
     this.configState = injector.get(ConfigStateService);
     this.sessionState = injector.get(SessionStateService);
-    this.matDialog = injector.get(MatDialog);
+    // this.matDialog = injector.get(MatDialog);
   }
 
   getGrantedPolicy(key: string) {
@@ -150,13 +158,13 @@ export class AppBaseComponent {
     );
   }
 
-  // login() {
-  //   this.authService.navigateToLogin();
-  // }
+  login() {
+    this.authService.navigateToLogin();
+  }
 
-  // logout() {
-  //   this.authService.logout().subscribe();
-  // }
+  logout() {
+    this.authService.logout().subscribe();
+  }
 
   protected getParam(param: string): string {
     return this.activeRoute.snapshot.paramMap.get(param);
@@ -203,10 +211,10 @@ export class AppBaseComponent {
   }
 
   protected openPopup(option: IOptionPopup, width = '400px'): void {
-    this.matDialog.open(MessageBoxComponent, {
-      width,
-      data: option,
-    });
+    // this.matDialog.open(MessageBoxComponent, {
+    //   width,
+    //   data: option,
+    // });
   }
 
   protected openDeleteConfirm(itemName: string, callBack: () => void): void {

@@ -1,0 +1,22 @@
+<nav class="topnav navbar navbar-expand justify-content-between navbar-light bg-white"
+  id="sidenavAccordion">
+  <div class="d-flex align-items-center">
+    <button type="button"
+      class="btn btn-icon btn-transparent-dark"
+      id="sidebarToggle"
+      (click)="sidebarToggleClick()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="page-title">
+      {{ appHeaderService.option?.pageTitle }}
+    </h1>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button 
+      *ngFor="let button of buttons"
+      type="button" 
+      (click)="appHeaderService.click(button.name); button?.click()" 
+      class="btn {{ button.class || 'btn-add-new' }} mr-md-2 mr-0 ml-2">{{ button.title }}</button>
+    
+  </div>
+</nav>

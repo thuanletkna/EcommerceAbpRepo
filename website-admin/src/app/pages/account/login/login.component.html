@@ -1,0 +1,49 @@
+<section class="login">
+  <div class="container-custom">
+    <h1 class="title">Đăng nhập</h1>
+    <p>Vui lòng nhập email và mật khẩu để đăng nhập</p>
+    <img src="./assets/images/logo.png" alt="" class="img-fluid d-block mx-auto">
+    <form>
+      <div class="form-group">
+        <label for="email">Email<span>*</span></label>
+        <div class="input-custom">
+          <img src="./assets/images/email-green-icon.svg" alt="" class="lock">
+          <input 
+            type="text" 
+            class="form-control" 
+            id="email" 
+            placeholder="Nhập email" 
+            [(ngModel)]="vm.username" 
+            name="email" 
+            autofocus 
+            required 
+            (keyup.enter)="login()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu<span>*</span></label>          
+        <div class="input-custom">
+          <img src="./assets/images/lock-icon-login.svg" alt="">
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" 
+            placeholder="Nhập mật khẩu" 
+            [(ngModel)]="vm.password" 
+            name="password" required 
+            (keyup.enter)="login()">
+            <button type="button" class="btn btn-eye p-0" (click)="togglePasswordVisibility()">
+              <img src="./assets/icons/visibility-off.svg" alt="" class="mr-0">
+            </button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="custom-control custom-checkbox">
+          <label nz-checkbox name="remember" [(ngModel)]="vm.rememberMe">Ghi nhớ tài khoản</label>
+        </div>
+        <a class="forget-password-link" [routerLink]="'/account/forgot-password'">Quên mật khẩu?</a>
+      </div>
+    </form>
+    <button type="button" class="btn btn-common" (click)="login()">
+      Đăng nhập
+    </button>
+  </div>
+</section>

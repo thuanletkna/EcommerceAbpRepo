@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EcommerceSourceAbp.Localization;
+﻿using EcommerceSourceAbp.Localization;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
 

@@ -12,6 +12,13 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 import { AnchorDirective } from './directives/anchor.directive';
 import { ThirdPartyModule } from './third-party.module';
+import { MainLayoutComponent } from './layout/main-layout.component';
+import { BlankLayoutComponent } from './layout/blank-layout.component';
+import { AsideComponent } from './layout/template-parts/aside.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const defineComponents = [
   MessageBoxComponent,
@@ -20,6 +27,11 @@ const defineComponents = [
   QuestionMessageComponent,
   WarningMessageComponent,
   DatatableComponent,
+  MainLayoutComponent,
+    BlankLayoutComponent,
+    AsideComponent,
+    HeaderComponent,
+  NavMenuComponent,
   // ImageComponent,
   // UploadImageComponent,
   // UploadFileComponent,
@@ -39,8 +51,12 @@ const directives = [AnchorDirective];
     CoreModule,
     ThemeSharedModule,
     NgbDropdownModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxValidateCoreModule,
-    ThirdPartyModule
+    ThirdPartyModule,
+    
   ],
   exports: [
     CoreModule,
@@ -48,6 +64,9 @@ const directives = [AnchorDirective];
     NgbDropdownModule,
     NgxValidateCoreModule,
     ThirdPartyModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     ...defineComponents,
     ...pipes,
     ...directives

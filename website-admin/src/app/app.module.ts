@@ -19,14 +19,19 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AppHeaderService } from './shared/layout/app-header.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { DeleteOutline, PlusOutline, CloseOutline } from '@ant-design/icons-angular/icons';
 
 registerLocaleData(en);
-
+const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NzIconModule.forRoot(icons),
     CoreModule.forRoot({
       environment,
       registerLocaleFn: registerLocale(),
@@ -41,7 +46,8 @@ registerLocaleData(en);
     HttpClientModule,
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER, { provide: NZ_I18N, useValue: en_US }],
+  providers: [APP_ROUTE_PROVIDER, { provide: NZ_I18N, useValue: en_US },AppHeaderService],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule {}

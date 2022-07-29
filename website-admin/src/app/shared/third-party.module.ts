@@ -26,7 +26,30 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 // import { ChartModule } from 'angular-highcharts';
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 // import { ColorPickerModule } from 'ngx-color-picker';
-
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMessageModule, NzMessageServiceModule } from 'ng-zorro-antd/message';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 const matModules = [
   DragDropModule,
   MatSortModule,
@@ -42,17 +65,41 @@ const matModules = [
   MatNativeDateModule,
   MatTreeModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
 ];
 
 const AntModules = [
-  NzInputModule,
-  NzSelectModule,
-  NzRadioModule,
-  NzFormModule,
-  NzDatePickerModule,
-  NzCheckboxModule,
-  NzInputNumberModule
+    NzTableModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
+    NzMessageModule,
+    NzCardModule,
+    NzPopconfirmModule,
+    NzSwitchModule,
+    NzUploadModule,
+    NzImageModule,
+    NzDropDownModule,
+    NzSelectModule,
+    NzDatePickerModule,
+    NzModalModule,
+    NzInputNumberModule,
+    NzDividerModule,
+    NzCheckboxModule,
+    DragDropModule,
+    NzTagModule,
+    NzBadgeModule,
+    NzTabsModule,
+    NzSpinModule, 
+    NzToolTipModule,
+    NzResultModule,
+    NzRateModule,
+    NzPaginationModule,
+    NzTimePickerModule,
+    NzListModule,
+    NzMessageServiceModule,
 ]
 
 const otherModules = [
