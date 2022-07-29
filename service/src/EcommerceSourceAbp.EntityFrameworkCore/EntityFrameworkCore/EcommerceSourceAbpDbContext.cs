@@ -54,6 +54,10 @@ public class EcommerceSourceAbpDbContext :
 
     #endregion
     public DbSet<Category> Categories { get; set; }
+    public DbSet<News> Newses { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<NewsTag> NewsTags { get; set; }
+    public DbSet<MetaSeo> MetaSeos { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
     {
@@ -86,6 +90,26 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<Category>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Categories", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<News>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Newses", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<NewsTag>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "NewsTags", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Tag>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Tags", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<MetaSeo>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "MetaSeos", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

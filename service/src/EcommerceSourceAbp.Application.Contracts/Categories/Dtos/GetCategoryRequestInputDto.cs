@@ -4,7 +4,6 @@ namespace EcommerceSourceAbp.Categories.Dtos
 {
     public class GetCategoryRequestInputDto : ListBaseGetRequestInput
     {
-        public int Level { get; set; }
-        public int? ParentId { get; set; }
+        public bool? IsBlog { get; set; }
     }
 }
