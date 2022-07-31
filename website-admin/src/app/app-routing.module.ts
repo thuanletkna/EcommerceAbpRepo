@@ -1,4 +1,4 @@
-import { AuthGuard } from '@abp/ng.core';
+import { AuthGuard, PermissionGuard } from '@abp/ng.core';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankLayoutComponent } from './shared/layout/blank-layout.component';
@@ -12,8 +12,50 @@ const routes: Routes = [
         {
             path: 'category',
             loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryModule),
+            canActivate: [AuthGuard],
+                // data: {
+                //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
+                // },
         },
-        
+        {
+          path: 'products',
+          loadChildren: () => import('./pages/product/product.module').then(m => m.ProductModule),
+          canActivate: [AuthGuard],
+              // data: {
+              //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
+              // },
+      },
+      {
+        path: 'category-product',
+        loadChildren: () => import('./pages/product/category-product/category-product.module').then(m => m.CategoryProductModule),
+        canActivate: [AuthGuard],
+            // data: {
+            //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
+            // },
+    },
+        {
+          path: 'account',
+          loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
+        },
+        {
+          path: 'identity',
+          loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
+        },
+        {
+          path: 'identity/roles',
+          loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'tenant-management',
+          loadChildren: () =>
+            import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
+        },
+        {
+          path: 'setting-management',
+          loadChildren: () =>
+            import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
+        },
         {
           path: '',
           pathMatch: 'full',
@@ -31,24 +73,29 @@ const routes: Routes = [
   component: BlankLayoutComponent,
   path: '',
   children: [
-    {
-      path: 'account',
-      loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
-    },
-    {
-      path: 'identity',
-      loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
-    },
-    {
-      path: 'tenant-management',
-      loadChildren: () =>
-        import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
-    },
-    {
-      path: 'setting-management',
-      loadChildren: () =>
-        import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
-    },
+    // {
+    //   path: 'account',
+    //   loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
+    // },
+    // {
+    //   path: 'identity',
+    //   loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
+    // },
+    // {
+    //   path: 'identity/roles',
+    //   loadChildren: () => import('@abp/ng.identity').then(m => m.IdentityModule.forLazy()),
+    //   canActivate: [AuthGuard],
+    // },
+    // {
+    //   path: 'tenant-management',
+    //   loadChildren: () =>
+    //     import('@abp/ng.tenant-management').then(m => m.TenantManagementModule.forLazy()),
+    // },
+    // {
+    //   path: 'setting-management',
+    //   loadChildren: () =>
+    //     import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
+    // },
   ],
 },
   // {

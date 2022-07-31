@@ -1,0 +1,5 @@
+<span class="data-field" *ngIf="disabled">
+    <p [innerHTML]="value | safeHTML"></p>
+</span>
+<input #quillFile type="file" (change)="quillFileSelected($event)" class="d-none">
+<div *ngIf="!disabled" [id]="editorId" [ngStyle]="{ height: heightValue }"></div>

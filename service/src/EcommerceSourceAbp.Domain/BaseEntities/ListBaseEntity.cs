@@ -8,6 +8,7 @@ namespace EcommerceSourceAbp.BaseEntities
     {
         [MaxLength(ListBaseEntityConsts.NameMaxLength)]
         public string Name { get; set; }
+        public int Code { get; set; }
 
         public Status? Status { get; set; }
     }

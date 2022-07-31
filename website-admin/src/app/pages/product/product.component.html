@@ -1,0 +1,14 @@
+<nz-card nzType="inner" nzTitle="Quản lý Sản Phẩm" [nzExtra]="extraTemplate">
+  <div class="body">
+    <div class="card mb-4">
+      <div class="card-header bg-white">Result</div>
+      <datatable [option]="tableOptions"></datatable>
+    </div>
+  </div>
+</nz-card>
+
+<ng-template #extraTemplate>
+  <button nz-button nzType="primary" (click)="create()">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>Thêm
+  </button>
+</ng-template>

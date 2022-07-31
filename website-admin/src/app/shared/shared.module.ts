@@ -19,6 +19,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductComponent } from '../pages/product/product.component';
+import { RichTextBoxComponent } from './components/richtextbox/richtextbox.component';
 
 const defineComponents = [
   MessageBoxComponent,
@@ -36,7 +38,7 @@ const defineComponents = [
   // UploadImageComponent,
   // UploadFileComponent,
   // UploadVideoComponent,
-  // RichTextBoxComponent,
+   RichTextBoxComponent,
   // SlideViewComponent,
   // VideoViewComponent,
   // PDFViewComponent,

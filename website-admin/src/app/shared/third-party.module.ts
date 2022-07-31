@@ -50,6 +50,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { IconsProviderModule } from '../icons-provider.module';
 const matModules = [
   DragDropModule,
   MatSortModule,
@@ -69,9 +70,11 @@ const matModules = [
 ];
 
 const AntModules = [
+    NzRadioModule,
     NzTableModule,
     NzLayoutModule,
     NzMenuModule,
+    IconsProviderModule,
     NzFormModule,
     NzInputModule,
     NzButtonModule,

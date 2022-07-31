@@ -17,20 +17,24 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import vi from '@angular/common/locales/vi';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppHeaderService } from './shared/layout/app-header.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { DeleteOutline, PlusOutline, CloseOutline } from '@ant-design/icons-angular/icons';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { NZ_DATE_LOCALE, vi_VN } from 'ng-zorro-antd/i18n';
 
-registerLocaleData(en);
+registerLocaleData(vi);
 const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    OverlayModule,
     NzIconModule.forRoot(icons),
     CoreModule.forRoot({
       environment,
@@ -46,7 +50,8 @@ const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
     HttpClientModule,
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER, { provide: NZ_I18N, useValue: en_US },AppHeaderService],
+  providers: [
+    APP_ROUTE_PROVIDER, { provide: NZ_I18N, useValue: vi_VN },{ provide: NZ_DATE_LOCALE, useValue: vi },AppHeaderService],
   
   bootstrap: [AppComponent],
 })
