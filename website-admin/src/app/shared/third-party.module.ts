@@ -70,6 +70,7 @@ const matModules = [
 ];
 
 const AntModules = [
+    NzRadioModule,
     NzTableModule,
     NzLayoutModule,
     NzMenuModule,

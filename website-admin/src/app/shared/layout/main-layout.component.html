@@ -7,24 +7,27 @@
     </main>
   </div>
 </div> -->
+
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
         <h1>Ant Design Of Angular</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngFor="let menu of menus" >
-      <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" >
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+          <li nz-menu-item>
+            <a routerLink="/">Trang chủ</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
@@ -34,58 +37,60 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-menu-item  nzIcon="form">
+        <a routerLink="/category" >Danh mục </a>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Sản phẩm" nzIcon="form">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+          <li nz-menu-item>
+            <a routerLink="/category-product" >Danh mục sản phẩm</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/products">Sản phẩm</a>
           </li>
         </ul>
-      </li> -->
-
-
-
-      <li *ngIf="!menu.children && menu.isPermission" nz-menu-item [nzPaddingLeft]="menu.level * 24"
-                [nzDisabled]="menu.disabled" [nzSelected]="menu.selected" [routerLink]="menu.route">
-                <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
-                <span>{{ menu.title }}</span>
-            </li>
-            <li *ngIf="menu.children && menu.isPermission" nz-submenu [nzPaddingLeft]="menu.level * 24"
-                [nzOpen]="menu.open" [nzTitle]="menu.title" [nzIcon]="menu.icon" [nzDisabled]="menu.disabled" (click)="onClickMenu(menu)">
-                <ul>
-                    <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }"></ng-container>
-                </ul>
-            </li>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Administration" nzIcon="form">
+        <ul>
+          <li nz-menu-item>
+            <a routerLink="/identity/roles">Phân quyền</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/identity/users">Người dùng</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/setting-management">Cài đặt</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
-            <!-- <div class="d-inline-flex align-items-center logo">
-              <img src="assets/images/TBW-logo.svg" width="150">
-            </div> -->
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
-        <span class="" nz-dropdown [nzDropdownMenu]="menu">{{profile?.fullName || currentUser?.userName}}</span>
-          <!-- <img class="avatar" width="42px" height="42px" [src]="getResourceById(profile?.profileImage)"
-            (error)="avatarError($event)" alt="" nz-dropdown [nzDropdownMenu]="menu"> -->
-
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu>
-              <li nz-menu-item (click)="redirectAccount()">
-                <i nz-icon nzType="info-circle" nzTheme="outline"></i>
-                Thông tin tài khoản
-              </li>
-              <li nz-menu-item (click)="logout()">
-                <i nz-icon nzType="logout" nzTheme="outline"></i>
-                Logout
-              </li>
-            </ul>
-          </nz-dropdown-menu>
+        <span class="" nz-dropdown [nzDropdownMenu]="menu">{{
+          profile?.fullName || currentUser?.userName
+        }}</span>
+        <!-- <img class="avatar" width="42px" height="42px" [src]="getResourceById(profile?.profileImage)"
+              (error)="avatarError($event)" alt="" nz-dropdown [nzDropdownMenu]="menu"> -->
+  
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="redirectAccount()">
+              <i nz-icon nzType="info-circle" nzTheme="outline"></i>
+              Thông tin tài khoản
+            </li>
+            <li nz-menu-item (click)="logout()">
+              <i nz-icon nzType="logout" nzTheme="outline"></i>
+              Logout
+            </li>
+          </ul>
+        </nz-dropdown-menu>
       </div>
+      
     </nz-header>
     <nz-content>
       <div class="inner-content">

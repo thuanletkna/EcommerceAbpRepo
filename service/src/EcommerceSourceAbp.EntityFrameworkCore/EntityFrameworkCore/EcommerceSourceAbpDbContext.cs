@@ -63,6 +63,8 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<Province> Provinces { get; set; }
     public DbSet<Ward> Wards { get; set; }
     public DbSet<District> Districts { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<FileStorage> FileStorages { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
@@ -141,6 +143,16 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<AppUser>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "AppUsers", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Product>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Products", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<FileStorage>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "FileStorages", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

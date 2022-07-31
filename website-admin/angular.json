@@ -68,6 +68,11 @@
                 "bundleName": "bootstrap-ltr.min"
               },
               {
+                "input": "node_modules/quill/dist/quill.snow.css",
+                "inject": true,
+                "bundleName": "quill.snow.min"
+              },
+              {
                 "input": "src/css/styles.css",
                 "inject": true,
                 "bundleName": "main-styles"
@@ -79,7 +84,28 @@
               },
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "node_modules/jquery/dist/jquery.min.js",
+                "inject": true,
+                "bundleName": "jquery.min"
+              },
+              {
+                "input": "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+                "inject": true,
+                "bundleName": "bootstrap.bundle.min"
+              },
+              {
+                "input": "node_modules/quill/dist/quill.js",
+                "inject": true,
+                "bundleName": "quill.min"
+              },
+              {
+                "input": "node_modules/quill-image-resize-module/image-resize.min.js",
+                "inject": true,
+                "bundleName": "quill-image-resize.min"
+              }
+            ]
           },
           "configurations": {
             "production": {

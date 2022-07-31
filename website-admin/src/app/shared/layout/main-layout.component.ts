@@ -34,8 +34,8 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
       icon: 'user',
       selected: false,
       open: false,
-       isPermission: true,
-      // isPermission: [AuthGuard],
+      //  isPermission: true,
+      isPermission: [AuthGuard],
       //     this.getGrantedPolicy('AbpIdentity.Users') ||
       //     this.getGrantedPolicy('AbpIdentity.Roles'),
       children: [
@@ -75,38 +75,7 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
       this.profile = data;
   });
   }
-  initMenu(isCollapsed: boolean) {
-    this.selectMenu(this.menus, null, isCollapsed);
-  }
-  selectMenu(menus, parent?, isCollapsed?) {
-    const pathname = window.location.pathname;
-    menus.forEach(element => {
-      if (element.route === pathname) {
-        element.selected = true;
-        if (parent) {
-          parent.open = !isCollapsed;
-        }
-      }
-      if (element.route !== pathname) {
-        element.selected = false;
-        element.open = false;
-      }
-      if (element.children) {
-        this.selectMenu(element.children, element, isCollapsed);
-      }
-    });
-  }
-  onClickMenu(menu) {
-    if (menu?.children?.length) {
-      if (menu.children.find(v => v.route === window.location.pathname)) {
-        return;
-      }
-      const path = menu.children.find(v => v.isPermission === true)?.route;
-      if (path) {
-        this.redirectTo(path);
-      }
-    }
-  }
+  
   logout() {
     this.authService.logout().subscribe(() => {
         this.redirectTo('/account/login');
@@ -117,30 +86,7 @@ redirectAccount() {
 }
 
 ngAfterViewInit(): void {
-  $('#app')
-      .find('.ant-spin-nested-loading')
-      .first()
-      .find('div')
-      .first()
-      .addClass('spin-content');
-  setTimeout(() => {
-      //TO DO remove after page home imp api
-      CommonHelper.removeElementSpin();
-  }, 2000);
-
-  // $('.scrollbar-macosx').scrollbar();
+ 
 }
 
-
-// onMouseoverMenu() {
-//   if(!this.isCollapsed) return;
-//   this.isCollapsed = false;
-//   // this.aside?.initMenu(this.isCollapsed);
-// }
-
-// onMouseleaveMenu() {
-//   if(this.isCollapsed) return;
-//   this.isCollapsed = true;
-//   // this.aside?.initMenu(this.isCollapsed);
-// }
 }
