@@ -54,6 +54,15 @@ private getCategories() {
     }
   }
 
+  private _categories: CategoryDto[] = [];
+  get categories(): CategoryDto[] {
+    return this._categories.filter(x => x.isBlog == true);
+}
+private getCategories() {
+  this.categoryService.getAll().subscribe((result) => {
+      this._categories = result || [];
+  });
+}
   ngAfterViewInit(): void {
     this.getCategories();
     if (this.id) {
