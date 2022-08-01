@@ -7,6 +7,8 @@ import { DatatableComponent } from "src/app/shared/components/datatable/datatabl
 import { ProductDto } from "src/app/shared/models/product/product.dto";
 import { EcommerceSourceAbpPermissions } from "src/app/shared/consts/ecommerce-permissions";
 import { ProductService } from "src/app/shared/services/product.service";
+import { CategoryDto } from "src/app/shared/models/category/category.dto";
+import { CategoryService } from "src/app/shared/services/category.service";
 
 
 @Component({
@@ -29,19 +31,31 @@ export class ProductCreateEditComponent extends AppBaseComponent implements Afte
   }
 
   vm: ProductDto = { status: Status.Active };
+  private _categories: CategoryDto[] = [];
+  
+  get categories(): CategoryDto[] {
+    return this._categories.filter(x => x.isBlog === false);
+}
+private getCategories() {
+  this.categoryService.getAll().subscribe((result) => {
+      this._categories = result || [];
+  });
+}
   constructor(
     injector: Injector,
     private readonly appHeaderService: AppHeaderService,
     private readonly productService: ProductService,
+    private readonly categoryService: CategoryService,
   ) {
     super(injector);
     this.appHeaderService.option = {
-      pageTitle: this.id ? 'Edit Master List Management' : 'Add New Master List Management',
+      pageTitle: this.id ? 'Chỉnh sửa sản phẩm' : 'Thêm mới sản phẩm',
       buttons: []
     }
   }
 
   ngAfterViewInit(): void {
+    this.getCategories();
     if (this.id) {
       this.productService.getById(this.id).subscribe(result => {
         this.vm = result || {};
