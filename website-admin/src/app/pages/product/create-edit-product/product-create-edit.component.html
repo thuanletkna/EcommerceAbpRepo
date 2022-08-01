@@ -15,7 +15,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Mã sản phẩm</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="productCode" type="text" [(ngModel)]="vm.productCode" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -23,7 +23,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Slug</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="slug" type="text" [(ngModel)]="vm.slug" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -37,9 +37,15 @@
                   </div>
                   <div nz-col [nzSpan]="8" >
                     <nz-form-item>
-                      <nz-form-label nzRequired>Loại sản phẩm</nz-form-label>
+                      <nz-form-label nzRequired>{{ '::Danh mục sản phẩm' | abpLocalization }}</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <nz-select name="categoryId" [(ngModel)]="vm.categoryId" nzShowSearch required>
+                          <nz-option
+                            *ngFor="let category of categories"
+                            [nzValue]="category.id"
+                            [nzLabel]="category.name"
+                          ></nz-option>
+                        </nz-select>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -47,7 +53,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Thuộc tính</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="productTypeId" type="text" [(ngModel)]="vm.productTypeId" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -55,7 +61,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Thương hiệu</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="tradeMark" type="text" [(ngModel)]="vm.tradeMark" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -63,7 +69,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Giá gốc</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="price" type="text" [(ngModel)]="vm.price" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -71,7 +77,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Giá bán</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="priceSale" type="text" [(ngModel)]="vm.priceSale" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -79,7 +85,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Số lượng</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="quantity" type="text" [(ngModel)]="vm.quantity" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -87,7 +93,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Số người mua</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="view" type="text" [(ngModel)]="vm.viewCount" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -95,7 +101,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Lượt đánh giá</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="numberOfReview" type="text" [(ngModel)]="vm.numberOfReview" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -103,7 +109,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Số sao đánh giá</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <input nz-input name="starRating" type="text" [(ngModel)]="vm.starRating" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
