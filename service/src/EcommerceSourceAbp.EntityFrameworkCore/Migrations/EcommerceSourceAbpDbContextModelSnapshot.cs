@@ -685,8 +685,8 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("TradeMark")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("TradeMarkId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
@@ -698,6 +698,8 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasIndex("FileStorageId");
 
                     b.HasIndex("ProductTypeId");
+
+                    b.HasIndex("TradeMarkId");
 
                     b.ToTable("AppProducts", (string)null);
                 });
@@ -899,6 +901,72 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppTags", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.TradeMark", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.ToTable("AppTradeMarks", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Ward", b =>
@@ -3059,11 +3127,26 @@ namespace EcommerceSourceAbp.Migrations
                         .WithMany()
                         .HasForeignKey("ProductTypeId");
 
+                    b.HasOne("EcommerceSourceAbp.Entities.TradeMark", "TradeMark")
+                        .WithMany()
+                        .HasForeignKey("TradeMarkId");
+
                     b.Navigation("Category");
 
                     b.Navigation("FileStorage");
 
                     b.Navigation("ProductType");
+
+                    b.Navigation("TradeMark");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.TradeMark", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.Navigation("FileStorage");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Ward", b =>

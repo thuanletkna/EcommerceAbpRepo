@@ -16,7 +16,6 @@ namespace EcommerceSourceAbp.Entities
         [Column(TypeName = "ntext")]
         [MaxLength(ListBaseEntityConsts.Comment)]
         public string Details { get; set; }
-        public string TradeMark { get; set; }
         public string ProductCode { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
@@ -28,6 +27,8 @@ namespace EcommerceSourceAbp.Entities
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
         public Category Category { get; set; }
+        public Guid? TradeMarkId { get; set; }
+        public TradeMark TradeMark { get; set; }
         public Guid? ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
         public ICollection<NewsTag> NewsTags { get; set; }

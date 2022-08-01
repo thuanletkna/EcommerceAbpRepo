@@ -25,6 +25,14 @@ export class EcommerceSourceAbpPermissions {
     //Delete: EcommerceSourceAbpPermissions.GroupName + '.Product.Delete',
   };
 
+  static TradeMark = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.TradeMark',
+    View: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Edit',
+    //Delete: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Delete',
+  };
+
   static SubCategorySelection = {
     Default: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection',
     View: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection.View',

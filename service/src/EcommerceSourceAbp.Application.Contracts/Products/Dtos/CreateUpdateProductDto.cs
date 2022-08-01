@@ -2,6 +2,7 @@
 using EcommerceSourceAbp.Categories.Dtos;
 using EcommerceSourceAbp.Constants;
 using EcommerceSourceAbp.Newses.Dtos;
+using EcommerceSourceAbp.TradeMarks.Dtos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,6 +27,8 @@ namespace EcommerceSourceAbp.Products.Dtos
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
         public CategoryDto Category { get; set; }
+        public Guid? TradeMartkId { get; set; }
+        public TradeMarkDto TradeMartks { get; set; }
         public ICollection<NewsTagDto> NewsTags { get; set; }
     }
 }

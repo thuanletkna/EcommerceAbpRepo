@@ -7,7 +7,7 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Tên sản phẩm</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="name" type="text" [(ngModel)]="vm.name" required autofocus [disabled]="vm?.id">
+                        <input nz-input name="name" type="text" [(ngModel)]="vm.name" required>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -59,9 +59,15 @@
                   </div>
                   <div nz-col [nzSpan]="8" >
                     <nz-form-item>
-                      <nz-form-label nzRequired>Thương hiệu</nz-form-label>
+                      <nz-form-label nzRequired>{{ '::Thương hiệu' | abpLocalization }}</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="tradeMark" type="text" [(ngModel)]="vm.tradeMark" required>
+                        <nz-select name="tradeMarkId" [(ngModel)]="vm.tradeMarkId" nzShowSearch required>
+                          <nz-option
+                            *ngFor="let trademark of trademarks"
+                            [nzValue]="trademark.id"
+                            [nzLabel]="trademark.name"
+                          ></nz-option>
+                        </nz-select>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
@@ -145,17 +151,11 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
-                  
-              <!-- <div class="d-flex justify-content-between mt-3">
-                <div>
-                  (<span class="required">*</span>) Thông tin bắt buộc
-                </div>
-              </div> -->
             </div>
             <div class="row mt-3">
               <!-- <div class="d-flex justify-content-between mt-3"> -->
                 <div class="col-md"> 
-                  (<span class="required">*</span>) Required information
+                  (<span class="required">*</span>) Thông tin bắt buộc
                 </div>
                 <div class="col-md text-right w-100 action-filter pt-0">
                   <button type="button" class="btn btn-reset" (click)="goback()">Cancel</button>

@@ -1,0 +1,58 @@
+<form #formEdit="ngForm" nz-form [nzLayout]="'vertical'">
+    <div class="container-edit my-4">
+      <div class="card">
+        <div class="card-header bg-white">
+          General Information
+        </div>
+        <div class="row p-3">
+          
+          <div class="col-md-12">
+            <nz-form-item>
+              <nz-form-label nzRequired>{{ '::Tên thương hiệu' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input maxlength="255" nz-input name="name" type="text" [(ngModel)]="vm.name" required>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <!-- <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-label>{{ '::Đường dẫn' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input maxlength="60"  nz-input name="employeeId" type="text" [(ngModel)]="vm.slug">
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-md-6">
+            <nz-form-item>
+              <nz-form-label>{{ '::Thứ tự hiển thị' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input maxlength="60"  nz-input name="employeeId" type="text" [(ngModel)]="vm.orderIndex">
+              </nz-form-control>
+            </nz-form-item>
+          </div> -->
+          <div class="col-md-12 mt-3">
+            <nz-form-item>
+                <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                <nz-radio-group [(ngModel)]="vm.status" name="status">
+                    <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                    <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                </nz-radio-group>
+            </nz-form-item>
+          </div>
+        </div>
+        
+      </div>
+      <div class="row mt-3">
+        <!-- <div class="d-flex justify-content-between mt-3"> -->
+          <div class="col-md"> 
+            (<span class="required">*</span>) Required information
+          </div>
+          <div class="col-md text-right w-100 action-filter pt-0">
+            <button type="button" class="btn btn-reset" (click)="goback()">Cancel</button>
+            <button  class="btn btn-apply ml-3" (click)="save()">{{ id ? 'Update' : 'Add new'}}</button>
+          </div>
+        </div>
+      <!-- </div> -->
+  
+    </div>
+  </form>
