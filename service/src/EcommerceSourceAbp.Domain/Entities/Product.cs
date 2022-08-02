@@ -32,8 +32,6 @@ namespace EcommerceSourceAbp.Entities
         public Guid? ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
         public ICollection<NewsTag> NewsTags { get; set; }
-        public Guid? FileStorageId { get; set; }
-        [ForeignKey("FileStorageId")]
-        public FileStorage FileStorage { get; set; }
+        public ICollection<ProductFile> ProductFile { get; set; }
     }
 }

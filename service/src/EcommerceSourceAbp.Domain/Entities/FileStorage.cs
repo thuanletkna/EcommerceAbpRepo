@@ -9,7 +9,7 @@ namespace EcommerceSourceAbp.Entities
     {
         [MaxLength(FileStorageConsts.TypeMaxLength)]
         public string Type { get; set; }
-        public Guid? FileId { get; set; }
+        public Guid? NatsId { get; set; }
         [MaxLength(FileStorageConsts.PathMaxLength)]
         public string Path { get; set; }
         [MaxLength(FileStorageConsts.FileExtensionMaxLength)]

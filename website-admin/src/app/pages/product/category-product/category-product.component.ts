@@ -44,11 +44,11 @@ export class CategoryProductComponent extends AppBaseComponent {
               },
             
             {
-                name: 'Trạng thái',
-                displayName: this.l('::Status'),
+                name: 'status',
+                displayName: this.l('::Trạng thái'),
                 dataType: 'status',
                 width: 100,
-                // permission: NcsPermissions.EmailOfEvent.Edit,
+                 permission: EcommerceSourceAbpPermissions.Category.Edit,
                 click: dataRow => {
                     this._toggleStatus(dataRow);
                 },

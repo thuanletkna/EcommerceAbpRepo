@@ -1,0 +1,13 @@
+<div class="upload-image">
+    <div *ngIf="hasSource" class="upload-file-name" (click)="downloadFile()">
+        <ng-container *ngIf="fileStorage?.id;else selectFile">{{ fileStorage.downloadFileName }}</ng-container>
+        <ng-template #selectFile >{{ fileName }}</ng-template>
+        
+    </div>
+    <div *ngIf="!hasSource" class="upload file d-flex flex-column justify-content-center align-items-center"
+        (click)="selectFile()">
+        <div class="icon-upload"></div>
+        <div class="title">Upload File</div>
+    </div>
+    <input type="file" [id]="fileInputId" class="d-none" (change)="fileSelectionChange($event)" [accept]="accept">
+</div>

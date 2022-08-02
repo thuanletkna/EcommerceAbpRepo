@@ -11,6 +11,7 @@ import { CategoryDto } from 'src/app/shared/models/category/category.dto';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { TradeMarkDto } from 'src/app/shared/models/trade-mark/trade-mark.dto';
 import { TradeMarkService } from 'src/app/shared/services/trade-mark.service';
+import { ProductFileDto } from 'src/app/shared/models/product-file/product-file.dto';
 
 @Component({
   templateUrl: './product-create-edit.component.html',
@@ -65,6 +66,37 @@ export class ProductCreateEditComponent extends AppBaseComponent implements Afte
       this._tradeMark = result || [];
     });
   }
+
+  get videoFiles() {
+    if (this.vm.productFile) {
+        return this.vm.productFile.filter(x => x.fileType === 'productVideo');
+    }
+    return [];
+}
+
+get files() {
+  if (this.vm.productFile) {
+      return this.vm.productFile.filter(x => x.fileType === 'productFile');
+  }
+  return [];
+}
+
+get subFiles() {
+  if (this.vm.productFile) {
+      return this.vm.productFile.filter(x => x.fileType === 'subProductFile');
+  }
+  return [];
+}
+
+remove(item: ProductFileDto) {
+  // Delete the item from fileNames list
+  const index = this.vm.productFile.findIndex(x => x === item);
+  this.vm.productFile.splice(index, 1);
+}
+add(fileType: string) {
+  if (!this.vm.productFile) this.vm.productFile = [];
+  this.vm.productFile.push({ fileType });
+}
 
 
   ngAfterViewInit(): void {

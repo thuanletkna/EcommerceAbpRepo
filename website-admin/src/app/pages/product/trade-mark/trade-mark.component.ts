@@ -49,11 +49,11 @@ export class TradeMarkComponent extends AppBaseComponent {
       },
 
       {
-        name: 'Trạng thái',
-        displayName: this.l('::Status'),
+        name: 'status',
+        displayName: this.l('::Trạng thái'),
         dataType: 'status',
         width: 100,
-        // permission: NcsPermissions.EmailOfEvent.Edit,
+        permission: EcommerceSourceAbpPermissions.TradeMark.Edit,
         click: dataRow => {
           // this._toggleStatus(dataRow);
         },

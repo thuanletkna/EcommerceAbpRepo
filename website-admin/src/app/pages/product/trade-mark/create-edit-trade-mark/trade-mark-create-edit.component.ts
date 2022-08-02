@@ -66,9 +66,9 @@ export class TradeMarkCreateEditComponent extends AppBaseComponent implements Af
       if(this.id) {
         this.goback();
       }
-    //   else {
-    //     this.redirectTo('/edit/' + result);
-    //   }
+      else {
+        this.redirectTo('/edit/' + result);
+      }
     });
   }
 }

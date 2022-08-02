@@ -64,9 +64,9 @@ export class CategoryProductCreateEditComponent extends AppBaseComponent impleme
       if(this.id) {
         this.goback();
       }
-    //   else {
-    //     this.redirectTo('/edit/' + result);
-    //   }
+      else {
+        this.redirectTo('/edit/' + result);
+      }
     });
   }
 }

@@ -1,12 +1,13 @@
 import { BaseDto } from "../app-dto";
 import { ProductTagDto } from "../new-tag/product-tag.dto";
+import { ProductFileDto } from "../product-file/product-file.dto";
 
 export interface ProductDto extends BaseDto {
     name?: string ;
     slug?: string ;
     description?: string ;
     productCode?:string;
-    detail?: string;
+    details?: string;
     comment?: string;
     price?: number;
     quantity?: number;
@@ -19,4 +20,5 @@ export interface ProductDto extends BaseDto {
     starRating?:number;
     tradeMarkId?:string;
     productTypeId?:string;
+    productFile?: ProductFileDto[];
 }

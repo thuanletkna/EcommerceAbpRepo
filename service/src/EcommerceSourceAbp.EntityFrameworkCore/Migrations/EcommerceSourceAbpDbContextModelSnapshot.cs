@@ -341,9 +341,6 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<Guid?>("FileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("FileName")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -361,6 +358,9 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("LastModifierId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("NatsId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Path")
                         .HasMaxLength(255)
@@ -631,9 +631,6 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<Guid?>("FileStorageId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("HotIndex")
                         .HasColumnType("int");
 
@@ -695,13 +692,32 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("FileStorageId");
-
                     b.HasIndex("ProductTypeId");
 
                     b.HasIndex("TradeMarkId");
 
                     b.ToTable("AppProducts", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("AppProductFiles", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductType", b =>
@@ -3119,10 +3135,6 @@ namespace EcommerceSourceAbp.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
-                        .WithMany()
-                        .HasForeignKey("FileStorageId");
-
                     b.HasOne("EcommerceSourceAbp.Entities.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId");
@@ -3133,11 +3145,24 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("FileStorage");
-
                     b.Navigation("ProductType");
 
                     b.Navigation("TradeMark");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.Product", "Product")
+                        .WithMany("ProductFile")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("FileStorage");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.TradeMark", b =>
@@ -3448,6 +3473,8 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Product", b =>
                 {
                     b.Navigation("NewsTags");
+
+                    b.Navigation("ProductFile");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Tag", b =>

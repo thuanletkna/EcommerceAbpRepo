@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from '../pages/product/product.component';
 import { RichTextBoxComponent } from './components/richtextbox/richtextbox.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 const defineComponents = [
   MessageBoxComponent,
@@ -36,7 +37,7 @@ const defineComponents = [
   NavMenuComponent,
   // ImageComponent,
   // UploadImageComponent,
-  // UploadFileComponent,
+  UploadFileComponent,
   // UploadVideoComponent,
    RichTextBoxComponent,
   // SlideViewComponent,

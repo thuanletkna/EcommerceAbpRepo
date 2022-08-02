@@ -120,34 +120,110 @@
                     </nz-form-item>
                   </div>
                   <div nz-col [nzSpan]="8" >
-                    <nz-form-item>
-                      <nz-form-label nzRequired>Video sản phẩm</nz-form-label>
-                      <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
-                      </nz-form-control>
-                    </nz-form-item>
+                      <nz-form-item class="w-100">
+                        <nz-form-label>Video sản phẩm (.avi, .m4v, .mp4, .mkv)</nz-form-label>
+                        <nz-form-control>
+                          <div *ngFor="let item of videoFiles; index as i" class="d-flex align-items-center">
+                            <upload-file
+                              name="files{{ i }}"
+                              [(ngModel)]="item.fileStorageId"
+                              style="float: left"
+                              [autoUpload]="true"
+                              [typeFile]="'productVideo'"
+                              [accept]="'.avi, .m4v, .mp4, .mkv'" ></upload-file>
+                            <button
+                              *ngIf="vm.productFile !== null"
+                              mat-icon-button
+                              type="button"
+                              (click)="remove(item)">
+                              <div class="icon-delete-red size-14"></div>
+                            </button>
+                          </div>
+                        </nz-form-control>
+                      </nz-form-item>
+                      <div class="d-flex align-items-center justify-content-between" *ngIf="this.videoFiles.length <3">
+                        <button
+                          type="button"
+                          class="btn btn-add-more"
+                          (click)="add('productVideo')"
+                          [disabled]="disableSave">
+                          <div class="icon-add mr-2"></div>
+                          Thêm video
+                        </button>
+                      </div>
                   </div>
                   <div nz-col [nzSpan]="8" >
-                    <nz-form-item>
-                      <nz-form-label nzRequired>Ảnh bìa sản phẩm</nz-form-label>
+                    <nz-form-item class="w-100">
+                      <nz-form-label>Ảnh bìa sản phẩm (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <div *ngFor="let item of files; index as i" class="d-flex align-items-center">
+                          <upload-file
+                            name="productFile{{ i }}"
+                            [(ngModel)]="item.fileStorageId"
+                            style="float: left"
+                            [autoUpload]="true"
+                            [typeFile]="'productFile'"
+                            [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png'" 
+                          ></upload-file>
+                          <button
+                            *ngIf="vm.productFile !== null"
+                            mat-icon-button
+                            type="button"
+                            (click)="remove(item)">
+                            <div class="icon-delete-red size-14"></div>
+                          </button>
+                        </div>
                       </nz-form-control>
                     </nz-form-item>
+                    <div class="d-flex align-items-center justify-content-between" *ngIf="this.files.length <1">
+                      <button
+                        type="button"
+                        class="btn btn-add-more"
+                        (click)="add('productFile')"
+                        [disabled]="disableSave">
+                        <div class="icon-add mr-2"></div>
+                        Thêm ảnh
+                      </button>
+                    </div>
                   </div>
                   <div nz-col [nzSpan]="8" >
-                    <nz-form-item>
-                      <nz-form-label nzRequired>Ảnh phụ sản phẩm</nz-form-label>
+                    <nz-form-item class="w-100">
+                      <nz-form-label>Ảnh phụ sản phẩm (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="description" type="text" [(ngModel)]="vm.description" required>
+                        <div *ngFor="let item of subFiles; index as i" class="d-flex align-items-center">
+                          <upload-file
+                            name="{{ i }}"
+                            [(ngModel)]="item.fileStorageId"
+                            style="float: left"
+                            [autoUpload]="true"
+                            [typeFile]="'subProductFile'"
+                            [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png'" ></upload-file>
+                          <button
+                            *ngIf="vm.productFile !== null"
+                            mat-icon-button
+                            type="button"
+                            (click)="remove(item)">
+                            <div class="icon-delete-red size-14"></div>
+                          </button>
+                        </div>
                       </nz-form-control>
                     </nz-form-item>
+                    <div class="d-flex align-items-center justify-content-between" *ngIf="this.subFiles.length <5">
+                      <button
+                        type="button"
+                        class="btn btn-add-more"
+                        (click)="add('subProductFile')"
+                        [disabled]="disableSave">
+                        <div class="icon-add mr-2"></div>
+                        Thêm ảnh
+                      </button>
+                    </div>
                   </div>
                   <div nz-col [nzSpan]="24" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Chi tiết sản phẩm</nz-form-label>
                       <nz-form-control>
-                        <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.detail" [height]="400"></richtextbox>
+                        <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.details" [height]="400"></richtextbox>
                       </nz-form-control>
                     </nz-form-item>
                   </div>
