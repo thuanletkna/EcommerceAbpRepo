@@ -8,17 +8,11 @@ import {
 } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { Injector } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { environment } from 'src/environments/environment';
 import { IOptionPopup, MessageBoxComponent } from './components/messagebox/messagebox.component';
 import { Status, NatsStatus } from './enums';
-import { TypeOfEvent } from './enums/typeofevent';
-import { MasterTable } from './enums/mastertable';
-import { EcommerceSourceAbpPermissions } from './consts/ecommerce-permissions';
-
-// import { MatDialog } from '@angular/material/dialog';
-
 export class AppBaseComponent {
   protected readonly permissionService: PermissionService;
   protected readonly oAuthService: OAuthService;
@@ -29,7 +23,7 @@ export class AppBaseComponent {
   protected readonly activeRoute: ActivatedRoute;
   protected readonly configState: ConfigStateService;
   protected readonly sessionState: SessionStateService;
-  // protected readonly matDialog: MatDialog;
+  protected readonly matDialog: MatDialog;
 
   get hasLoggedIn(): boolean {
     return this.oAuthService.hasValidAccessToken();
@@ -54,67 +48,70 @@ export class AppBaseComponent {
     return result.sort((a,b) => b - a);
   }
 
-  public getResourceById(path: string, resolution?: string) {
-    if (!path) return '';
-    if (path.startsWith('http')) return path;
-    return `${environment.s3Config.publishUrl}/${path}`;
-}
-avatarError(event) {
-  if (event) event.target.src = './assets/images/user-default.png';
-}
-  get listTypeOfEvent(): number[] {
-    const result = [];
-    for (const typeofevent in TypeOfEvent) {
-      if (!isNaN(Number(typeofevent))) {
-        result.push(Number(typeofevent));
-      }
-    }
+  // get listTypeOfEvent(): number[] {
+  //   const result = [];
+  //   for (const typeofevent in TypeOfEvent) {
+  //     if (!isNaN(Number(typeofevent))) {
+  //       result.push(Number(typeofevent));
+  //     }
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
-  get listMasterTable(): number[] {
-    const result = [];
-    for (const mastertable in MasterTable) {
-      if (!isNaN(Number(mastertable))) {
-        result.push(Number(mastertable));
-      }
-    }
+  // get listPriority(): number[] {
+  //   const result = [];
+  //   for (const priority in Priority) {
+  //     if (!isNaN(Number(priority))) {
+  //       result.push(Number(priority));
+  //     }
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
-  get listNatsStatus(): number[] {
-    const result = [];
-    for (const status in NatsStatus) {
-      if (!isNaN(Number(status))) {
-        result.push(Number(status));
-      }
-    }
+  // get listMasterTable(): number[] {
+  //   const result = [];
+  //   for (const mastertable in MasterTable) {
+  //     if (!isNaN(Number(mastertable))) {
+  //       result.push(Number(mastertable));
+  //     }
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
-  get listYear(): number[] {
-    if (this._listYear) {
-      return this._listYear;
-    }
+  // get listNatsStatus(): number[] {
+  //   const result = [];
+  //   for (const status in NatsStatus) {
+  //     if (!isNaN(Number(status))) {
+  //       result.push(Number(status));
+  //     }
+  //   }
 
-    const nextYear = new Date().getFullYear() + 2;
-    let startYear = 2000;
-    if (this.getGrantedPolicy(EcommerceSourceAbpPermissions.ViewUnlimitedYear.Default)) {
-        // startYear = environment.application.startYear;
-    } else {
-        startYear = new Date().getFullYear() - 5;
-    }
+  //   return result;
+  // }
+
+  // get listYear(): number[] {
+  //   if (this._listYear) {
+  //     return this._listYear;
+  //   }
+
+  //   const nextYear = new Date().getFullYear() + 2;
+  //   let startYear = 2000;
+  //   if (this.getGrantedPolicy(NcsPermissions.ViewUnlimitedYear.Default)) {
+  //       startYear = environment.application.startYear;
+  //   } else {
+  //       startYear = new Date().getFullYear() - 5;
+  //   }
     
-    this._listYear = [];
-    for (let i = nextYear; i >= startYear; i--) {
-      this._listYear.push(i);
-    }
+  //   this._listYear = [];
+  //   for (let i = nextYear; i >= startYear; i--) {
+  //     this._listYear.push(i);
+  //   }
 
-    return this._listYear;
-  }
+  //   return this._listYear;
+  // }
 
   set listYear(value: number[]) {
     this._listYear = value;
@@ -132,7 +129,7 @@ avatarError(event) {
     this.activeRoute = injector.get(ActivatedRoute);
     this.configState = injector.get(ConfigStateService);
     this.sessionState = injector.get(SessionStateService);
-    // this.matDialog = injector.get(MatDialog);
+    this.matDialog = injector.get(MatDialog);
   }
 
   getGrantedPolicy(key: string) {
@@ -159,13 +156,13 @@ avatarError(event) {
     );
   }
 
-  login() {
-    this.authService.navigateToLogin();
-  }
+  // login() {
+  //   this.authService.navigateToLogin();
+  // }
 
-  logout() {
-    this.authService.logout().subscribe();
-  }
+  // logout() {
+  //   this.authService.logout().subscribe();
+  // }
 
   protected getParam(param: string): string {
     return this.activeRoute.snapshot.paramMap.get(param);
@@ -212,15 +209,15 @@ avatarError(event) {
   }
 
   protected openPopup(option: IOptionPopup, width = '400px'): void {
-    // this.matDialog.open(MessageBoxComponent, {
-    //   width,
-    //   data: option,
-    // });
+    this.matDialog.open(MessageBoxComponent, {
+      width,
+      data: option,
+    });
   }
 
   protected openDeleteConfirm(itemName: string, callBack: () => void): void {
     this.openPopup({
-      title: this.l('::AreYouSure'),
+      title: this.l('::ARE YOU SURE ?'),
       message: this.l('::ItemWillBeDeletedMessageWithFormat', '<strong>' + itemName + '</strong>'),
       type: 'Question',
       btnClose: {

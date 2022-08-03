@@ -1,0 +1,23 @@
+<div mat-dialog-title>
+  {{ vm.name }}'s sub-categories
+</div>
+<div mat-dialog-content>
+  <ng-container *ngIf="vm.subProductProperties?.length;else NoSubCategories">
+    <mat-list>
+      <mat-divider></mat-divider>
+      <ng-container *ngFor="let subCategory of vm.subCategories">
+        <mat-list-item>{{subCategory.name}}</mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </mat-list>
+  </ng-container>
+  <ng-template #NoSubCategories>
+    There is no sub-category
+  </ng-template>
+</div>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-reset" type="button" mat-dialog-close>
+    Close
+  </button>
+</mat-dialog-actions>

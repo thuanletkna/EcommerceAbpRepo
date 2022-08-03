@@ -14,7 +14,7 @@ export class EcommerceSourceAbpPermissions {
     View: EcommerceSourceAbpPermissions.GroupName + '.Category.View',
     Create: EcommerceSourceAbpPermissions.GroupName + '.Category.Create',
     Edit: EcommerceSourceAbpPermissions.GroupName + '.Category.Edit',
-    //Delete: EcommerceSourceAbpPermissions.GroupName + '.Category.Delete',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.Category.Delete',
   };
 
   static Product = {
@@ -22,7 +22,23 @@ export class EcommerceSourceAbpPermissions {
     View: EcommerceSourceAbpPermissions.GroupName + '.Product.View',
     Create: EcommerceSourceAbpPermissions.GroupName + '.Product.Create',
     Edit: EcommerceSourceAbpPermissions.GroupName + '.Product.Edit',
-    //Delete: EcommerceSourceAbpPermissions.GroupName + '.Product.Delete',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.Product.Delete',
+  };
+
+  static ProductProperty = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty',
+    View: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Delete',
+  };
+
+  static SubProductProperty = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty',
+    View: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Delete',
   };
 
   static TradeMark = {
@@ -30,7 +46,7 @@ export class EcommerceSourceAbpPermissions {
     View: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.View',
     Create: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Create',
     Edit: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Edit',
-    //Delete: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Delete',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Delete',
   };
 
   static SubCategorySelection = {
@@ -53,7 +69,7 @@ export class EcommerceSourceAbpPermissions {
     View: EcommerceSourceAbpPermissions.GroupName + '.Team.View',
     Create: EcommerceSourceAbpPermissions.GroupName + '.Team.Create',
     Edit: EcommerceSourceAbpPermissions.GroupName + '.Team.Edit',
-    //Delete: EcommerceSourceAbpPermissions.GroupName + '.Team.Delete',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.Team.Delete',
   };
 
 

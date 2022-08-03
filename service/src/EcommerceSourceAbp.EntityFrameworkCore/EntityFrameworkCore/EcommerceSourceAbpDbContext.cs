@@ -68,6 +68,8 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<ProductFile> ProductFiles { get; set; }
     public DbSet<TradeMark> TradeMarks { get; set; }
     public DbSet<FileStorage> FileStorages { get; set; }
+    public DbSet<ProductProperty> ProductProperties { get; set; }
+    public DbSet<SubProductProperty> SubProductProperties { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
@@ -171,6 +173,16 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<TradeMark>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "TradeMarks", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<ProductProperty>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "ProductProperties", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<SubProductProperty>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "SubProductProperties", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

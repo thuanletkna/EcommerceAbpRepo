@@ -1,0 +1,40 @@
+<div
+  class="modal fade"
+  id="Modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalLogoutLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="title">{{ modalService.option?.title }}</h3>
+        <textarea
+          *ngIf="modalService.option?.isHasText"
+          [(ngModel)]="modalService.text"
+          id="txt-content"
+          name="txt-content"
+          rows="4"
+          cols="50"
+          maxlength="200"
+        >
+        </textarea>
+        <!-- <image *ngIf="modalService.option?.zoomImage" [className]="'w-100 h-100'" [imageSrcIn]="modalService.option?.zoomImage"></image> -->
+        <img *ngIf="modalService?.option?.zoomImage" [src]="modalService?.option?.zoomImage"  alt='image' class="w-100 h-100"/>
+        <div class="d-flex justify-content-end">
+          <button
+          *ngFor="let button of buttons"
+          type="button"
+          (click)="modalService.click(button.name); button?.click()"
+          class="btn {{ button.class || 'btn-add-new' }} mr-md-2 mr-0 ml-2 mt-3"
+        >
+          {{ button.title }}
+        </button>
+        </div>
+        <!-- <button class="btn btn-common">Đồng ý</button>
+          <button class="btn btn-cancel">Huỷ</button> -->
+      </div>
+    </div>
+  </div>
+</div>

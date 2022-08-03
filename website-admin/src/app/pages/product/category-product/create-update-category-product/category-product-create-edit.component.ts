@@ -50,14 +50,10 @@ export class CategoryProductCreateEditComponent extends AppBaseComponent impleme
   }
 
   save(): void {
-
     if (!this.formEdit?.valid) {
-      
           this.showError('Missing required information (*).');
-      
       return;
   }
-
     this.categoryService.save(this.vm).subscribe((result) => {
       this.showSaveSuccess();
        this.goback();

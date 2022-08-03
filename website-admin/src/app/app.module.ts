@@ -26,6 +26,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { DeleteOutline, PlusOutline, CloseOutline } from '@ant-design/icons-angular/icons';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NZ_DATE_LOCALE, vi_VN } from 'ng-zorro-antd/i18n';
+import { ModalService } from './shared/layout/modal.service';
 
 registerLocaleData(vi);
 const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
@@ -50,7 +51,7 @@ const icons: IconDefinition[] = [ DeleteOutline, PlusOutline, CloseOutline ];
     HttpClientModule,
   ],
   declarations: [AppComponent],
-  providers: [
+  providers: [ModalService,
     APP_ROUTE_PROVIDER, { provide: NZ_I18N, useValue: vi_VN },{ provide: NZ_DATE_LOCALE, useValue: vi },AppHeaderService],
   
   bootstrap: [AppComponent],

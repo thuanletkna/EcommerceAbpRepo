@@ -37,6 +37,12 @@ const routes: Routes = [
         // },
       },
       {
+        path: 'product-property',
+        loadChildren: () =>
+          import('./pages/product/product-property/product-property.module').then(m => m.ProductPropertyModule),
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'trade-mark',
         loadChildren: () =>
           import('./pages/product/trade-mark/trade-mark.module').then(m => m.TradeMarkModule),

@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from '../pages/product/product.component';
 import { RichTextBoxComponent } from './components/richtextbox/richtextbox.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 const defineComponents = [
   MessageBoxComponent,
@@ -40,6 +41,7 @@ const defineComponents = [
   UploadFileComponent,
   // UploadVideoComponent,
    RichTextBoxComponent,
+   ModalComponent,
   // SlideViewComponent,
   // VideoViewComponent,
   // PDFViewComponent,
