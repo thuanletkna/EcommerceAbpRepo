@@ -107,7 +107,7 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
         this.goback();
       }
       else {
-        this.redirectTo('/ProductProperty/edit/' + result);
+        this.redirectTo('/product-property/edit/' + result);
       }
     });
   }

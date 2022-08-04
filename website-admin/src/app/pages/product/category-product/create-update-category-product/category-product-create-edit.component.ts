@@ -56,7 +56,6 @@ export class CategoryProductCreateEditComponent extends AppBaseComponent impleme
   }
     this.categoryService.save(this.vm).subscribe((result) => {
       this.showSaveSuccess();
-       this.goback();
       if(this.id) {
         this.goback();
       }
