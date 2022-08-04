@@ -23,6 +23,12 @@ public class EcommerceSourceAbpPermissionDefinitionProvider : PermissionDefiniti
         product.AddChild(EcommerceSourceAbpPermissions.Product.Create, L("Permission:Create"));
         product.AddChild(EcommerceSourceAbpPermissions.Product.Delete, L("Permission:Delete"));
         product.AddChild(EcommerceSourceAbpPermissions.Product.Edit, L("Permission:Edit"));
+
+        var trademark = myGroup.AddPermission(EcommerceSourceAbpPermissions.TradeMark.Default, L("TradeMark"));
+        trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.View, L("Permission:View"));
+        trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Create, L("Permission:Create"));
+        trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Delete, L("Permission:Delete"));
+        trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Edit, L("Permission:Edit"));
     }
 
     private static LocalizableString L(string name)
