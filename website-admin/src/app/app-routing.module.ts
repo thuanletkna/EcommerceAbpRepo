@@ -33,6 +33,12 @@ const routes: Routes = [
             //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
             // },
     },
+    {
+      path: 'trade-mark',
+      loadChildren: () =>
+        import('./pages/product/trade-mark/trade-mark.module').then(m => m.TradeMarkModule),
+      canActivate: [AuthGuard],
+    },
         {
           path: 'account',
           loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),
