@@ -16,8 +16,8 @@ import { Status, NatsStatus } from './enums';
 import { TypeOfEvent } from './enums/typeofevent';
 import { MasterTable } from './enums/mastertable';
 import { EcommerceSourceAbpPermissions } from './consts/ecommerce-permissions';
+import { MatDialog } from '@angular/material/dialog';
 
-// import { MatDialog } from '@angular/material/dialog';
 
 export class AppBaseComponent {
   protected readonly permissionService: PermissionService;
@@ -29,7 +29,7 @@ export class AppBaseComponent {
   protected readonly activeRoute: ActivatedRoute;
   protected readonly configState: ConfigStateService;
   protected readonly sessionState: SessionStateService;
-  // protected readonly matDialog: MatDialog;
+  protected readonly matDialog: MatDialog;
 
   get hasLoggedIn(): boolean {
     return this.oAuthService.hasValidAccessToken();
@@ -132,7 +132,7 @@ avatarError(event) {
     this.activeRoute = injector.get(ActivatedRoute);
     this.configState = injector.get(ConfigStateService);
     this.sessionState = injector.get(SessionStateService);
-    // this.matDialog = injector.get(MatDialog);
+    this.matDialog = injector.get(MatDialog);
   }
 
   getGrantedPolicy(key: string) {
@@ -212,10 +212,10 @@ avatarError(event) {
   }
 
   protected openPopup(option: IOptionPopup, width = '400px'): void {
-    // this.matDialog.open(MessageBoxComponent, {
-    //   width,
-    //   data: option,
-    // });
+    this.matDialog.open(MessageBoxComponent, {
+      width,
+      data: option,
+    });
   }
 
   protected openDeleteConfirm(itemName: string, callBack: () => void): void {

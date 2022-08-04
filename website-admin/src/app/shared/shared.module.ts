@@ -19,7 +19,6 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductComponent } from '../pages/product/product.component';
 import { RichTextBoxComponent } from './components/richtextbox/richtextbox.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
@@ -31,15 +30,15 @@ const defineComponents = [
   WarningMessageComponent,
   DatatableComponent,
   MainLayoutComponent,
-    BlankLayoutComponent,
-    AsideComponent,
-    HeaderComponent,
+  BlankLayoutComponent,
+  AsideComponent,
+  HeaderComponent,
   NavMenuComponent,
   // ImageComponent,
   // UploadImageComponent,
-   UploadFileComponent,
+  UploadFileComponent,
   // UploadVideoComponent,
-   RichTextBoxComponent,
+  RichTextBoxComponent,
   // SlideViewComponent,
   // VideoViewComponent,
   // PDFViewComponent,
@@ -49,7 +48,7 @@ const defineComponents = [
 const pipes = [SafeHTMLPipe];
 const directives = [AnchorDirective];
 @NgModule({
-  declarations: [...defineComponents,...pipes,...directives],
+  declarations: [...defineComponents, ...pipes, ...directives],
   imports: [
     CoreModule,
     ThemeSharedModule,
@@ -59,7 +58,6 @@ const directives = [AnchorDirective];
     ReactiveFormsModule,
     NgxValidateCoreModule,
     ThirdPartyModule,
-    
   ],
   exports: [
     CoreModule,
@@ -72,8 +70,8 @@ const directives = [AnchorDirective];
     ReactiveFormsModule,
     ...defineComponents,
     ...pipes,
-    ...directives
+    ...directives,
   ],
-  providers: []
+  providers: [],
 })
 export class SharedModule {}
