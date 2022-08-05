@@ -372,6 +372,29 @@ namespace EcommerceSourceAbp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppProductProperties",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppProductProperties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppProductTypes",
                 columns: table => new
                 {
@@ -949,6 +972,35 @@ namespace EcommerceSourceAbp.Migrations
                         name: "FK_AppTradeMarks_AppFileStorages_FileStorageId",
                         column: x => x.FileStorageId,
                         principalTable: "AppFileStorages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppSubProductProperties",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductPropertyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppSubProductProperties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppSubProductProperties_AppProductProperties_ProductPropertyId",
+                        column: x => x.ProductPropertyId,
+                        principalTable: "AppProductProperties",
                         principalColumn: "Id");
                 });
 
@@ -1742,6 +1794,11 @@ namespace EcommerceSourceAbp.Migrations
                 column: "TradeMarkId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppSubProductProperties_ProductPropertyId",
+                table: "AppSubProductProperties",
+                column: "ProductPropertyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AppTradeMarks_FileStorageId",
                 table: "AppTradeMarks",
                 column: "FileStorageId");
@@ -1857,6 +1914,9 @@ namespace EcommerceSourceAbp.Migrations
                 name: "AppProductFiles");
 
             migrationBuilder.DropTable(
+                name: "AppSubProductProperties");
+
+            migrationBuilder.DropTable(
                 name: "IdentityServerApiResourceClaims");
 
             migrationBuilder.DropTable(
@@ -1942,6 +2002,9 @@ namespace EcommerceSourceAbp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppProducts");
+
+            migrationBuilder.DropTable(
+                name: "AppProductProperties");
 
             migrationBuilder.DropTable(
                 name: "IdentityServerApiResources");

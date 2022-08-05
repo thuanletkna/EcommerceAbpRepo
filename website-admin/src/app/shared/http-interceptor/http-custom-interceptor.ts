@@ -10,7 +10,7 @@ export class HttpCustomInterceptor implements HttpInterceptor {
     private addHeader(request: HttpRequest<any>) {
 
         request = request.clone({
-            withCredentials: true,
+            // withCredentials: true,
             body: this.trimStringInBody(request.body)
         });
         
