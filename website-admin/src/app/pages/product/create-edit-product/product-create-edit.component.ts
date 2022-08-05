@@ -12,6 +12,8 @@ import { CategoryService } from 'src/app/shared/services/category.service';
 import { TradeMarkDto } from 'src/app/shared/models/trade-mark/trade-mark.dto';
 import { TradeMarkService } from 'src/app/shared/services/trade-mark.service';
 import { ProductFileDto } from 'src/app/shared/models/product-file/product-file.dto';
+import { ProductPropertyDto } from 'src/app/shared/models/product-property/product-property.dto';
+import { ProductPropertyService } from 'src/app/shared/services/product-property.service';
 
 @Component({
   templateUrl: './product-create-edit.component.html',
@@ -38,7 +40,8 @@ export class ProductCreateEditComponent extends AppBaseComponent implements Afte
     private readonly appHeaderService: AppHeaderService,
     private readonly productService: ProductService,
     private readonly categoryService: CategoryService,
-    private readonly tradeMarkService: TradeMarkService
+    private readonly tradeMarkService: TradeMarkService,
+    private readonly productPropertyService: ProductPropertyService
   ) {
     super(injector);
     this.appHeaderService.option = {
@@ -64,6 +67,16 @@ export class ProductCreateEditComponent extends AppBaseComponent implements Afte
   private getTrademarks() {
     this.tradeMarkService.getAll().subscribe(result => {
       this._tradeMark = result || [];
+    });
+  }
+
+  private _productProperty: ProductPropertyDto[] = [];
+  get productProperties(): ProductPropertyDto[] {
+    return this._productProperty.filter(x => x.status == Status.Active);
+  }
+  private getProductProperty() {
+    this.productPropertyService.getAll().subscribe(result => {
+      this._productProperty = result || [];
     });
   }
 
@@ -102,6 +115,7 @@ add(fileType: string) {
   ngAfterViewInit(): void {
     this.getCategories();
     this.getTrademarks();
+    this.getProductProperty();
     if (this.id) {
       this.productService.getById(this.id).subscribe(result => {
         this.vm = result || {};

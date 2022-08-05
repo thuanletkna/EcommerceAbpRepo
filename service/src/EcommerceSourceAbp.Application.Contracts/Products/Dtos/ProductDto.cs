@@ -3,12 +3,12 @@ using EcommerceSourceAbp.Categories.Dtos;
 using EcommerceSourceAbp.Constants;
 using EcommerceSourceAbp.Newses.Dtos;
 using EcommerceSourceAbp.ProductFiles.Dtos;
+using EcommerceSourceAbp.ProductProperties.Dtos;
 using EcommerceSourceAbp.TradeMarks.Dtos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace EcommerceSourceAbp.Products.Dtos
 {
@@ -36,5 +36,7 @@ namespace EcommerceSourceAbp.Products.Dtos
         public TradeMarkDto TradeMarks { get; set; }
         public ICollection<NewsTagDto> NewsTags { get; set; }
         public List<CreateUpdateProductFileDto> ProductFile { get; set; }
+        public Guid? ProductPropertyId { get; set; }
+        public CreateUpdateProductPropertyDto ProductProperties { get; set; }
     }
 }

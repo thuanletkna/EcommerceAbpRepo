@@ -1,10 +1,9 @@
 ﻿using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Permissions;
 using EcommerceSourceAbp.Products.Dtos;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
+using System;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
@@ -22,5 +21,14 @@ namespace EcommerceSourceAbp.Products
         protected override string UpdatePolicyName => EcommerceSourceAbpPermissions.Product.Edit;
         protected override string DeletePolicyName => EcommerceSourceAbpPermissions.Product.Delete;
 
+        //protected override async Task<Product> FilteredForUpdate(CreateUpdateProductDto input)
+        //{
+        //    return await Repository
+        //        .Include(a => a.ProductProperties)
+        //        .Include(a => a.OtherReportActions)
+        //        .Include(a => a.OtherReportFiles)
+        //        .Include("OtherReportActions.OtherReportActionFiles")
+        //        .FirstOrDefaultAsync(a => a.Id == input.Id);
+        //}
     }
 }

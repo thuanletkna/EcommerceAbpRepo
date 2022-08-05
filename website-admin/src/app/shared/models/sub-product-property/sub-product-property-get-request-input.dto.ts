@@ -1,5 +1,5 @@
 
-import { BaseGetRequestInput, ListBaseGetRequestInput } from "../app-dto";
+import {  ListBaseGetRequestInput } from "../app-dto";
 
 export interface SubProductPropertyGetRequestInputDto extends ListBaseGetRequestInput {
     productPropertyId?:string;

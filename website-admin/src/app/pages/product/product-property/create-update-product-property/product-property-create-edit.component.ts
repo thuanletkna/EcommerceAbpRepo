@@ -32,7 +32,9 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
   }
 
   vm: ProductPropertyDto = { status: Status.Active };
-  subProductPropertyDto: SubProductPropertyDto = { productPropertyId: this.id };
+  hasSubProductProperty = false;
+
+
   tableOptions: DatatableOption<SubProductPropertyDto> = {
     functionData: (input: SubProductPropertyGetRequestInputDto) => {
       input.productPropertyId = this.id;
@@ -64,7 +66,7 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
       {
         icon: 'create',
         click: dataRow => {
-          this._openCreateEdit(dataRow);
+          this.editSubProductProperty(dataRow.id);
 
         },
         name: this.l('AbpUi::Edit'),
@@ -88,9 +90,19 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
 
   ngAfterViewInit(): void {
     if (this.id) {
+      // this.productPropertyService.getById(this.id).subscribe(result => {
+      //   this.vm = result || {};
+      // });
       this.productPropertyService.getById(this.id).subscribe(result => {
         this.vm = result || {};
+        // this.typeOfEvent = result.typeOfEvent;
+        // this.handleTypeOfEventChange({ keepCategoryId: true });
       });
+
+      this.subProductPropertyService.getByPaged({maxResultCount: 1, productPropertyId: this.id}).subscribe((data) => {
+        this.hasSubProductProperty = data.totalCount > 0;
+      });
+
     }
   }
 
@@ -113,23 +125,42 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
   }
 
   create(): void {
-    this._openCreateEdit(this.subProductPropertyDto);
+    this._openSubProductPropertyCreateEditDialog();
   }
 
-  private _openCreateEdit(item?: SubProductPropertyDto) {
+  editSubProductProperty(selectionId: string) {
+    this._openSubProductPropertyCreateEditDialog({ id: selectionId });
+  }
+
+  private _openSubProductPropertyCreateEditDialog(item?: SubProductPropertyDto) {
     const dialogRef = this.matDialog.open<SubProductPropertyCreateEditComponent, SubProductPropertyDto>(SubProductPropertyCreateEditComponent, {
-      data: item || {},
+      data: { ...item, productPropertyId: this.id },
       width: '600px',
     });
 
-    dialogRef.afterClosed().subscribe((result: string) => {
-      let stayCurrentPage = false;
-      if (item?.id) {
-        stayCurrentPage = true;
-      }
-      this.table.refresh(stayCurrentPage);
+    dialogRef.afterClosed().subscribe(() => {
+      this.subProductPropertyService.getByPaged({maxResultCount: 1, productPropertyId: this.id}).subscribe((data) => {
+        this.hasSubProductProperty = data.totalCount > 0;
+        this.table.refresh();
+      });
     });
   }
+
+  
+  // private _openCreateEdit(item?: SubProductPropertyDto) {
+  //   const dialogRef = this.matDialog.open<SubProductPropertyCreateEditComponent, SubProductPropertyDto>(SubProductPropertyCreateEditComponent, {
+  //     data: item || {},
+  //     width: '600px',
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result: string) => {
+  //     let stayCurrentPage = false;
+  //     if (item?.id) {
+  //       stayCurrentPage = true;
+  //     }
+  //     this.table.refresh(stayCurrentPage);
+  //   });
+  // }
 
 //   private _toggleStatus(item: SubProductPropertyDto): void {
 //     this.openToggleStatusConfirm(this.l('::SubProductProperty'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),

@@ -25,6 +25,19 @@ export class AppBaseService<TPrimaryKey, TEntityDto, TGetInputDto> {
     );
   }
 
+  // getUsingFilter(params = {} as Undefinable<TGetInputDto>): Observable<TEntityDto[]> {
+  //   return this.restService.request(
+  //     {
+  //       url: `${this.apiUrl}/using-filter`,
+  //       method: 'GET',
+  //       params,
+  //     },
+  //     {
+  //       apiName: this.apiName,
+  //     }
+  //   );
+  // }
+
   getByPagedReportObservations(params = {} as TGetInputDto): Observable<PagedResultDto<TEntityDto>> {
     return this.restService.request(
       {

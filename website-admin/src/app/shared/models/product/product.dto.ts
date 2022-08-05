@@ -19,6 +19,6 @@ export interface ProductDto extends BaseDto {
     numberOfReview?:number;
     starRating?:number;
     tradeMarkId?:string;
-    productTypeId?:string;
+    productPropertyId?:string;
     productFile?: ProductFileDto[];
 }

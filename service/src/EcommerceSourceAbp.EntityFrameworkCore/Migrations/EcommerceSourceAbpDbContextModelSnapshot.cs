@@ -667,7 +667,7 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<string>("ProductCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductTypeId")
+                    b.Property<Guid?>("ProductPropertyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -692,7 +692,7 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("ProductPropertyId");
 
                     b.HasIndex("TradeMarkId");
 
@@ -3262,9 +3262,9 @@ namespace EcommerceSourceAbp.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("EcommerceSourceAbp.Entities.ProductType", "ProductType")
+                    b.HasOne("EcommerceSourceAbp.Entities.ProductProperty", "ProductProperties")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId");
+                        .HasForeignKey("ProductPropertyId");
 
                     b.HasOne("EcommerceSourceAbp.Entities.TradeMark", "TradeMark")
                         .WithMany()
@@ -3272,7 +3272,7 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("ProductType");
+                    b.Navigation("ProductProperties");
 
                     b.Navigation("TradeMark");
                 });

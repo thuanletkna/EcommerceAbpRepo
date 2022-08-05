@@ -53,7 +53,13 @@
                     <nz-form-item>
                       <nz-form-label nzRequired>Thuộc tính</nz-form-label>
                       <nz-form-control>
-                        <input nz-input name="productTypeId" type="text" [(ngModel)]="vm.productTypeId" required>
+                        <nz-select name="productPropertyId" [(ngModel)]="vm.productPropertyId" nzShowSearch required>
+                          <nz-option
+                            *ngFor="let productProperty of productProperties"
+                            [nzValue]="productProperty.id"
+                            [nzLabel]="productProperty.name"
+                          ></nz-option>
+                        </nz-select>
                       </nz-form-control>
                     </nz-form-item>
                   </div>

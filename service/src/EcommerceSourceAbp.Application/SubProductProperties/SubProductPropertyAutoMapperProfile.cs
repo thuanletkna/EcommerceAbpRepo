@@ -8,11 +8,11 @@ namespace EcommerceSourceAbp.SubProductProperties
     {
         public SubProductPropertyAutoMapperProfile()
         {
-            CreateMap<CreateUpdateSubProductPropertyDto, ProductProperty>(MemberList.None);
+            CreateMap<CreateUpdateSubProductPropertyDto, SubProductProperty>(MemberList.None);
             CreateMap<SubProductProperty, GetSubProductPropertyForUpdateDto>(MemberList.None);
-            CreateMap<ProductProperty, GetSubProductPropertyForViewDto>(MemberList.None);
-            CreateMap<ProductProperty, SubProductPropertyDto>(MemberList.None);
-            CreateMap<ProductProperty, CreateUpdateSubProductPropertyDto>(MemberList.None);
+            CreateMap<SubProductProperty, GetSubProductPropertyForViewDto>(MemberList.None);
+            CreateMap<SubProductProperty, SubProductPropertyDto>(MemberList.None);
+            CreateMap<SubProductProperty, CreateUpdateSubProductPropertyDto>(MemberList.None);
         }
     }
 }

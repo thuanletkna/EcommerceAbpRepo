@@ -36,9 +36,11 @@ export class SubProductPropertyCreateEditComponent extends AppBaseComponent impl
                 this.vm = result || {};
             });
         }
-        else if (this.data?.productPropertyId){
-          this.vm.productPropertyId = this.data.productPropertyId;
+
+        if (this.data?.productPropertyId) {
+            this.vm.productPropertyId = this.data.productPropertyId;
         }
+        
     }
 
     save(): void {

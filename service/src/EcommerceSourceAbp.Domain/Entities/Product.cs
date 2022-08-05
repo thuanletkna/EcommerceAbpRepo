@@ -26,11 +26,14 @@ namespace EcommerceSourceAbp.Entities
         public bool IsHot { get; set; }
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public Category Category { get; set; }
         public Guid? TradeMarkId { get; set; }
+        [ForeignKey("TradeMarkId")]
         public TradeMark TradeMark { get; set; }
-        public Guid? ProductTypeId { get; set; }
-        public ProductType ProductType { get; set; }
+        public Guid? ProductPropertyId { get; set; }
+        [ForeignKey("ProductPropertyId")]
+        public ProductProperty ProductProperties { get; set; }
         public ICollection<NewsTag> NewsTags { get; set; }
         public ICollection<ProductFile> ProductFile { get; set; }
     }
