@@ -29,6 +29,7 @@ namespace EcommerceSourceAbp.Products.Dtos
         public int NumberOfReview { get; set; }
         public int StarRating { get; set; }
         public bool IsHot { get; set; }
+        public bool IsAffilate { get; set; }
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
         public CategoryDto Category { get; set; }

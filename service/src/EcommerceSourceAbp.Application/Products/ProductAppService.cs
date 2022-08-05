@@ -21,14 +21,19 @@ namespace EcommerceSourceAbp.Products
         protected override string UpdatePolicyName => EcommerceSourceAbpPermissions.Product.Edit;
         protected override string DeletePolicyName => EcommerceSourceAbpPermissions.Product.Delete;
 
-        //protected override async Task<Product> FilteredForUpdate(CreateUpdateProductDto input)
-        //{
-        //    return await Repository
-        //        .Include(a => a.ProductProperties)
-        //        .Include(a => a.OtherReportActions)
-        //        .Include(a => a.OtherReportFiles)
-        //        .Include("OtherReportActions.OtherReportActionFiles")
-        //        .FirstOrDefaultAsync(a => a.Id == input.Id);
-        //}
+        protected override async Task<Product> FilteredForUpdate(CreateUpdateProductDto input)
+        {
+            return await (await Repository.GetQueryableAsync())
+                .Include(a => a.ProductProperties)
+                .Include("ProductFile.FileStorage")
+                .FirstOrDefaultAsync(a => a.Id == input.Id);
+        }
+        protected override async Task<Product> FilterForGet(Guid id)
+        {
+            return await (await Repository.GetQueryableAsync())
+                .Include(a => a.ProductProperties)
+                .Include("ProductFile.FileStorage")
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
     }
 }
