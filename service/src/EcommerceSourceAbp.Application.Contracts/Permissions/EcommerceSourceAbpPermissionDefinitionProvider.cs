@@ -29,6 +29,18 @@ public class EcommerceSourceAbpPermissionDefinitionProvider : PermissionDefiniti
         trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Create, L("Permission:Create"));
         trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Delete, L("Permission:Delete"));
         trademark.AddChild(EcommerceSourceAbpPermissions.TradeMark.Edit, L("Permission:Edit"));
+
+        var productproperty = myGroup.AddPermission(EcommerceSourceAbpPermissions.ProductProperty.Default, L("ProductProperty"));
+        productproperty.AddChild(EcommerceSourceAbpPermissions.ProductProperty.View, L("Permission:View"));
+        productproperty.AddChild(EcommerceSourceAbpPermissions.ProductProperty.Create, L("Permission:Create"));
+        productproperty.AddChild(EcommerceSourceAbpPermissions.ProductProperty.Delete, L("Permission:Delete"));
+        productproperty.AddChild(EcommerceSourceAbpPermissions.ProductProperty.Edit, L("Permission:Edit"));
+
+        var subproductproperty = myGroup.AddPermission(EcommerceSourceAbpPermissions.SubProductProperty.Default, L("SubProductProperty"));
+        subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.View, L("Permission:View"));
+        subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Create, L("Permission:Create"));
+        subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Delete, L("Permission:Delete"));
+        subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Edit, L("Permission:Edit"));
     }
 
     private static LocalizableString L(string name)

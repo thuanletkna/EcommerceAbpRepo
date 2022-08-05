@@ -33,6 +33,22 @@ export class EcommerceSourceAbpPermissions {
     Delete: EcommerceSourceAbpPermissions.GroupName + '.TradeMark.Delete',
   };
   
+  static ProductProperty = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty',
+    View: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.ProductProperty.Delete',
+  };
+
+  static SubProductProperty = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty',
+    View: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Delete',
+  };
+  
   static SubCategorySelection = {
     Default: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection',
     View: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection.View',
