@@ -33,6 +33,16 @@ const routes: Routes = [
             //     requiredPolicy: 'EcommerceSourceAbpPermissions.Category',
             // },
     },
+    // {
+      //   path: 'category-blog',
+      //   loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule),
+      //   canActivate: [AuthGuard],
+      // },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule),
+        canActivate: [AuthGuard],
+      },
     {
       path: 'product-property',
       loadChildren: () =>
