@@ -49,6 +49,22 @@ export class EcommerceSourceAbpPermissions {
     Delete: EcommerceSourceAbpPermissions.GroupName + '.SubProductProperty.Delete',
   };
   
+  static Blog = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.Blog',
+    View: EcommerceSourceAbpPermissions.GroupName + '.Blog.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.Blog.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.Blog.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.Blog.Delete',
+  };
+
+  static BlogDetail = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.BlogDetail',
+    View: EcommerceSourceAbpPermissions.GroupName + '.BlogDetail.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.BlogDetail.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.BlogDetail.Edit',
+    Delete: EcommerceSourceAbpPermissions.GroupName + '.BlogDetail.Delete',
+  };
+  
   static SubCategorySelection = {
     Default: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection',
     View: EcommerceSourceAbpPermissions.GroupName + '.SubCategorySelection.View',

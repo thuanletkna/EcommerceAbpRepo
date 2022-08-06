@@ -3,7 +3,6 @@ import { AppBaseComponent } from "src/app/shared/app-base.component";
 import { DatatableComponent, DatatableOption } from "src/app/shared/components/datatable/datatable.component";
 import {  EcommerceSourceAbpPermissions } from "src/app/shared/consts/ecommerce-permissions";
 import { Status } from "src/app/shared/enums";
-import { TypeOfEvent } from "src/app/shared/enums/typeofevent";
 import { CategoryGetRequestInputDto } from "src/app/shared/models/category/category-get-request-input.dto";
 import { CategoryDto } from "src/app/shared/models/category/category.dto";
 import { CategoryService } from "src/app/shared/services/category.service";
@@ -20,35 +19,35 @@ export class CategoryProductComponent extends AppBaseComponent {
     }
 
     keyword: string;
-    typeofevent: TypeOfEvent = 0;
     status: Status ;
     tableOptions: DatatableOption<CategoryDto> = {
         functionData: (input: CategoryGetRequestInputDto) => {
             input.filter = this.keyword;
-            // input.status = this.status === 2 ? null : this.status;
+            input.isBlog = false;
+            input.status = this.status === 2 ? null : this.status;
             return this.categoryService.getByPaged(input);
         },
         sortable: true,
         columns: [
             {
                 name: 'name',
-                displayName: 'name',
+                displayName: 'Tên danh mục',
               },
-            {
-                name: 'slug',
-                displayName: 'slug',
-              },
+            // {
+            //     name: 'slug',
+            //     displayName: 'slug',
+            //   },
               {
                 name: 'orderIndex',
                 displayName: 'Thứ tự hiển thị',
               },
             
             {
-                name: 'Trạng thái',
-                displayName: this.l('::Status'),
+                name: 'status',
+                displayName: this.l('::Trạng thái'),
                 dataType: 'status',
                 width: 100,
-                // permission: NcsPermissions.EmailOfEvent.Edit,
+                permission: EcommerceSourceAbpPermissions.Category.Edit,
                 click: dataRow => {
                     this._toggleStatus(dataRow);
                 },
@@ -85,7 +84,7 @@ export class CategoryProductComponent extends AppBaseComponent {
 
 
     private _toggleStatus(item: CategoryDto): void {
-        this.openToggleStatusConfirm(this.l('::Emailofevent'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+        this.openToggleStatusConfirm(this.l('::danh mục sản phẩm'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
             () => {
                 this.categoryService.toggleStatus(item.id).subscribe(() => {
                     this.showUpdateSuccess();
@@ -98,7 +97,5 @@ export class CategoryProductComponent extends AppBaseComponent {
         return Status[status];
     }
 
-    getTypeOfEvent(typeofevent: TypeOfEvent): string {
-        return TypeOfEvent[typeofevent];
-    }
+    
 }

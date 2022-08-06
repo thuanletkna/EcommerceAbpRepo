@@ -3,6 +3,8 @@ using EcommerceSourceAbp.Categories.Dtos;
 using System;
 using Volo.Abp.Domain.Repositories;
 using EcommerceSourceAbp.Permissions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EcommerceSourceAbp.Categories
 {
@@ -17,6 +19,21 @@ namespace EcommerceSourceAbp.Categories
         protected override string CreatePolicyName => EcommerceSourceAbpPermissions.Category.Create;
         protected override string UpdatePolicyName => EcommerceSourceAbpPermissions.Category.Edit;
         protected override string DeletePolicyName => EcommerceSourceAbpPermissions.Category.Delete;
-        
+        protected override async Task<IQueryable<Category>> CreateFilteredQueryAsync(GetCategoryRequestInputDto input)
+        {
+            if (!string.IsNullOrWhiteSpace(input.Filter))
+            {
+                input.Filter = input.Filter.ToLower();
+            }
+            var a= (await base.CreateFilteredQueryAsync(input))
+                //.FilterPermission(CurrentUser)
+                //.Where(x => x.ItemDescription != "Contractors")
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
+                    x => x.Name.ToLower().Contains(input.Filter) || x.Slug.ToLower().Contains(input.Filter))
+                //.WhereIf(input.IsBlog.HasValue, x => x.IsBlog == input.IsBlog)
+                .WhereIf(input.IsBlog != null, x => x.IsBlog == input.IsBlog.Value)
+                .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
+            return a;
+        }
     }
 }

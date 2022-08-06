@@ -1,19 +1,21 @@
 import { PagedResultDto } from '@abp/ng.core';
-import { AfterViewInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, Injector, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { merge, Observable } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { AppBaseComponent } from '../../app-base.component';
-
+import { AppConsts } from '../../consts/app-consts';
+import { NatsStatus } from '../../enums';
 
 @Component({
   selector: 'datatable[option]',
   templateUrl: './datatable.component.html',
 })
-export class DatatableComponent extends AppBaseComponent implements AfterViewInit {
+export class DatatableComponent extends AppBaseComponent implements AfterViewInit, OnInit, OnChanges, AfterContentInit {
   get displayedColumns(): string[] {
     return this._displayColumns;
   }
@@ -41,8 +43,11 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
     return this._paginator.pageSize;
   }
 
-  dataSource: PagedResultDto<any>;
+  dataSource: any;
   filterObject: any = {};
+
+  @Input()
+  source?: any[];
 
   @Input()
   option: DatatableOption<any>;
@@ -69,18 +74,42 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
     super(injector);
   }
 
+  ngOnInit(): void {
+    if (this.option)
+      this.dataSource = this.option.functionData ? [] : new MatTableDataSource<any>([]);
+  }
+
   ngAfterViewInit(): void {
-    this._sort.sortChange.subscribe(() => (this._paginator.pageIndex = 0));
-    merge(this._sort.sortChange, this._paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          return this._getDataForTable();
-        })
-      )
-      .subscribe(result => {
-        this.dataSource = result;
-      });
+    if (this.option.defaultSorting?.field) {
+      this._sort.active = this.option.defaultSorting.field;
+      this._sort.direction = this.option.defaultSorting.direction || 'asc';
+    }
+
+    if (this.option.functionData) {
+      this._sort.sortChange.subscribe(() => (this._paginator.pageIndex = 0));
+      merge(this._sort.sortChange, this._paginator.page)
+        .pipe(
+          startWith({}),
+          switchMap(() => {
+            return this._getDataForTable();
+          })
+        )
+        .subscribe(result => {
+          this.dataSource = result?.items || [];
+          this._paginator.length = result?.totalCount || 0;
+        });
+    }
+    else {
+      this.dataSource.data = this.source || [];
+      this.dataSource.paginator = this._paginator;
+      this.dataSource.sort = this._sort;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.dataSource && changes.source && changes.source.currentValue !== changes.source.previousValue) {
+      this.dataSource.data = this.source || [];
+    }
   }
 
   ngAfterContentInit(): void{
@@ -88,11 +117,32 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
   }
 
   refresh(stayCurrentPage: boolean = false): void {
-    if (!stayCurrentPage) {
-      this._paginator.pageIndex = 0;
+    if (this.option.functionData) {
+      if (!stayCurrentPage) {
+        this._paginator.pageIndex = 0;
+      }
+      
+      this._getDataForTable().subscribe(result => {
+        this.dataSource = result?.items;
+        this._paginator.length = result?.totalCount || 0;
+      });
     }
+    else {
+      if (!this.source) {
+        this.source = [];
+      }
 
-    this._getDataForTable().subscribe(result => (this.dataSource = result));
+      let totalPage = this.source.length / this._paginator.pageSize;
+
+      if (this.source.length % this._paginator.pageSize !== 0) {
+        totalPage++;
+      }
+
+      if (totalPage - 1 < this._paginator.pageIndex) {
+        this._paginator.pageIndex = totalPage - 1;
+      }
+      this.dataSource.data = this.source;
+    }
   }
 
   getColsDisplay(): DatatableColumn<any>[] {
@@ -100,6 +150,9 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
   }
 
   getColSortable(col: DatatableColumn<any>): string {
+    if (col.dataType === 'select' || col.dataType === 'viewphoto') {
+      return null;
+    }
     let sortable = this.option.sortable;
     if (col.sortable !== null && col.sortable !== undefined) {
       sortable = col.sortable;
@@ -154,7 +207,11 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
 
 
   private _getDataForTable() {
-    return this.option.functionData(this._filter);
+    if (this.option?.functionData) {
+      return this.option?.functionData(this._filter);
+    }
+
+    return new Observable<PagedResultDto<any>>();
   }
 
   private _getDisplayColumns() {
@@ -172,10 +229,10 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
     if (!isTop && !isDepartmentChange) {
       return true;
     }
-    // if (((value?.status === NatsStatus.Open && value?.staffId === AppConsts.currentStaff.id) 
-    //   || this.currentUser.roles.findIndex(x => x === 'admin') > -1) && !isDepartmentChange ){
-    //   return true;
-    // }
+    if (((value?.status === NatsStatus.Open && value?.staffId === AppConsts.currentStaff.id) 
+      || this.currentUser.roles.findIndex(x => x === 'admin') > -1) && !isDepartmentChange ){
+      return true;
+    }
     if ((value?.endDate === undefined || value?.endDate === null) && !isTop) {
         return true;
     }
@@ -184,8 +241,12 @@ export class DatatableComponent extends AppBaseComponent implements AfterViewIni
 }
 
 export interface DatatableOption<T> {
-  functionData: (input: any) => Observable<PagedResultDto<T>>;
+  functionData?: (input: any) => Observable<PagedResultDto<T>>;
   sortable?: boolean;
+  defaultSorting?: {
+    field?: string;
+    direction?: 'asc' | 'desc';
+  },
   columns: DatatableColumn<T>[];
   actions?: DatatableActionItem<T>[];
   pageSizeList?: number[];

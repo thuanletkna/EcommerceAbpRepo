@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>
+    {{ (vm.id ? '::Chỉnh sửa' : '::Thêm mới') | abpLocalization: l('::Action') }}
+  </h1>
+  <div mat-dialog-content>
+    <form #formEdit="ngForm" nz-form [nzLayout]="'vertical'" class="my-3">
+      <div class="row p-3">
+        <div class="col-12">
+          <nz-form-item>
+            <nz-form-label nzRequired>{{ '::Title chi tiết bài đăng' | abpLocalization }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                name="name"
+                type="text"
+                [(ngModel)]="vm.name"
+                required
+                maxlength="1000"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-12">
+          <nz-form-item>
+            <nz-form-label>{{ '::Thứ tự' | abpLocalization }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                name="actionDescription"
+                type="text"
+                [(ngModel)]="vm.code"
+                maxlength="1000"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Chi tiết bài đăng</nz-form-label>
+              <nz-form-control>
+                <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.details" [height]="250"></richtextbox>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12 mt-2">
+            <nz-form-item>
+                <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                <nz-radio-group [(ngModel)]="vm.status" name="status">
+                    <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                    <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                </nz-radio-group>
+            </nz-form-item>
+        </div>
+      </div>
+      <div class="row p-3">
+        <div class="col-12">(<span class="required">*</span>) Không được để trống</div>
+      </div>
+    </form>
+  </div>
+  
+  <mat-dialog-actions align="end">
+    <button class="btn btn-reset" type="button" mat-dialog-close>Trở về</button>
+    <button class="btn btn-apply ml-3" type="button" (click)="save()">Lưu</button>
+  </mat-dialog-actions>
+  

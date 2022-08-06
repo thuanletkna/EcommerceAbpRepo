@@ -34,6 +34,16 @@ const routes: Routes = [
             // },
     },
     {
+        path: 'category-blog',
+        loadChildren: () => import('./pages/blog/category-blog/category-blog.module').then(m => m.CategoryBlogModule),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule),
+        canActivate: [AuthGuard],
+      },
+    {
       path: 'product-property',
       loadChildren: () =>
         import('./pages/product/product-property/product-property.module').then(m => m.ProductPropertyModule),

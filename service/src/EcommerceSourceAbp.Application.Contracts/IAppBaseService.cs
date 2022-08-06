@@ -19,6 +19,7 @@ namespace EcommerceSourceAbp
         Task Delete(TPrimaryKey id);
         Task<TPrimaryKey?> Save(TCreateUpdate input);
         Task<List<TViewOutput>> GetAll();
+        Task<List<TViewOutput>> GetUsingFilter(TGetInput input);
     }
 
     public interface IAppBaseService<in TCreateUpdate, TViewOutput, TEditOutput, in TGetInput> :

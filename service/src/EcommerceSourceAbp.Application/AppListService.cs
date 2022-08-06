@@ -26,14 +26,14 @@ namespace EcommerceSourceAbp
         {
         }
 
-        protected override async Task<IQueryable<TEntity>> CreateFilteredQuery(TGetInput input)
+        protected override async Task<IQueryable<TEntity>> CreateFilteredQueryAsync(TGetInput input)
         {
             if (!string.IsNullOrWhiteSpace(input.Filter))
             {
                 input.Filter = input.Filter.ToLower();
             }
 
-            return (await base.CreateFilteredQuery(input))
+            return (await base.CreateFilteredQueryAsync(input))
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
                     x => x.Name.ToLower().Contains(input.Filter))
                 .WhereIf(input.Status.HasValue, x => x.Status == input.Status);

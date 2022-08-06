@@ -36,19 +36,19 @@ export class ProductPropertyComponent extends AppBaseComponent {
         },
         sortable: true,
         columns: [
-            {
-                name: 'code',
-                displayName: 'ProductProperty ID',
-                width: 200
-            },
-            {
-                name: 'orderIndex',
-                displayName: 'Order Index',
-                width: 200
-            },
+            // {
+            //     name: 'code',
+            //     displayName: 'ProductProperty ID',
+            //     width: 200
+            // },
+            // {
+            //     name: 'orderIndex',
+            //     displayName: 'Thứ tự',
+            //     width: 200
+            // },
             {
                 name: 'name',
-                displayName: 'ProductProperty Name',
+                displayName: 'Tên thuộc tính',
             },
             // {
             //     name: 'list-subcatgory',
@@ -61,12 +61,12 @@ export class ProductPropertyComponent extends AppBaseComponent {
             // },
             {
                 name: 'status',
-                displayName: this.l('::Status'),
+                displayName: this.l('::Trạng thái'),
                 dataType: 'status',
                 width: 100,
                 permission: EcommerceSourceAbpPermissions.ProductProperty.Edit,
                 click: dataRow => {
-                    // this._toggleStatus(dataRow);
+                    this._toggleStatus(dataRow);
                 },
             },
         ],
@@ -130,15 +130,15 @@ export class ProductPropertyComponent extends AppBaseComponent {
         });
     }
 
-    // private _toggleStatus(item: ProductPropertyDto): void {
-    //     this.openToggleStatusConfirm(this.l('::ProductProperty'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
-    //         () => {
-    //             this.productPropertyService.toggleStatus(item.id).subscribe(() => {
-    //                 this.showUpdateSuccess();
-    //                 this.table.refresh();
-    //             });
-    //         });
-    // }
+    private _toggleStatus(item: ProductPropertyDto): void {
+        this.openToggleStatusConfirm(this.l('::thuộc tính sản phẩm'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+            () => {
+                this.productPropertyService.toggleStatus(item.id).subscribe(() => {
+                    this.showUpdateSuccess();
+                    this.table.refresh();
+                });
+            });
+    }
 
     getStatus(status: Status): string {
         return Status[status];

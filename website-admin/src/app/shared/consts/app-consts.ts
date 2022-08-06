@@ -1,7 +1,7 @@
-import { StaffDto } from "../models";
+import { ProductDto } from "../models/product/product.dto";
 
 export class AppConsts {
-  static currentStaff: StaffDto = null;
+  static currentStaff: ProductDto = null;
   static colorList = ['#87CEFA','#8A2BE2','#7CFC00','#DC143C','#FF8C00','#9ACD32','#008080','#800080','#90EE90','#DFFF00'
     ,'#DE3163','#556B2F','#5F9EA0','#48D1CC','#A52A2A','#55eb59','#7031d6','#1f8ad8','#47d61a','#87460d','#4da3d6',
     '#7954b6','#4cab42','#e2ff28','#8f13f3','#ff7c94','#6708e5','#c64227','#8c8ff1','#1de752','#ea66d2','#920f1e','#c1d786','#84cccb','#b722e7',

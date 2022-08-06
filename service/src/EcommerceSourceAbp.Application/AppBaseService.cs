@@ -65,7 +65,7 @@ namespace EcommerceSourceAbp
 
         #region Filter Function
 
-        protected virtual async Task<IQueryable<TEntity>> CreateFilteredQuery(TGetInput input)
+        protected virtual async Task<IQueryable<TEntity>> CreateFilteredQueryAsync(TGetInput input)
         {
             return await Repository.GetQueryableAsync();
         }
@@ -181,7 +181,7 @@ namespace EcommerceSourceAbp
         {
             await CheckGetListPolicyAsync();
 
-            var query = await CreateFilteredQuery(input);
+            var query = await CreateFilteredQueryAsync(input);
 
             var totalCount = await AsyncExecuter.CountAsync(query);
 
@@ -228,6 +228,19 @@ namespace EcommerceSourceAbp
         public virtual async Task<List<TViewOutput>> GetAll()
         {
             return await GetAllFromDatabase();
+        }
+
+        public async Task<List<TViewOutput>> GetUsingFilter(TGetInput input)
+        {
+            await CheckGetListPolicyAsync();
+
+            var query = await CreateFilteredQueryAsync(input);
+
+            query = ApplySorting(query, input);
+
+            var result = await AsyncExecuter.ToListAsync(query);
+
+            return result.Select(MapToViewOutput).ToList();
         }
 
         #endregion Public methods
