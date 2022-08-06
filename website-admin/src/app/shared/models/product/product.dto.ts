@@ -1,8 +1,8 @@
-import { BaseDto } from "../app-dto";
+import { BaseDto, ListBaseDto } from "../app-dto";
 import { ProductTagDto } from "../new-tag/product-tag.dto";
 import { ProductFileDto } from "../product-file/product-file.dto";
 
-export interface ProductDto extends BaseDto {
+export interface ProductDto extends ListBaseDto {
     name?: string ;
     slug?: string ;
     description?: string ;

@@ -1,6 +1,6 @@
 <div class="mt-3 mb-3" style="text-align: center;font-size: 16px;" [hidden]="hasData">No matching data found</div>
 <div [hidden]="!hasData" class="table-container">
-  <table mat-table matSort [dataSource]="dataSource?.items" [width]="width">
+  <table mat-table matSort [dataSource]="dataSource" [width]="width">
     <!-- col action -->
     <ng-container *ngIf="option.actions?.length" matColumnDef="Actions">
       <th
@@ -108,5 +108,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
-<mat-paginator [hidden]="!hasData" [length]="dataSource?.totalCount || 0" [pageSizeOptions]="option.pageSizeList || [10, 20, 50, 100]">
+<mat-paginator [hidden]="!hasData" [pageSizeOptions]="option.pageSizeList || [10, 20, 50, 100]">
 </mat-paginator>

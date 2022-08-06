@@ -230,6 +230,19 @@ namespace EcommerceSourceAbp
             return await GetAllFromDatabase();
         }
 
+        public async Task<List<TViewOutput>> GetUsingFilter(TGetInput input)
+        {
+            await CheckGetListPolicyAsync();
+
+            var query = await CreateFilteredQuery(input);
+
+            query = ApplySorting(query, input);
+
+            var result = await AsyncExecuter.ToListAsync(query);
+
+            return result.Select(MapToViewOutput).ToList();
+        }
+
         #endregion Public methods
     }
 
