@@ -18,7 +18,7 @@ export class MainLayoutComponent extends AppBaseComponent implements OnInit {
     super(injector);
   }
   profile: ProfileModel = new ProfileModel();
-  isCollapsed = false;
+  isCollapsed = true;
   menus = [
     {
       level: 1,
