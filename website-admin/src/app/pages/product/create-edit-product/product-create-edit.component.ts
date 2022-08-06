@@ -52,7 +52,7 @@ export class ProductCreateEditComponent extends AppBaseComponent implements Afte
 
   private _categories: CategoryDto[] = [];
   get categories(): CategoryDto[] {
-    return this._categories.filter(x => x.isBlog == true);
+    return this._categories.filter(x => x.isBlog == false);
   }
   private getCategories() {
     this.categoryService.getAll().subscribe(result => {

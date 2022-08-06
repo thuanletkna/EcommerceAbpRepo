@@ -41,6 +41,19 @@ public class EcommerceSourceAbpPermissionDefinitionProvider : PermissionDefiniti
         subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Create, L("Permission:Create"));
         subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Delete, L("Permission:Delete"));
         subproductproperty.AddChild(EcommerceSourceAbpPermissions.SubProductProperty.Edit, L("Permission:Edit"));
+
+        var blog = myGroup.AddPermission(EcommerceSourceAbpPermissions.Blog.Default, L("Blog"));
+        blog.AddChild(EcommerceSourceAbpPermissions.Blog.View, L("Permission:View"));
+        blog.AddChild(EcommerceSourceAbpPermissions.Blog.Create, L("Permission:Create"));
+        blog.AddChild(EcommerceSourceAbpPermissions.Blog.Delete, L("Permission:Delete"));
+        blog.AddChild(EcommerceSourceAbpPermissions.Blog.Edit, L("Permission:Edit"));
+
+        var blogdetail = myGroup.AddPermission(EcommerceSourceAbpPermissions.BlogDetail.Default, L("BlogDetail"));
+        blogdetail.AddChild(EcommerceSourceAbpPermissions.BlogDetail.View, L("Permission:View"));
+        blogdetail.AddChild(EcommerceSourceAbpPermissions.BlogDetail.Create, L("Permission:Create"));
+        blogdetail.AddChild(EcommerceSourceAbpPermissions.BlogDetail.Delete, L("Permission:Delete"));
+        blogdetail.AddChild(EcommerceSourceAbpPermissions.BlogDetail.Edit, L("Permission:Edit"));
+
     }
 
     private static LocalizableString L(string name)

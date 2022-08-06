@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
+using EcommerceSourceAbp.BlogDetails.Dtos;
 
 namespace EcommerceSourceAbp.Products
 {

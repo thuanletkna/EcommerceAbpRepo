@@ -1,4 +1,5 @@
-﻿using EcommerceSourceAbp.Products.Dtos;
+﻿using EcommerceSourceAbp.BlogDetails.Dtos;
+using EcommerceSourceAbp.Products.Dtos;
 
 namespace EcommerceSourceAbp.Products
 {

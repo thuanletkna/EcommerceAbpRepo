@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EcommerceSourceAbp.BlogDetails.Dtos;
+using EcommerceSourceAbp.Blogs.Dtos;
 using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Products.Dtos;
 
