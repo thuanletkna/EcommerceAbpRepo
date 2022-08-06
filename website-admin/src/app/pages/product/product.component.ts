@@ -15,7 +15,7 @@ export class ProductComponent extends AppBaseComponent {
     @ViewChild(DatatableComponent) table: DatatableComponent;
 
     get canAdd(): boolean {
-        return this.getGrantedPolicy(EcommerceSourceAbpPermissions.Category.Create);
+        return this.getGrantedPolicy(EcommerceSourceAbpPermissions.Product.Create);
     }
 
     keyword: string;
@@ -23,30 +23,41 @@ export class ProductComponent extends AppBaseComponent {
     tableOptions: DatatableOption<ProductDto> = {
         functionData: (input: ProductGetRequestInputDto) => {
             input.filter = this.keyword;
-            // input.status = this.status === 2 ? null : this.status;
+            input.status = this.status === 2 ? null : this.status;
             return this.productService.getByPaged(input);
         },
         sortable: true,
         columns: [
             {
-                name: 'name',
-                displayName: 'name',
+                name: 'code',
+                displayName: 'Thứ tự',
+              },
+              {
+                name: 'productCode',
+                displayName: 'Mã sản phẩm',
               },
             {
-                name: 'code',
-                displayName: 'code',
+                name: 'name',
+                displayName: 'Tên sản phẩm',
               },
-            
-            // {
-            //     name: 'status',
-            //     displayName: this.l('::Status'),
-            //     dataType: 'status',
-            //     width: 100,
-            //     permission: NcsPermissions.EmailOfEvent.Edit,
-            //     click: dataRow => {
-            //         this._toggleStatus(dataRow);
-            //     },
-            // },
+              {
+                name: 'price',
+                displayName: 'Giá gốc',
+              },
+              {
+                name: 'priceSale',
+                displayName: 'Giá bán',
+              },
+            {
+                name: 'status',
+                displayName: this.l('::Trạng thái'),
+                dataType: 'status',
+                width: 200,
+                permission: EcommerceSourceAbpPermissions.Product.Edit,
+                click: dataRow => {
+                    this._toggleStatus(dataRow);
+                },
+            },
         ],
         actions: [
             {
@@ -78,15 +89,15 @@ export class ProductComponent extends AppBaseComponent {
 
 
 
-    // private _toggleStatus(item: CategoryDto): void {
-    //     this.openToggleStatusConfirm(this.l('::Emailofevent'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
-    //         () => {
-    //             this.productService.toggleStatus(item.id).subscribe(() => {
-    //                 this.showUpdateSuccess();
-    //                 this.table.refresh();
-    //             });
-    //         });
-    // }
+    private _toggleStatus(item: ProductDto): void {
+        this.openToggleStatusConfirm(this.l('::sản phẩm'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+            () => {
+                this.productService.toggleStatus(item.id).subscribe(() => {
+                    this.showUpdateSuccess();
+                    this.table.refresh();
+                });
+            });
+    }
 
     getStatus(status: Status): string {
         return Status[status];

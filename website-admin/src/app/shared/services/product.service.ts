@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseGetRequestInput } from '../models/app-dto';
 import { ProductDto } from '../models/product/product.dto';
-import { AppBaseService } from './base';
+import {  AppListService } from './base';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService extends AppBaseService<string, ProductDto, BaseGetRequestInput> {
+export class ProductService extends AppListService<string, ProductDto, BaseGetRequestInput> {
     constructor(restService: RestService) {
         super(restService, 'product');
     }

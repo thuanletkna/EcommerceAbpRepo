@@ -1,14 +1,14 @@
-<nz-card nzType="inner" nzTitle="Quản lý Sản Phẩm" [nzExtra]="extraTemplate">
+<nz-card nzType="inner" nzTitle="Quản Lý Bài Đăng" [nzExtra]="extraTemplate">
     <div class="body">
         <div class="card my-4 pb-4">
             <div class="card-header bg-white d-flex align-items-center justify-content-between">
-                <div>Search/Filter</div>
+                <div>Tìm kiếm</div>
                 <div class="text-right">
                     <button type="button" class="btn btn-reset" (click)="keyword = null;  table.refresh()">
-                        Reset
+                        Xóa
                     </button>
                     <button type="button" class="btn btn-apply ml-2" (click)="table.refresh()">
-                        Apply
+                        Lọc
                     </button>
                 </div>
             </div>
@@ -16,11 +16,11 @@
                 <div class="w-100">
                     <div class="row">
                         <div class="col-md-8">
-                            <label>{{ '::Keyword' | abpLocalization }}</label>
-                            <input nz-input placeholder="Enter location name/ description" name="Keyword" [(ngModel)]="keyword" (keyup.enter)="table.refresh()"/>
+                            <label>{{ '::Từ khóa' | abpLocalization }}</label>
+                            <input nz-input placeholder="Nhập từ khóa tìm kiếm" name="Keyword" [(ngModel)]="keyword" (keyup.enter)="table.refresh()"/>
                         </div>
                         <div class="col-md-4">
-                            <label>{{ '::Status' | abpLocalization }}</label>
+                            <label>{{ '::Trạng thái' | abpLocalization }}</label>
                             <nz-select [(ngModel)]="status" nzShowSearch class="w-100" (ngModelChange)="table.refresh()">
                                 <nz-option *ngFor="let item of listStatus" [nzValue]="item" nzLabel="{{getStatus(item)}}"></nz-option>
                             </nz-select>
@@ -30,7 +30,7 @@
             </div>
         </div>
       <div class="card mb-4">
-        <div class="card-header bg-white">Result</div>
+        <div class="card-header bg-white">Danh sách</div>
         <datatable [option]="tableOptions"></datatable>
       </div>
     </div>

@@ -31,20 +31,20 @@ export class CategoryProductComponent extends AppBaseComponent {
         columns: [
             {
                 name: 'name',
-                displayName: 'name',
+                displayName: 'Tên danh mục',
               },
-            {
-                name: 'slug',
-                displayName: 'slug',
-              },
+            // {
+            //     name: 'slug',
+            //     displayName: 'slug',
+            //   },
               {
                 name: 'orderIndex',
                 displayName: 'Thứ tự hiển thị',
               },
             
             {
-                name: 'Trạng thái',
-                displayName: this.l('::Status'),
+                name: 'status',
+                displayName: this.l('::Trạng thái'),
                 dataType: 'status',
                 width: 100,
                 permission: EcommerceSourceAbpPermissions.Category.Edit,
@@ -84,7 +84,7 @@ export class CategoryProductComponent extends AppBaseComponent {
 
 
     private _toggleStatus(item: CategoryDto): void {
-        this.openToggleStatusConfirm(this.l('::Emailofevent'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+        this.openToggleStatusConfirm(this.l('::danh mục sản phẩm'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
             () => {
                 this.categoryService.toggleStatus(item.id).subscribe(() => {
                     this.showUpdateSuccess();

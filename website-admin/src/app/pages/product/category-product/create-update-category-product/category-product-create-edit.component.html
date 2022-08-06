@@ -2,7 +2,7 @@
     <div class="container-edit my-4">
       <div class="card">
         <div class="card-header bg-white">
-          General Information
+          Thông tin
         </div>
         <div class="row p-3">
           
@@ -45,11 +45,11 @@
       <div class="row mt-3">
         <!-- <div class="d-flex justify-content-between mt-3"> -->
           <div class="col-md"> 
-            (<span class="required">*</span>) Required information
+            (<span class="required">*</span>) Không được để trống
           </div>
           <div class="col-md text-right w-100 action-filter pt-0">
             <button type="button" class="btn btn-reset" (click)="goback()">Cancel</button>
-            <button *ngIf="canSave" class="btn btn-apply ml-3" (click)="save()">{{ id ? 'Update' : 'Add new'}}</button>
+            <button *ngIf="canSave" class="btn btn-apply ml-3" (click)="save()">{{ id ? 'Chỉnh sửa' : 'Thêm mới'}}</button>
           </div>
         </div>
       <!-- </div> -->

@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>
-  {{ (vm.id ? '::Edit' : '::AddNew') | abpLocalization: l('::SubCategory') }}
+  {{ (vm.id ? '::Chỉnh sửa' : '::Thêm mới') | abpLocalization: l('::SubCategory') }}
 </h1>
 <div mat-dialog-content>
   <form #formEdit="ngForm" nz-form [nzLayout]="'vertical'" class="my-3">
       <div class="row">
           <div class="col-12">
               <nz-form-item>
-                  <nz-form-label nzRequired>Sub-category Name</nz-form-label>
+                  <nz-form-label nzRequired>Thuộc tính con</nz-form-label>
                   <nz-form-control>
                       <input nz-input name="name" type="text" [(ngModel)]="vm.name" required>
                   </nz-form-control>
@@ -14,7 +14,7 @@
           </div>
           <div class="col-12 mt-3">
               <nz-form-item>
-                  <nz-form-label>{{ '::Status' | abpLocalization }}</nz-form-label>
+                  <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
                   <nz-radio-group [(ngModel)]="vm.status" name="status">
                       <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
                       <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
@@ -27,9 +27,9 @@
 
 <mat-dialog-actions align="end">
   <button class="btn btn-reset" type="button" mat-dialog-close>
-      Cancel
+      Trở về
   </button>
   <button *ngIf="canSave" class="btn btn-apply ml-3" type="button" (click)="save()">
-      Save
+      Lưu
   </button>
 </mat-dialog-actions>

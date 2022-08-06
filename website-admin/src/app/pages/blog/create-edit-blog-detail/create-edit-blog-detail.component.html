@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
-    {{ (vm.id ? '::Edit' : '::AddNew') | abpLocalization: l('::Action') }}
+    {{ (vm.id ? '::Chỉnh sửa' : '::Thêm mới') | abpLocalization: l('::Action') }}
   </h1>
   <div mat-dialog-content>
     <form #formEdit="ngForm" nz-form [nzLayout]="'vertical'" class="my-3">
@@ -52,13 +52,13 @@
         </div>
       </div>
       <div class="row p-3">
-        <div class="col-12">(<span class="required">*</span>) Required information</div>
+        <div class="col-12">(<span class="required">*</span>) Không được để trống</div>
       </div>
     </form>
   </div>
   
   <mat-dialog-actions align="end">
-    <button class="btn btn-reset" type="button" mat-dialog-close>Cancel</button>
-    <button class="btn btn-apply ml-3" type="button" (click)="save()">Save</button>
+    <button class="btn btn-reset" type="button" mat-dialog-close>Trở về</button>
+    <button class="btn btn-apply ml-3" type="button" (click)="save()">Lưu</button>
   </mat-dialog-actions>
   

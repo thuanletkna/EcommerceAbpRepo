@@ -22,37 +22,32 @@ export class TradeMarkComponent extends AppBaseComponent {
   }
 
   keyword: string;
-  typeofevent: TypeOfEvent = 0;
   status: Status;
   tableOptions: DatatableOption<TradeMarkDto> = {
     functionData: (input: TradeMarkGetRequestInputDto) => {
       input.filter = this.keyword;
-      // input.status = this.status === 2 ? null : this.status;
+      input.status = this.status === 2 ? null : this.status;
       return this.tradeMarkService.getByPaged(input);
     },
     sortable: true,
     columns: [
       {
         name: 'name',
-        displayName: 'name',
+        displayName: 'Tên thương hiệu',
       },
-      {
-        name: 'slug',
-        displayName: 'slug',
-      },
-      {
-        name: 'orderIndex',
-        displayName: 'Thứ tự hiển thị',
-      },
+      // {
+      //   name: 'orderIndex',
+      //   displayName: 'Thứ tự hiển thị',
+      // },
 
       {
         name: 'status',
         displayName: this.l('::Trạng thái'),
         dataType: 'status',
-        width: 100,
-        permission: EcommerceSourceAbpPermissions.TradeMark.Edit,
+        width: 200,
+        // permission: EcommerceSourceAbpPermissions.TradeMark.Edit,
         click: dataRow => {
-          // this._toggleStatus(dataRow);
+          this._toggleStatus(dataRow);
         },
       },
     ],
@@ -64,7 +59,7 @@ export class TradeMarkComponent extends AppBaseComponent {
         },
         name: this.l('AbpUi::Edit'),
         color: 'primary',
-        permission: EcommerceSourceAbpPermissions.TradeMark.View,
+        // permission: EcommerceSourceAbpPermissions.TradeMark.View,
       },
     ],
   };
@@ -85,15 +80,15 @@ export class TradeMarkComponent extends AppBaseComponent {
     this.redirectTo('create');
   }
 
-  // private _toggleStatus(item: CategoryDto): void {
-  //     this.openToggleStatusConfirm(this.l('::Emailofevent'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
-  //         () => {
-  //             this.tradeMarkService.toggleStatus(item.id).subscribe(() => {
-  //                 this.showUpdateSuccess();
-  //                 this.table.refresh();
-  //             });
-  //         });
-  // }
+  private _toggleStatus(item: TradeMarkDto): void {
+      this.openToggleStatusConfirm(this.l('::thương hiệu'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+          () => {
+              this.tradeMarkService.toggleStatus(item.id).subscribe(() => {
+                  this.showUpdateSuccess();
+                  this.table.refresh();
+              });
+          });
+   }
 
   getStatus(status: Status): string {
     return Status[status];

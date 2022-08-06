@@ -44,21 +44,21 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
     columns: [
       {
         name: 'code',
-        displayName: this.l('Sub-ProductProperty ID'),
-        width: 180
+        displayName: this.l('Thứ tự'),
+        // width: 180
       },
       {
         name: 'name',
-        displayName: this.l('Sub-ProductProperty Name'),
+        displayName: this.l('Tên thuộc tính con'),
       },
       {
         name: 'status',
-        displayName: this.l('::Status'),
+        displayName: this.l('::Trạng thái'),
         dataType: 'status',
-        width: 100,
+        // width: 100,
         permission: EcommerceSourceAbpPermissions.SubProductProperty.Edit,
         click: dataRow => {
-          // this._toggleStatus(dataRow);
+          this._toggleStatus(dataRow);
         },
       },
     ],
@@ -162,15 +162,15 @@ export class ProductPropertyCreateEditComponent extends AppBaseComponent impleme
   //   });
   // }
 
-//   private _toggleStatus(item: SubProductPropertyDto): void {
-//     this.openToggleStatusConfirm(this.l('::SubProductProperty'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
-//       () => {
-//         this.subProductPropertyService.toggleStatus(item.id).subscribe(() => {
-//           this.showUpdateSuccess();
-//           this.table.refresh();
-//         });
-//       });
-//   }
+  private _toggleStatus(item: SubProductPropertyDto): void {
+    this.openToggleStatusConfirm(this.l('::thuộc tính con'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+      () => {
+        this.subProductPropertyService.toggleStatus(item.id).subscribe(() => {
+          this.showUpdateSuccess();
+          this.table.refresh();
+        });
+      });
+  }
 
 }
 

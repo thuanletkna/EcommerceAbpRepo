@@ -30,24 +30,23 @@ export class BlogComponent extends AppBaseComponent {
         sortable: true,
         columns: [
             {
-                name: 'name',
-                displayName: 'name',
+                name: 'code',
+                displayName: 'Thứ tự',
               },
             {
-                name: 'code',
-                displayName: 'code',
+                name: 'name',
+                displayName: 'Tên bài đăng',
               },
-            
-            // {
-            //     name: 'status',
-            //     displayName: this.l('::Status'),
-            //     dataType: 'status',
-            //     width: 100,
-            //     permission: NcsPermissions.EmailOfEvent.Edit,
-            //     click: dataRow => {
-            //         this._toggleStatus(dataRow);
-            //     },
-            // },
+            {
+                name: 'status',
+                displayName: this.l('::Trạng thái'),
+                dataType: 'status',
+                width: 200,
+                permission: EcommerceSourceAbpPermissions.Blog.Edit,
+                click: dataRow => {
+                     this._toggleStatus(dataRow);
+                },
+            },
         ],
         actions: [
             {
@@ -79,15 +78,15 @@ export class BlogComponent extends AppBaseComponent {
 
 
 
-    // private _toggleStatus(item: CategoryDto): void {
-    //     this.openToggleStatusConfirm(this.l('::Emailofevent'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
-    //         () => {
-    //             this.BlogService.toggleStatus(item.id).subscribe(() => {
-    //                 this.showUpdateSuccess();
-    //                 this.table.refresh();
-    //             });
-    //         });
-    // }
+    private _toggleStatus(item: BlogDto): void {
+        this.openToggleStatusConfirm(this.l('::bài đăng'), item.status == Status.Active ? this.l('::Enum:Status_0') : this.l('::Enum:Status_1'),
+            () => {
+                this.blogService.toggleStatus(item.id).subscribe(() => {
+                    this.showUpdateSuccess();
+                    this.table.refresh();
+                });
+            });
+    }
 
     getStatus(status: Status): string {
         return Status[status];
