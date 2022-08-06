@@ -28,7 +28,7 @@ export class CategoryProductCreateEditComponent extends AppBaseComponent impleme
     return this.getGrantedPolicy(EcommerceSourceAbpPermissions.Category.Create);
   }
 
-  vm: CategoryDto = { status: Status.Active, isBlog: true };
+  vm: CategoryDto = { status: Status.Active, isBlog: false };
   constructor(
     injector: Injector,
     private readonly appHeaderService: AppHeaderService,

@@ -23,7 +23,8 @@ export class CategoryProductComponent extends AppBaseComponent {
     tableOptions: DatatableOption<CategoryDto> = {
         functionData: (input: CategoryGetRequestInputDto) => {
             input.filter = this.keyword;
-            // input.status = this.status === 2 ? null : this.status;
+            input.isBlog = false;
+            input.status = this.status === 2 ? null : this.status;
             return this.categoryService.getByPaged(input);
         },
         sortable: true,
