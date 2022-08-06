@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AppBaseComponent } from "src/app/shared/app-base.component";
 import { CommonHelper } from "src/app/shared/consts/common-helper";
 import { EcommerceSourceAbpPermissions } from "src/app/shared/consts/ecommerce-permissions";
+import { Status } from "src/app/shared/enums";
 import { BlogDetailDto } from "src/app/shared/models/blog-detail/blog-detail.dto";
 import { BlogDetailService } from "src/app/shared/services/blog-detail.service";
 
@@ -33,7 +34,7 @@ export class CreateEditBlogDetailComponent extends AppBaseComponent implements A
     }
 
     
-    vm: BlogDetailDto = { id: CommonHelper.newId() };
+    vm: BlogDetailDto = { id: CommonHelper.newId(),status: Status.Active };
     dateFormat = 'dd/MM/yyyy';
 
     constructor(

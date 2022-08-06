@@ -41,7 +41,15 @@
               </nz-form-control>
             </nz-form-item>
           </div>
-        
+          <div class="col-12 mt-2">
+            <nz-form-item>
+                <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                <nz-radio-group [(ngModel)]="vm.status" name="status">
+                    <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                    <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                </nz-radio-group>
+            </nz-form-item>
+        </div>
       </div>
       <div class="row p-3">
         <div class="col-12">(<span class="required">*</span>) Required information</div>

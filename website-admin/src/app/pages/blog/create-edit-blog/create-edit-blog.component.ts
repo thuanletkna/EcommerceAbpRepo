@@ -33,7 +33,7 @@ export class BlogCreateEditComponent extends AppBaseComponent implements AfterVi
     return this.getGrantedPolicy(EcommerceSourceAbpPermissions.Category.Create);
   }
 
-  vm: BlogDto = { id: CommonHelper.newId(),status: Status.Active };
+  vm: BlogDto = { status: Status.Active };
 
   selectionTableOptions: DatatableOption<BlogDetailDto> = {
     sortable: true,
@@ -54,7 +54,7 @@ export class BlogCreateEditComponent extends AppBaseComponent implements AfterVi
         {
             icon: 'create',
             click: dataRow => {
-                // this.editSelection(dataRow);
+                 this.editBlogDetail(dataRow);
             },
             name: this.l('AbpUi::Edit'),
             color: 'primary',
@@ -63,7 +63,7 @@ export class BlogCreateEditComponent extends AppBaseComponent implements AfterVi
         {
             icon: 'delete',
             click: dataRow => {
-                // this._delete(dataRow);
+                this._delete(dataRow);
                 //   this.editSelection(dataRow.id);
             },
             name: this.l('AbpUi::Delete'),
@@ -91,7 +91,18 @@ export class BlogCreateEditComponent extends AppBaseComponent implements AfterVi
   addBlogDetail(): void {
     this._openBlogDetailCreateEditDialog();
 }
+private _delete(item: BlogDetailDto) {
 
+    this.openDeleteConfirm(item.name, () => {
+        const index: number = this.vm.blogDetails.indexOf(item);
+       
+        if (index !== -1) {
+            this.vm.blogDetails.splice(index, 1);
+        }
+        // this.showSuccess("Soc Report Action deleted successfully");
+        this.table.refresh();
+    });
+}
 
 editBlogDetail(blogId: BlogDetailDto) {
     this._openBlogDetailCreateEditDialog( blogId);
