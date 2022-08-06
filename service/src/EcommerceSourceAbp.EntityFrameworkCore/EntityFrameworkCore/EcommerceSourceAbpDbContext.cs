@@ -71,6 +71,9 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<ProductProperty> ProductProperties { get; set; }
     public DbSet<SubProductProperty> SubProductProperties { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<ProductAffilate> ProductAffilates { get; set; }
+    public DbSet<BlogDetail> BlogDetails { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
     {
@@ -183,6 +186,21 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<SubProductProperty>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "SubProductProperties", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<ProductAffilate>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "ProductAffilates", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Blog>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Blogs", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<BlogDetail>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "BlogDetails", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

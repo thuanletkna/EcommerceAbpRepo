@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace EcommerceSourceAbp.Migrations
 {
     [DbContext(typeof(EcommerceSourceAbpDbContext))]
-    [Migration("20220805212434_updateProductProperty")]
-    partial class updateProductProperty
+    [Migration("20220806123737_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,136 @@ namespace EcommerceSourceAbp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Blog", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppBlogs", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BlogId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("AppBlogDetails", (string)null);
+                });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
                 {
@@ -699,6 +829,93 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasIndex("TradeMarkId");
 
                     b.ToTable("AppProducts", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductAffilate", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsAffilateInDetailBlog")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LinkAffilateLazada")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkAffilateOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkAffilateShopee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkAffilateTiki")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PriceSale")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("ProductDetailId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductDetailId");
+
+                    b.ToTable("AppProductAffilates", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
@@ -3198,6 +3415,15 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", "Blog")
+                        .WithMany("BlogDetails")
+                        .HasForeignKey("BlogId");
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.District", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Province", "Province")
@@ -3277,6 +3503,15 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("ProductProperties");
 
                     b.Navigation("TradeMark");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductAffilate", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.BlogDetail", "ProductDetail")
+                        .WithMany("ProductAffilates")
+                        .HasForeignKey("ProductDetailId");
+
+                    b.Navigation("ProductDetail");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
@@ -3596,6 +3831,16 @@ namespace EcommerceSourceAbp.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Blog", b =>
+                {
+                    b.Navigation("BlogDetails");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
+                {
+                    b.Navigation("ProductAffilates");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
