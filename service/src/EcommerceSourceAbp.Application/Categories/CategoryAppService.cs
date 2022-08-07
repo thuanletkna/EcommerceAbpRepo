@@ -5,6 +5,10 @@ using Volo.Abp.Domain.Repositories;
 using EcommerceSourceAbp.Permissions;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Volo.Abp.Application.Dtos;
+using System.Collections.Generic;
+using EcommerceSourceAbp.Enums;
 
 namespace EcommerceSourceAbp.Categories
 {
@@ -34,6 +38,17 @@ namespace EcommerceSourceAbp.Categories
                 .WhereIf(input.IsBlog != null, x => x.IsBlog == input.IsBlog.Value)
                 .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
             return a;
+        }
+
+        
+        [AllowAnonymous]
+        public async Task<List<GetCategoryForViewDto>> GetAllPublic()
+        {
+            var query = await Repository.GetQueryableAsync();
+            var result = query.Where(x => x.Status == Status.Active)
+               .OrderBy(x => x.OrderIndex);
+
+            return result.Select(MapToViewOutput).ToList();
         }
     }
 }

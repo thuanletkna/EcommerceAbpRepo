@@ -2,9 +2,30 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// export const environment = {
+//   production: false
+// };
+
+const baseUrl = 'https://localhost:30666';
 export const environment = {
-  production: false
+  production: false,
+  oAuthConfig: {
+    issuer: 'https://localhost:44314',
+    redirectUri: baseUrl,
+    clientId: 'EcommerceSourceAbp_App',
+    responseType: 'code',
+    scope: 'offline_access EcommerceSourceAbp',
+    requireHttps: true,
+  },
+  apis: {
+    default: {
+      url: 'https://localhost:44314',
+      rootNamespace: 'EcommerceSourceAbp',
+      // prefixEcom: '/api/app',
+    },
+  },
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

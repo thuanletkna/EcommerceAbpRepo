@@ -5,7 +5,14 @@
   "projects": {
     "website-public": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,12 +27,29 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input":"node_modules/wowjs/css/libs/animate.css",
+                "inject": true,
+                "bundleName": "wow-animate.css.min"
+              }
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "node_modules/jquery/dist/jquery.min.js",
+                "bundleName": "jquery.min",
+                "inject": true
+              },
+              {
+                "input":"node_modules/wowjs/dist/wow.js",
+                "inject": true,
+                "bundleName": "wow.js.min"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -97,5 +121,9 @@
         }
       }
     }
-  }
+  },
+  "cli": {
+    "analytics": "8b67343f-d216-4091-8f3e-a88bdc24090e"
+  },
+  "defaultProject": "website-public"
 }
