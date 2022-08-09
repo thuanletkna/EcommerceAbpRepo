@@ -31,11 +31,20 @@
               "src/web.config"
             ],
             "styles": [
-              "src/styles.css",
               {
-                "input":"node_modules/wowjs/css/libs/animate.css",
+                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "bundleName": "bootstrap.min",
+                "inject": true
+              },
+              {
+                "input": "node_modules/quill/dist/quill.snow.css",
                 "inject": true,
-                "bundleName": "wow-animate.css.min"
+                "bundleName": "quill.snow.min"
+              },
+              {
+                "input": "src/styles.less",
+                "bundleName": "styles.min",
+                "inject": true
               }
             ],
             "scripts": [
@@ -45,9 +54,24 @@
                 "inject": true
               },
               {
-                "input":"node_modules/wowjs/dist/wow.js",
+                "input": "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+                "bundleName": "bootstrap.bundle.min",
+                "inject": true
+              },
+              {
+                "input": "node_modules/quill/dist/quill.js",
                 "inject": true,
-                "bundleName": "wow.js.min"
+                "bundleName": "quill.min"
+              },
+              {
+                "input": "node_modules/moment/moment.js",
+                "inject": true,
+                "bundleName": "moment.min"
+              },
+              {
+                "input": "node_modules/moment/locale/vi.js",
+                "inject": true,
+                "bundleName": "moment.vi.min"
               }
             ]
           },

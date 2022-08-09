@@ -1,0 +1,495 @@
+/*!
+ * Datetimepicker for Bootstrap 3
+ * ! version : 4.17.37
+ * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ */
+
+@bs-datetimepicker-timepicker-font-size: 1.2em;
+@bs-datetimepicker-active-bg: #ED342E;
+@bs-datetimepicker-active-color: white;
+@bs-datetimepicker-border-radius: 3px;
+@bs-datetimepicker-btn-hover-bg: #eee;
+@bs-datetimepicker-disabled-color: rgba(0, 0, 0, 0.12);
+@bs-datetimepicker-alternate-color: #666;
+@bs-datetimepicker-secondary-border-color: #ccc;
+@bs-datetimepicker-secondary-border-color-rgba: rgba(0, 0, 0, 0.2);
+@bs-datetimepicker-primary-border-color: white;
+@bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.bootstrap-datetimepicker-widget {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07), 0px 0px 40px rgba(0, 0, 0, 0.08);
+  list-style: none;
+
+  .datepicker {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .timepicker {
+    display: none;
+  }
+
+  a {
+    &:hover {
+      box-shadow: none !important;
+    }
+
+    .btn {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.dropdown-menu {
+    padding: 4px;
+    width: 19em;
+
+    &.timepicker-sbs {
+      @media (min-width: 768px) {
+        width: 38em;
+      }
+
+      @media (min-width: 991px) {
+        width: 38em;
+      }
+
+      @media (min-width: 1200px) {
+        width: 38em;
+      }
+    }
+
+    &.bottom {
+
+      &:before,
+      &:after {
+        right: auto;
+        left: 12px;
+      }
+    }
+
+    &.top {
+      margin-top: auto;
+      margin-bottom: 27px;
+
+      &.open {
+        margin-top: auto;
+        margin-bottom: 27px;
+      }
+    }
+
+    &.pull-right {
+      &:before {
+        left: auto;
+        right: 6px;
+      }
+
+      &:after {
+        left: auto;
+        right: 7px;
+      }
+    }
+  }
+
+  .list-unstyled {
+    margin: 0;
+  }
+
+  a[data-action] {
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    background-color: transparent;
+    color: @bs-datetimepicker-active-bg;
+    box-shadow: none;
+
+    &:hover {
+      background-color: transparent;
+
+      span {
+        background-color: @bs-datetimepicker-btn-hover-bg;
+        color: @bs-datetimepicker-active-bg;
+      }
+    }
+  }
+
+  a[data-action]:active {
+    box-shadow: none;
+  }
+
+  .timepicker-hour,
+  .timepicker-minute,
+  .timepicker-second {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 300;
+    font-size: 1.125rem;
+    margin: 0;
+    border-radius: 50%;
+  }
+
+  button[data-action] {
+    width: 38px;
+    height: 38px;
+    margin-right: 3px;
+    padding: 0;
+  }
+
+  .btn[data-action='incrementHours']::after {
+    &:extend(.sr-only);
+    content: 'Increment Hours';
+  }
+
+  .btn[data-action='incrementMinutes']::after {
+    &:extend(.sr-only);
+    content: 'Increment Minutes';
+  }
+
+  .btn[data-action='decrementHours']::after {
+    &:extend(.sr-only);
+    content: 'Decrement Hours';
+  }
+
+  .btn[data-action='decrementMinutes']::after {
+    &:extend(.sr-only);
+    content: 'Decrement Minutes';
+  }
+
+  .btn[data-action='showHours']::after {
+    &:extend(.sr-only);
+    content: 'Show Hours';
+  }
+
+  .btn[data-action='showMinutes']::after {
+    &:extend(.sr-only);
+    content: 'Show Minutes';
+  }
+
+  .btn[data-action='togglePeriod']::after {
+    &:extend(.sr-only);
+    content: 'Toggle AM/PM';
+  }
+
+  .btn[data-action='clear']::after {
+    &:extend(.sr-only);
+    content: 'Clear the picker';
+  }
+
+  .btn[data-action='today']::after {
+    &:extend(.sr-only);
+    content: 'Set the date to today';
+  }
+
+  .picker-switch {
+    text-align: center;
+    border-radius: unset !important;
+    font-weight: 600;
+
+    &::after {
+      &:extend(.sr-only);
+      content: 'Toggle Date and Time Screens';
+    }
+
+    td {
+      padding: 0;
+      margin: 0;
+      height: auto;
+      width: auto;
+      line-height: inherit;
+
+      span {
+        line-height: 2.5;
+        height: 2.5em;
+        width: 100%;
+        border-radius: @bs-datetimepicker-border-radius;
+        margin: 2px 0px !important;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+
+    &.table-condensed {
+      thead {
+        tr {
+          &:first-child {
+            th {
+              &:extend(.animation-transition-fast);
+              font-family: Roboto-Bold;
+              font-size: 20px;
+              color: #fff;
+              background-color: #ED342E;
+              padding: 18px 0;
+              position: relative;
+              text-transform: capitalize;
+              &.disabled,
+              &.disabled:hover {
+                background: none;
+                color: @bs-datetimepicker-disabled-color;
+                cursor: not-allowed;
+              }
+
+              &.prev span,
+              &.next span {
+                border-radius: @bs-datetimepicker-border-radius;
+                height: 27px;
+                width: 27px;
+                line-height: 28px;
+                font-size: 12px;
+                border-radius: 50%;
+                text-align: center;
+                &.glyphicon-chevron-left {
+                  background: url('../assets/images/chevron-left-white.svg') no-repeat center center;
+                  background-size: 10px 10px;
+                  width: 13px;
+                  height: 13px;
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                }
+                &.glyphicon-chevron-right {
+                  background: url('../assets/images/chevron-right-white.svg') no-repeat center center;
+                  background-size: 10px 10px;
+                  width: 13px;
+                  height: 13px;
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                }
+              }
+
+              &.prev::after {
+                &:extend(.sr-only);
+                content: 'Previous Month';
+              }
+
+              &.next::after {
+                &:extend(.sr-only);
+                content: 'Next Month';
+              }
+
+              &.dow {
+                text-align: center;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                font-size: 12px;
+                text-transform: uppercase;
+                color: #222;
+                font-weight: 400;
+                padding-bottom: 5px;
+                padding-top: 10px;
+              }
+            }
+          }
+
+          &:nth-child(2) {
+            th {
+              width: calc(~"100% / 7");
+              padding: 30px 0 16px;
+              border-bottom: 0.5px solid #666666;
+
+              &:first-child {
+                color: #01A54E;
+              }
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          &:last-child {
+            td {
+              padding: 12px 0.75rem 30px !important;
+            }
+          }
+          td {
+            width: calc(~"100% / 7");
+            padding: 12px 0.75rem !important;
+            &.old, &.new {
+              opacity: 0;
+              pointer-events: none;
+            }
+            &:first-child {
+              color: #01A54E;
+            }
+          }
+        }
+      }
+    }
+
+    & td>div,
+    & th>div {
+      &:extend(.animation-transition-fast);
+      text-align: center;
+    }
+
+    & thead tr:first-child th {
+      cursor: pointer;
+    }
+
+    & td {
+      >div {
+        border-radius: @bs-datetimepicker-border-radius;
+      }
+
+      &.cw>div {
+        font-size: 0.8em;
+        height: 20px;
+        line-height: 20px;
+        color: @bs-datetimepicker-alternate-color;
+      }
+
+      &.day>div {
+        width: 24px;
+        height: 24px;
+        margin: 0 auto;
+        padding: 0;
+        border-radius: 0;
+        position: relative;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &.old>div,
+      &.new>div {
+        color: @bs-datetimepicker-alternate-color;
+      }
+
+      &.today>div {
+        position: relative;
+
+        &:before {
+          content: '';
+          display: inline-block;
+          border: 0 0 7px 7px solid transparent;
+          border-bottom-color: @bs-datetimepicker-active-bg;
+          border-top-color: @bs-datetimepicker-secondary-border-color-rgba;
+          position: absolute;
+          bottom: 4px;
+          right: 4px;
+        }
+      }
+
+      &.active>div,
+      &.active:hover>div {
+        background-color: @bs-datetimepicker-active-bg;
+        color: @bs-datetimepicker-active-color;
+      }
+
+      &.active.today:before>div {
+        border-bottom-color: #fff;
+      }
+
+      &.disabled>div,
+      &.disabled:hover>div {
+        background: none;
+        color: @bs-datetimepicker-disabled-color;
+        cursor: not-allowed;
+      }
+
+      span {
+        &:extend(.animation-transition-fast);
+
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin: 3px 3px;
+        cursor: pointer;
+        border-radius: 50%;
+        text-align: center;
+
+        &:hover {
+          background: @bs-datetimepicker-btn-hover-bg;
+        }
+
+        &.active {
+          background-color: @bs-datetimepicker-active-bg;
+          color: @bs-datetimepicker-active-color;
+        }
+
+        &.old {
+          color: @bs-datetimepicker-alternate-color;
+        }
+
+        &.disabled,
+        &.disabled:hover {
+          background: none;
+          color: @bs-datetimepicker-disabled-color;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .timepicker-picker,
+  .timepicker-hours,
+  .timepicker-minutes {
+    span {
+      border-radius: 50% !important;
+    }
+  }
+
+  &.usetwentyfour {
+    td.hour {
+      height: 27px;
+      line-height: 27px;
+    }
+  }
+}
+
+.input-group.date {
+  & .input-group-addon {
+    cursor: pointer;
+
+    span>img {
+      vertical-align: sub;
+    }
+
+    span:last-of-type {
+      img {
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+
+.table-condensed>tbody>tr>td,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>td,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>thead>tr>th {
+  padding: 1px;
+  text-align: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.datepicker-inline {
+  max-width: 274px;
+  max-height: 260px;
+}
+
+@media screen and (min-width: 375px) {
+  // .bootstrap-datetimepicker-widget {
+  //   width: 274px;
+  // }
+}

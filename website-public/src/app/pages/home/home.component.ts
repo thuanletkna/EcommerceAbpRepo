@@ -37,18 +37,18 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
 
  initData() {
         // this.renderMetaSeo({ title: 'Tin tức', meta_seo: AppConst.DEFAULT_META_SEO });
-        forkJoin([
-            this.categoriesService.getPaged({ maxResultCount: 3 }),
+      //   forkJoin([
+      //       this.categoriesService.getPaged({ maxResultCount: 3 }),
            
-        ]).subscribe(([categories]) => {
-            this.categories = categories.items;
-        });
+      //   ]).subscribe(([categories]) => {
+      //       this.categories = categories.items;
+      //   });
         forkJoin([
           this.categoriesService.getAllCategory(),
          
       ]).subscribe(([categories]) => {
           this.categories = categories;
       });
-        console.log(this.categories);
+      //   console.log(this.categories);
     }
 }

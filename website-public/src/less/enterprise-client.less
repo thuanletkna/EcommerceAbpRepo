@@ -1,0 +1,63 @@
+//enterprise-client
+.enterprise-client {
+  background: url('../assets/images/shareholder-relation/corporate-governance-bg.png') no-repeat top center;
+  background-size: 100% auto;
+  .content {
+    .typical-customer {
+      margin-bottom: 60px;
+      border-bottom: 1px solid #D9D9D9;
+      .switch-tab {
+        padding-bottom: 9px;
+        border-bottom: 1px solid #D9D9D9;
+        h2.title {
+          margin-bottom: 0;
+        }
+        .swiper-navigation {
+          .swiper-button-next-SC, .swiper-button-prev-SC {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer;
+          }
+          .line {
+            width: 1px;
+            height: 22px;
+            background: #666666;
+            margin: 0 5.5px;
+          }
+          span {
+            font-family: Roboto-Medium;
+            color: #666666;
+            line-height: 14px;
+            &.current {
+              font-weight: 600;
+              font-size: 20px;
+              color: #ED342E;
+            }
+          }
+        }
+      }
+      .mySwiperCustomers {
+        padding: 32px 0;
+        .swiper-wrapper {
+          align-items: center;
+          .swiper-slide {
+            text-align: center;
+            &:hover {
+              img {
+                filter: unset;
+              }
+            }
+            img {
+              width: 70%;
+              filter: grayscale(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+}

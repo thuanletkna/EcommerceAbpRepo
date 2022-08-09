@@ -1,0 +1,101 @@
+//org-client
+.increase-value-service {
+  padding-bottom: 75px;
+  .content {
+    .top-bar {
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid #000000;
+      h2.title {
+        margin-bottom: 0;
+      }
+      ul.nav-tabs {
+        .nav-item {
+          &:not(:first-child) {
+            .nav-link {
+              border-left: 1px solid #666666;
+            }
+          }
+          .nav-link {
+            padding: 0 0 0 38px;
+            margin-left: 32px;
+            border-color: transparent;
+            &:hover {
+              color: #DCAB27;
+            }
+            &.active {
+              font-family: Roboto-Bold;
+              color: #DCAB27;
+            }
+          }
+        }
+      }
+    }
+    .tab-content {
+      .tab-pane {
+        padding-top: 65px;
+        .analysis-service {
+          .image-thumbnail {
+            position: relative;
+            z-index: 1;
+            .vector {
+              position: absolute;
+              top: 35%;
+              left: 15px;
+            }
+            .corporate-governance-img {
+              width: calc(~"100% - 24px");
+            }
+          }
+          h2.title {
+            margin-bottom: 30px;
+          }
+          .right-content {
+            background: #FCF8EE;
+            padding: 46px 0 62px;
+            margin-top: -260px;
+          }
+          .list-report {
+            margin-top: 48px;
+            .item {
+              background: #FFFFFF;
+              box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.07), 0px 0px 40px rgba(0, 0, 0, 0.08);
+              border-radius: 1px;
+              padding: 25px 12px;
+              height: 100%;
+              &.item-large {
+                padding: 25px;
+              }
+              .block-img {
+                width: 60px;
+                height: 60px;
+                margin-right: 14px;
+                img {
+                  display: block;
+                  margin: 0 auto;
+                }
+              }
+              h4.title {
+                font-size: 22px;
+                color: #ED342E;
+                margin-bottom: 2px;
+              }
+              p {
+                font-family: Roboto-Bold;
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .increase-value-service {
+    background-image: url('../assets/images/org-client/service-bg.png'), url("../assets/images/org-client/bg-company-info.png");
+    background-position: top center, bottom center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100% auto, 100% auto;
+  }
+}

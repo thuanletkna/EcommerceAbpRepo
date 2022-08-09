@@ -1,0 +1,351 @@
+//support
+.support-faq {
+  padding: 0 0px 45px;
+  .content {
+    h2.title {
+      margin-bottom: 31px;
+    }
+    .switch-tab {
+      .dropdown {
+        height: 40px;
+        border: 0.5px solid #666666;
+        border-radius: 1px;
+        .dropdown-toggle {
+          font-family: Roboto-Bold;
+          color: #666666;
+          width: 100%;
+          height: 100%;
+          position: relative;
+          text-align: left;
+          padding: 0 0 0 20px;
+          &:after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 50%;
+            right: 13px;
+            transform: translateY(-35%);
+            background: url('../assets/images/dropdown-up-icon-grey.svg') no-repeat center center;
+            background-size: 100% auto;
+            border: unset;
+          }
+        }
+        .dropdown-menu {
+          font-family: Roboto-Bold;
+          border-radius: unset;
+          background: #F5F5F5;
+          transform: translate3d(0px, 37px, 0px) !important;
+          .dropdown-item {
+            font-family: Roboto-Bold;
+            color: #666666;
+            padding: 10px 20px;
+            border-bottom: 0.5px solid #EAEAEA;
+          }
+        }
+      }
+      .nav-tabs {
+        border: none;
+        flex-direction: column;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        .nav-item {
+          .nav-link {
+            font-family: Roboto-Bold;
+            padding: 17px 34px 17px 22px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: unset;
+            border: 0.5px solid #979797;
+            border-right: unset;
+            &.active {
+              font-family: Roboto-Bold;
+              color: #fff !important;
+              border-color: transparent;
+              background: #ED342E;
+              box-shadow: 0px 14px 35px -8px rgba(0, 0, 0, 0.2), 0px 20px 50px -10px rgba(0, 0, 0, 0.15);
+            }
+            &:hover {
+              color: #ED342E;
+            }
+          }
+        }
+      }
+    }
+    .support-accordion {
+      background: #fff;
+      border-radius: 1px;
+      .input-group {
+        border: 0.5px solid #979797;
+        border-radius: 3px;
+        margin-top: 24px;
+        margin-right: 0;
+        margin-left: auto;
+        input {
+          height: 30px;
+          background: unset;
+          border: unset;
+          border-radius: 3px;
+        }
+        .input-group-text {
+          background: unset;
+        }
+      }
+      .accordion {
+        margin-top: 22px;
+        padding-bottom: 50px;
+        .card {
+          border: none;
+          border-radius: unset !important;
+          padding: 0;
+          width: calc(~"100% + 40px");
+          margin-left: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+          .card-header {
+            background-color: unset;
+            border: unset;
+            padding: 0;
+            background-color: #fff;
+            border-top: 0.5px solid #666666;
+            .btn {
+              font-family: Roboto-Bold;
+              color: #666666;
+              padding: 10px 20px 10px 10px;
+              .closed {
+                display: none;
+              }
+              &:not(.collapsed) {
+                background: #FFFFFF;
+                box-shadow: 0px 14px 35px -8px rgba(0, 0, 0, 0.2), 0px 20px 50px -10px rgba(0, 0, 0, 0.15) !important;
+                .opened {
+                  display: none;
+                }
+                .closed {
+                  display: inline-block;
+                  vertical-align: sub;
+                }
+              }
+              span {
+                font-size: 14.5px;
+              }
+            }
+            img {
+              margin-right: 10px;
+              vertical-align: sub;
+            }
+          }
+          .card-body {
+            border-left: 1px solid #DCAB27;
+            margin: 1px 0 0;
+            padding: 10px 0 10px 16px;
+            .branch {
+              font-family: Roboto-Bold;
+              line-height: 20px;
+              letter-spacing: 0.03em;
+              color: #666666;
+              margin-bottom: 0;
+            }
+            .address {
+              line-height: 19px;
+              color: #666666;
+              margin-bottom: 5px;
+            }
+            .phone {
+              font-family: Roboto-Light;
+              margin-bottom: 5px;
+            }
+            a {
+              display: inline-block;
+              color: #DCAB27;
+            }
+            .information {
+              padding: 12px 0 0;
+            }
+            span {
+              font-family: Roboto-Bold;
+              color: #ED342E;
+            }
+          }
+          .sub-content {
+            padding-left: 20px;
+            padding-bottom: 13px;
+          }
+          .btn-link {
+            &:focus {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.investor-guide {
+  ul.nav-tabs {
+    .nav-item {
+      .nav-link {
+        &.active {
+          & ~ .nav-link-child {
+            padding: 0;
+            border-left: unset;
+            display: block;
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+      .nav-link-child {
+        display: none;
+        a.nav-link-child-item {
+          font-family: Roboto-Regular;
+          display: block;
+          padding: 17px 34px 17px 19px;
+          border-left: 4px solid #979797;
+          border-top: 1px solid #979797;
+          border-right: unset;
+          &.active {
+            color: #ED342E;
+            border-left-color: #ED342E;
+          }
+          &:hover {
+            color: #ED342E;
+          }
+        }
+      }
+    }
+  }
+  .tab-content {
+    .tab-pane {
+      h3.title {
+        font-size: 16px;
+        margin-bottom: 7px;
+      }
+      img {
+        margin-bottom: 20px;
+        &.arrow {
+          width: 20px;
+          margin-bottom: 0;
+        }
+      }
+      a {
+        color: #DCAB27;
+      }
+      .guide-item {
+        background: #F5F5F5;
+        padding: 0 20px 1px 20px;
+        margin-bottom: 20px;
+        .line-top {
+          width: calc(~"100% + 20px + 20px");
+          height: 5px;
+          background: #ED342E;
+          margin-left: -20px;
+          margin-bottom: 10px;
+        }
+        h4.title {
+          font-size: 16px;
+          color: #ED342E;
+          margin-bottom: 2px;
+        }
+        .line {
+          width: 30px;
+          height: 1px;
+          background: #DCAB27;
+          margin-bottom: 8px;
+        }
+        p {
+          margin-bottom: 16px;
+        }
+        h6.title {
+          font-family: Roboto-Regular;
+          color: #666666;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .support-faq {
+    .content {
+      h2.title {
+        margin-bottom: 14px;
+      }
+      .support-accordion {
+        border: 0.5px solid #666666;
+        .input-group {
+          max-width: 320px;
+          margin-right: 62px;
+        }
+        .accordion {
+          .card {
+            width: 100%;
+            margin-left: 0;
+            padding: 0 65px;
+            .card-header {
+              .btn {
+                padding: 20px;
+              }
+            }
+            .card-body {
+              margin: 16px 0 0;
+              border-left: 2px solid #DCAB27;
+              .branch {
+                margin-bottom: 6px;
+              }
+              .address {
+                line-height: 20px;
+              }
+              .phone {
+                line-height: 30px;
+              }
+              .address, .phone {
+                margin-bottom: 9px;
+              }
+              a {
+                margin-bottom: 5px;
+              }
+            }
+            .sub-content {
+              padding-left: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .investor-guide {
+    .tab-content {
+      .tab-pane {
+        h3.title {
+          font-size: 25px;
+          margin-bottom: 24px;
+        }
+        img {
+          &.arrow {
+            width: 24px;
+          }
+        }
+        .guide-item {
+          padding: 0 20px 10px 20px;
+          margin-bottom: 24px;
+          .line-top {
+            margin-bottom: 20px;
+          }
+          h4.title {
+            font-size: 20px;
+            margin-bottom: 16px;
+          }
+          .line {
+            height: 1.5px;
+            margin-bottom: 13.5px;
+          }
+        }
+      }
+    }
+  }
+}

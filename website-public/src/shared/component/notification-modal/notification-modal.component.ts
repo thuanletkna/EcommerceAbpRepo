@@ -10,7 +10,7 @@ export class NotificationModalComponent extends AppBaseComponent {
   get vm() {
     return this.notificationModalService.value;
   }
-  $:any;
+
   get isShow() {
     return this.notificationModalService.isShow;
   }
@@ -23,8 +23,8 @@ export class NotificationModalComponent extends AppBaseComponent {
       if (result === "show") {
         setTimeout(() => {
           if (this.isBrowser) {
-            (this.$('#notificationModal') as any).modal('show');
-            this.$('#notificationModal').on('hidden.bs.modal', () => {
+            ($('#notificationModal') as any).modal('show');
+            $('#notificationModal').on('hidden.bs.modal', () => {
               this.notificationModalService.hide();
             });
           }

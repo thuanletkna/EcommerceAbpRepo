@@ -49,7 +49,7 @@ import { NotificationModalComponent } from './component/notification-modal/notif
         // SidebarMenuComponent,
         // MainLayoutComponent,
         // BlankLayoutComponent,
-        NotificationModalComponent,
+        // NotificationModalComponent,
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
@@ -60,7 +60,7 @@ import { NotificationModalComponent } from './component/notification-modal/notif
         HeaderComponent,
         FooterComponent,
         SidebarMenuComponent,
-        // NotificationModalComponent,
+        NotificationModalComponent,
         BlankLayoutComponent
     ],
     providers: [
