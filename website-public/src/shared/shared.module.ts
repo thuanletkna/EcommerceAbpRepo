@@ -20,7 +20,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotificationModalComponent } from './component/notification-modal/notification-modal.component';
 import { NavbarStyleTwoComponent } from './layout/navbar-style-two/navbar-style-two.component';
 import { PreloaderComponent } from './layout/preloader/preloader.component';
-import { FooterStyleTwoComponent } from './layout/footer-style-two/footer-style-two.component';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 
 
@@ -30,7 +29,6 @@ import { FooterStyleTwoComponent } from './layout/footer-style-two/footer-style-
         MainLayoutComponent,
         HeaderComponent,
         FooterComponent,
-        FooterStyleTwoComponent,
         PreloaderComponent,
         SidebarMenuComponent,
         NotificationModalComponent,
@@ -65,7 +63,6 @@ import { FooterStyleTwoComponent } from './layout/footer-style-two/footer-style-
         MainLayoutComponent,
         HeaderComponent,
         FooterComponent,
-        FooterStyleTwoComponent,
         PreloaderComponent,
         NavbarStyleTwoComponent,
         SidebarMenuComponent,

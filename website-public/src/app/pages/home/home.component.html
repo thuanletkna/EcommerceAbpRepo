@@ -33,14 +33,14 @@
         </div>
 
         <div class="row pt-45">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6"  *ngFor="let cat of categories">
                 <div class="choose-card">
                     <i class='bx bx-box'></i>
-                    <h3>Trusted Company</h3>
+                    <h3>{{cat.name}}</h3>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-sm-6">
+            <!-- <div class="col-lg-3 col-sm-6">
                 <div class="choose-card">
                     <i class='bx bxs-coin-stack'></i>
                     <h3>Budget Oriented</h3>
@@ -87,7 +87,7 @@
                     <i class='bx bx-money'></i>
                     <h3>Money Back Guarantee</h3>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
