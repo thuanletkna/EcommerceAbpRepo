@@ -45,7 +45,15 @@
                 "input": "src/styles.less",
                 "bundleName": "styles.min",
                 "inject": true
-              }
+              },
+              "node_modules/owl.carousel/dist/assets/owl.carousel.min.css",
+              "node_modules/owl.carousel/dist/assets/owl.theme.default.min.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/boxicons.min.css",
+              "src/assets/css/meanmenu.css",
+              "node_modules/jquery-nice-select/scss/nice-select.scss",
+              "src/styles.scss",
+              "src/responsive.scss"
             ],
             "scripts": [
               {
@@ -53,6 +61,10 @@
                 "bundleName": "jquery.min",
                 "inject": true
               },
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/owl.carousel/dist/owl.carousel.min.js",
+                "src/assets/js/meanmenu.js",
+                "node_modules/jquery-nice-select/js/jquery.nice-select.min.js",
               {
                 "input": "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                 "bundleName": "bootstrap.bundle.min",
@@ -72,6 +84,21 @@
                 "input": "node_modules/moment/locale/vi.js",
                 "inject": true,
                 "bundleName": "moment.vi.min"
+              },
+              {
+                "input": "src/assets/js/plugins/slick.min.js",
+                "inject": true,
+                "bundleName": "slick.min"
+              },
+              {
+                "input": "src/assets/js/meanmenu.js",
+                "inject": true,
+                "bundleName": "meanmenu.min"
+              },
+              {
+                "input": "src/assets/js/custom.js",
+                "inject": true,
+                "bundleName": "custom.min"
               }
             ]
           },

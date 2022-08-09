@@ -18,6 +18,9 @@ import { environment } from 'src/environments/environment';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotificationModalComponent } from './component/notification-modal/notification-modal.component';
+import { NavbarStyleTwoComponent } from './layout/navbar-style-two/navbar-style-two.component';
+import { PreloaderComponent } from './layout/preloader/preloader.component';
+import { FooterStyleTwoComponent } from './layout/footer-style-two/footer-style-two.component';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 
 
@@ -27,9 +30,12 @@ import { NotificationModalComponent } from './component/notification-modal/notif
         MainLayoutComponent,
         HeaderComponent,
         FooterComponent,
+        FooterStyleTwoComponent,
+        PreloaderComponent,
         SidebarMenuComponent,
         NotificationModalComponent,
         BlankLayoutComponent,
+        NavbarStyleTwoComponent
     ],
     imports: [
         FormsModule,
@@ -59,6 +65,9 @@ import { NotificationModalComponent } from './component/notification-modal/notif
         MainLayoutComponent,
         HeaderComponent,
         FooterComponent,
+        FooterStyleTwoComponent,
+        PreloaderComponent,
+        NavbarStyleTwoComponent,
         SidebarMenuComponent,
         NotificationModalComponent,
         BlankLayoutComponent
