@@ -12,6 +12,11 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./pages/home/home.module').then(x => x.HomeModule),
         pathMatch: 'full'
+      },
+      {
+        path: 'san-pham',
+        loadChildren: () => import('./pages/product/product.module').then(x => x.ProductModule),
+        pathMatch: 'full'
       }
     ]
   },

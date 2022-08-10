@@ -50,7 +50,10 @@ export interface IPagination {
   totalPage: number;
   currentPage: number;
 }
-
+export interface IPaginations<T> {
+  items: T[];
+  totalCount: number;
+}
 export interface INotificationOption {
   type?: ENotificationType;
   title?: string;
@@ -64,4 +67,10 @@ export declare class ListResultDto<T> {
 export declare class PagedResultDto<T> extends ListResultDto<T> {
   totalCount?: number;
   constructor(initialValues?: Partial<PagedResultDto<T>>);
+}
+
+export interface PagedRequest {
+  sorting?: string;
+  skipCount?: number;
+  maxResultCount?: number;
 }

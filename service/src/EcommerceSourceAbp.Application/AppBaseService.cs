@@ -176,10 +176,25 @@ namespace EcommerceSourceAbp
         #endregion create, update and select all
 
         #region Public methods
-
+        
         public virtual async Task<PagedResultDto<TViewOutput>> GetListPaged(TGetInput input)
         {
             await CheckGetListPolicyAsync();
+
+            var query = await CreateFilteredQueryAsync(input);
+
+            var totalCount = await AsyncExecuter.CountAsync(query);
+
+            query = ApplySorting(query, input);
+            query = ApplyPaging(query, input);
+
+            var result = await AsyncExecuter.ToListAsync(query);
+
+            return new PagedResultDto<TViewOutput>(totalCount, result.Select(MapToViewOutput).ToList());
+        }
+        [AllowAnonymous]
+        public virtual async Task<PagedResultDto<TViewOutput>> GetListPublicPaged(TGetInput input)
+        {
 
             var query = await CreateFilteredQueryAsync(input);
 

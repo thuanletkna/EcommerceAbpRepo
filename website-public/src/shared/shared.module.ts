@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 //layout
 import { MainLayoutComponent } from './layout/main-layout.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu/sidebar-menu.component';
@@ -20,8 +19,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotificationModalComponent } from './component/notification-modal/notification-modal.component';
 import { NavbarStyleTwoComponent } from './layout/navbar-style-two/navbar-style-two.component';
 import { PreloaderComponent } from './layout/preloader/preloader.component';
+import { PaginationComponent } from './component/pagination/pagination.component';
+import SwiperCore,{ Autoplay, Pagination, Swiper } from 'swiper';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
-
+SwiperCore.use([Autoplay, Pagination]);
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { PreloaderComponent } from './layout/preloader/preloader.component';
         FooterComponent,
         PreloaderComponent,
         SidebarMenuComponent,
+        PaginationComponent,
         NotificationModalComponent,
         BlankLayoutComponent,
         NavbarStyleTwoComponent
@@ -40,7 +42,8 @@ import { PreloaderComponent } from './layout/preloader/preloader.component';
         RouterModule,
         ReactiveFormsModule,
         CommonModule,
-        NgxSpinnerModule,
+        NgxSpinnerModule
+
     ],
     exports: [
         // FormsModule,
@@ -64,6 +67,7 @@ import { PreloaderComponent } from './layout/preloader/preloader.component';
         HeaderComponent,
         FooterComponent,
         PreloaderComponent,
+        PaginationComponent,
         NavbarStyleTwoComponent,
         SidebarMenuComponent,
         NotificationModalComponent,

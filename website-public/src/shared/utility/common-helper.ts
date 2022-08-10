@@ -100,6 +100,16 @@ export class CommonHelper {
         }
     }
 
+    static isNumber(num: any): boolean {
+        if (typeof num === 'number') {
+          return num - num === 0;
+        }
+        if (typeof num === 'string' && num.trim() !== '') {
+          return Number.isFinite ? Number.isFinite(+num) : isFinite(+num);
+        }
+        return false;
+      };
+
     // static getAllUrlParams(url: string) {
     //     // get query string from url (optional) or window
     //     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);

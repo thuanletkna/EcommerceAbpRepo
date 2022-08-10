@@ -6,6 +6,8 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Application.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommerceSourceAbp.Products
 {
@@ -35,5 +37,11 @@ namespace EcommerceSourceAbp.Products
                 .Include("ProductFile.FileStorage")
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
+        [AllowAnonymous]
+        public override Task<PagedResultDto<GetProductForViewDto>> GetListPublicPaged(GetProductRequestInputDto input)
+        {
+            return base.GetListPublicPaged(input);
+        }
+
     }
 }

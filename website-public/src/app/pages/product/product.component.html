@@ -1,0 +1,36 @@
+<div class="designer-area pb-70">
+    <div class="container">
+        <div class="scetion-title text-center">
+            <span>Our Designer</span>
+            <h2>Our Company Leads by Professional Designer</h2>
+            <p>What indication best sick be project proposal in attempt, train of the showed some a forth. That homeless, won't many of goals thoughts volumes felt.</p>
+        </div>
+
+        <div class="row pt-45">
+            <div class="col-lg-3 col-sm-6" *ngFor="let item of products.items">
+                <div class="designer-card">
+                    <div class="designer-img">
+                        <a routerLink="/designer"><img src="assets/img/designer/designer1.jpg" alt="Designer Images"></a>
+                    </div>
+
+                    <div class="designer-content">
+                        <a routerLink="/designer"><h3>{{item.name}}</h3></a>
+                        <span>Director</span>
+                        <div class="social-icon">
+                            <ul>
+                                <li><a href="#" target="_blank" ><i class='bx bxl-facebook'></i></a></li>
+                                <li><a href="#" target="_blank" ><i class='bx bxl-twitter' ></i></a></li>
+                                <li><a href="#" target="_blank" ><i class='bx bxl-instagram' ></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <pagination [totalCount]="products.totalCount" [pageSize]="pageSize"></pagination>
+        
+    </div>
+</div>

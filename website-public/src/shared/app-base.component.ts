@@ -1,11 +1,20 @@
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Injector, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
+import * as moment from 'moment';
+import { CommonHelper } from './utility/common-helper';
 export class AppBaseComponent {
   protected readonly router: Router;
   readonly activatedRoute: ActivatedRoute;
   private readonly platformId: object;
+
+  get currentPage(): number {
+    const page = this.getQueryParam('page');
+    if (page && CommonHelper.isNumber(page)) {
+      return Number(page);
+    }
+    return 1;
+  }
 
   get lang() {
     return "vi";
@@ -40,5 +49,11 @@ redirectTo(url: string, params?: NavigationExtras): void {
     queryParamsHandling: 'merge',
     ...params,
   });
+}
+formatDate(date: string | Date, format = 'DD/MM/YYYY') {
+  if (!date) {
+      return '';
+  }
+  return moment(date).local().format(format);
 }
 }
