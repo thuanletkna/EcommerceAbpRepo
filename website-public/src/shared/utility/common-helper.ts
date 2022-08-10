@@ -37,6 +37,7 @@ export class CommonHelper {
         return pattern.test(value);
     }
 
+    
     static getUrlParams(params: any) {
         let str = '?';
         for (const key in params) {
