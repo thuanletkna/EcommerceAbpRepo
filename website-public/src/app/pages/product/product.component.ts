@@ -4,8 +4,10 @@ import { AppBaseComponent } from 'src/shared/app-base.component';
 import { Status } from 'src/shared/enums';
 import { IPagination, IPaginations } from 'src/shared/model/base.dto';
 import { CategoryDto } from 'src/shared/model/category.dto';
+import { ProductFileDto } from 'src/shared/model/product-file/product-file.dto';
 import { ProductDto } from 'src/shared/model/product/product.dto';
 import { CategoriesService } from 'src/shared/services/categories.service';
+import { FileStorageService } from 'src/shared/services/file-storage.service';
 import { ProductService } from 'src/shared/services/product.service';
 
 import Swiper, { SwiperOptions } from 'swiper';
@@ -18,6 +20,9 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   @ViewChild(SwiperComponent, { static: false }) swiper?: SwiperComponent;
   categories: CategoryDto[] = [];
   @Input() category: CategoryDto | undefined;
+  productFile: ProductFileDto[]| undefined = [];
+
+  fileId?:string;
   products: IPaginations<ProductDto> = {
     items: [],
     totalCount: 0,
@@ -42,7 +47,8 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   constructor(
     protected override readonly injector: Injector,
     private readonly categoriesService: CategoriesService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly fileStorageService: FileStorageService
   ) {
     super(injector);
   }
@@ -53,7 +59,9 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
+    
   }
+
 
   initData() {
     forkJoin([this.categoriesService.getAllCategory()]).subscribe(
@@ -61,7 +69,6 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
         this.categories = categories;
       }
     );
-
     this.productService
       .getPaged({
         // groupId: this.groupId,
@@ -74,6 +81,32 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
         this.products.items = this.products.items.filter(
           (x) => x.status === Status.Active
         );
+        this.products.items.forEach(element => {
+          this.productFile = element.productFile?.filter(x=>x.fileType === "productFile")
+        });
+        console.log(this.productFile);
       });
+      
+      
   }
+  get actionFiles() {
+    if (this.products.items) {
+      this.products.items.forEach(element => {
+        return element.productFile?.filter(x=>x.fileType === 'productFile');
+      });
+    }
+    return [];
+
+    
+}
+
+private _productFiles: ProductFileDto[] = [];
+private getStatus() {
+  this.products.items.forEach(element => {
+    this.fileId = element.id
+  });
+  this.productService.getListFile(this.fileId).subscribe((result) => {
+      this._productFiles = result || [];
+  });
+}
 }

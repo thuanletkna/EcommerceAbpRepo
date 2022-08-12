@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcommerceSourceAbp.FilesStorage.Dtos;
+using System;
 using Volo.Abp.Application.Dtos;
 
 namespace EcommerceSourceAbp.ProductFiles.Dtos
@@ -8,5 +9,6 @@ namespace EcommerceSourceAbp.ProductFiles.Dtos
         public Guid? ProducttId { get; set; }
         public Guid? FileStorageId { get; set; }
         public string FileType { get; set; }
+        public FileStorageDto FilesStorage { get; set; }
     }
 }

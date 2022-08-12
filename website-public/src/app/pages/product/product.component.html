@@ -9,8 +9,8 @@
         <div class="row pt-45">
             <div class="col-lg-3 col-sm-6" *ngFor="let item of products.items">
                 <div class="designer-card">
-                    <div class="designer-img">
-                        <a routerLink="/designer"><img src="assets/img/designer/designer1.jpg" alt="Designer Images"></a>
+                    <div class="designer-img" *ngFor="let filePr of this.productFile">
+                        <a routerLink="/designer"><img [src]="getLinkMedia(filePr.fileStorageId)" alt="Designer Images"></a>
                     </div>
                     <div class="designer-content">
                         <a routerLink="/designer"><h3>{{item.name}}</h3></a>

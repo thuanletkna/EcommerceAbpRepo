@@ -2,6 +2,7 @@ import { RestService } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseGetRequestInput } from '../models/app-dto';
+import { ProductFileDto } from '../models/product-file/product-file.dto';
 import { ProductDto } from '../models/product/product.dto';
 import {  AppListService } from './base';
 
@@ -15,6 +16,13 @@ export class ProductService extends AppListService<string, ProductDto, BaseGetRe
         return this.restService.request({
           url: `/api/app/product`,
           method: 'GET'
+        });
+      }
+
+      getListFile(id: string): Observable<ProductFileDto[]> {
+        return this.restService.request({
+          url: '/api/app/product/' + id + '/file',
+          method: 'GET',
         });
       }
 }

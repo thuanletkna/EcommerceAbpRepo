@@ -1,6 +1,8 @@
 ﻿using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.ProductFiles.Dtos;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
 namespace EcommerceSourceAbp.ProductFiles
@@ -21,5 +23,6 @@ namespace EcommerceSourceAbp.ProductFiles
         protected override string UpdatePolicyName => String.Empty;
 
         protected override string DeletePolicyName => String.Empty;
+
     }
 }

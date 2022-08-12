@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPagination, IResponsePaginate, PagedRequest } from '../model/base.dto';
+import { ProductFileDto } from '../model/product-file/product-file.dto';
 import { IParamFilterNews, ProductDto } from '../model/product/product.dto';
 import { RestService } from '../rest-service/rest.service';
 import { CommonHelper } from '../utility/common-helper';
@@ -34,5 +35,12 @@ export class ProductService {
                 params
             }
         );
+    }
+
+    getListFile(id: string|undefined): Observable<ProductFileDto[]> {
+      return this.restService.request({
+        url: '/api/app/product/' + id + '/file',
+        method: 'GET',
+      });
     }
 }

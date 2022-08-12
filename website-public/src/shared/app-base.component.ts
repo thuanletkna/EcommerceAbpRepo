@@ -39,7 +39,11 @@ public formatCurrency(value: number) {
 //   return `${environment.s3Config.publishUrl}/${path}`;
 // }
 
-
+getLinkMedia(url: string|undefined) {
+  if (!url) return '';
+  if (url.toLowerCase().startsWith('http')) return url;
+  return `${environment.apis.default.url}/api/app/file-storage/${url}`;
+}
   get isBrowser() {
     return isPlatformBrowser(this.platformId);
   }
