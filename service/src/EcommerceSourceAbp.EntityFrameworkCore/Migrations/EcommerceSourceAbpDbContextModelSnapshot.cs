@@ -83,6 +83,9 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("isHot")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("AppBlogs", (string)null);
@@ -152,6 +155,32 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("AppBlogDetails", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogFile", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BlogId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("AppBlogFiles", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
@@ -3422,6 +3451,25 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("Blog");
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogFile", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", null)
+                        .WithMany("BlogFile")
+                        .HasForeignKey("BlogId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("FileStorage");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.District", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Province", "Province")
@@ -3834,6 +3882,8 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Blog", b =>
                 {
                     b.Navigation("BlogDetails");
+
+                    b.Navigation("BlogFile");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>

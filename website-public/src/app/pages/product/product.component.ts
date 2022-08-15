@@ -42,8 +42,8 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   get skipCount() {
     return this.pageSize * (this.currentPage - 1);
   }
-  page: number = 2;
-  pageSize: number = 1;
+  page: number = 1;
+  pageSize: number = 8;
   constructor(
     protected override readonly injector: Injector,
     private readonly categoriesService: CategoriesService,
@@ -59,6 +59,7 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
+    
     
   }
 
@@ -78,35 +79,13 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
       })
       .subscribe((result) => {
         this.products = result || { items: [], totalCount: 0 };
-        this.products.items = this.products.items.filter(
-          (x) => x.status === Status.Active
-        );
+        this.products.items = this.products.items.filter((x) => x.status === Status.Active);
         this.products.items.forEach(element => {
-          this.productFile = element.productFile?.filter(x=>x.fileType === "productFile")
+          element.productFile = element.productFile?.filter(x=>x.fileType === 'productFile' )
         });
-        console.log(this.productFile);
       });
       
       
   }
-  get actionFiles() {
-    if (this.products.items) {
-      this.products.items.forEach(element => {
-        return element.productFile?.filter(x=>x.fileType === 'productFile');
-      });
-    }
-    return [];
 
-    
-}
-
-private _productFiles: ProductFileDto[] = [];
-private getStatus() {
-  this.products.items.forEach(element => {
-    this.fileId = element.id
-  });
-  this.productService.getListFile(this.fileId).subscribe((result) => {
-      this._productFiles = result || [];
-  });
-}
 }

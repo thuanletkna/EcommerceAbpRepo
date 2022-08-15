@@ -21,9 +21,9 @@
                         </nz-form-item>
                       </div>
                       
-                      <!-- <div nz-col [nzSpan]="8" >
+                      <div nz-col [nzSpan]="8" >
                           <nz-form-item class="w-100">
-                            <nz-form-label>Video sản phẩm (.avi, .m4v, .mp4, .mkv)</nz-form-label>
+                            <nz-form-label>Video bài đăng (.avi, .m4v, .mp4, .mkv)</nz-form-label>
                             <nz-form-control>
                               <div *ngFor="let item of videoFiles; index as i" class="d-flex align-items-center">
                                 <upload-file
@@ -31,10 +31,10 @@
                                   [(ngModel)]="item.fileStorageId"
                                   style="float: left"
                                   [autoUpload]="true"
-                                  [typeFile]="'productVideo'"
+                                  [typeFile]="'blogVideo'"
                                   [accept]="'.avi, .m4v, .mp4, .mkv'" ></upload-file>
                                 <button
-                                  *ngIf="vm.productFile !== null"
+                                  *ngIf="vm.blogFile !== null"
                                   mat-icon-button
                                   type="button"
                                   (click)="remove(item)">
@@ -47,7 +47,7 @@
                             <button
                               type="button"
                               class="btn btn-add-more"
-                              (click)="add('productVideo')"
+                              (click)="add('blogVideo')"
                               [disabled]="disableSave">
                               <div class="icon-add mr-2"></div>
                               Thêm video
@@ -56,19 +56,19 @@
                       </div>
                       <div nz-col [nzSpan]="8" >
                         <nz-form-item class="w-100">
-                          <nz-form-label>Ảnh bìa sản phẩm (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
+                          <nz-form-label>Ảnh bìa bài đăng (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
                           <nz-form-control>
                             <div *ngFor="let item of files; index as i" class="d-flex align-items-center">
                               <upload-file
-                                name="productFile{{ i }}"
+                                name="blogFile{{ i }}"
                                 [(ngModel)]="item.fileStorageId"
                                 style="float: left"
                                 [autoUpload]="true"
-                                [typeFile]="'productFile'"
+                                [typeFile]="'blogFile'"
                                 [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png'" 
                               ></upload-file>
                               <button
-                                *ngIf="vm.productFile !== null"
+                                *ngIf="vm.blogFile !== null"
                                 mat-icon-button
                                 type="button"
                                 (click)="remove(item)">
@@ -81,7 +81,7 @@
                           <button
                             type="button"
                             class="btn btn-add-more"
-                            (click)="add('productFile')"
+                            (click)="add('blogFile')"
                             [disabled]="disableSave">
                             <div class="icon-add mr-2"></div>
                             Thêm ảnh
@@ -90,7 +90,7 @@
                       </div>
                       <div nz-col [nzSpan]="8" >
                         <nz-form-item class="w-100">
-                          <nz-form-label>Ảnh phụ sản phẩm (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
+                          <nz-form-label>Ảnh phụ bài đăng (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
                           <nz-form-control>
                             <div *ngFor="let item of subFiles; index as i" class="d-flex align-items-center">
                               <upload-file
@@ -98,10 +98,10 @@
                                 [(ngModel)]="item.fileStorageId"
                                 style="float: left"
                                 [autoUpload]="true"
-                                [typeFile]="'subProductFile'"
+                                [typeFile]="'subBlogFile'"
                                 [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png'" ></upload-file>
                               <button
-                                *ngIf="vm.productFile !== null"
+                                *ngIf="vm.blogFile !== null"
                                 mat-icon-button
                                 type="button"
                                 (click)="remove(item)">
@@ -114,21 +114,15 @@
                           <button
                             type="button"
                             class="btn btn-add-more"
-                            (click)="add('subProductFile')"
+                            (click)="add('subBlogFile')"
                             [disabled]="disableSave">
                             <div class="icon-add mr-2"></div>
                             Thêm ảnh
                           </button>
                         </div>
                       </div>
-                      <div nz-col [nzSpan]="24" >
-                        <nz-form-item>
-                          <nz-form-label nzRequired>Chi tiết sản phẩm</nz-form-label>
-                          <nz-form-control>
-                            <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.details" [height]="400"></richtextbox>
-                          </nz-form-control>
-                        </nz-form-item>
-                      </div> -->
+                      
+                    
                       <div class="col-12 mt-2">
                         <nz-form-item>
                             <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>

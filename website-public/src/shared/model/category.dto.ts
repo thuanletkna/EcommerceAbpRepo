@@ -15,6 +15,7 @@ export interface CategoryDto extends BaseDto {
   slugEn?: string;
   publishDate?: Date;
   creatorName?: string;
+  isBlog?: Boolean;
 }
 export interface IParamFilterCategory extends IParamFilter {
   isBlog?: Boolean;

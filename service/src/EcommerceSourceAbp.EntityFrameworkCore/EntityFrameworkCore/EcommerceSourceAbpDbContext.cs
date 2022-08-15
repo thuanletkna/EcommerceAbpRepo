@@ -72,6 +72,7 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<SubProductProperty> SubProductProperties { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Blog> Blogs { get; set; }
+    public DbSet<BlogFile> BlogFiles { get; set; }
     public DbSet<ProductAffilate> ProductAffilates { get; set; }
     public DbSet<BlogDetail> BlogDetails { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
@@ -201,6 +202,11 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<BlogDetail>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "BlogDetails", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<BlogFile>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "BlogFiles", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

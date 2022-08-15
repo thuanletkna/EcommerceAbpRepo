@@ -3,7 +3,10 @@ import { NgForm } from '@angular/forms';
 import { AppBaseComponent } from 'src/app/shared/app-base.component';
 import { Status } from 'src/app/shared/enums';
 import { AppHeaderService } from 'src/app/shared/layout/app-header.service';
-import { DatatableComponent, DatatableOption } from 'src/app/shared/components/datatable/datatable.component';
+import {
+  DatatableComponent,
+  DatatableOption,
+} from 'src/app/shared/components/datatable/datatable.component';
 import { EcommerceSourceAbpPermissions } from 'src/app/shared/consts/ecommerce-permissions';
 import { CategoryDto } from 'src/app/shared/models/category/category.dto';
 import { CategoryService } from 'src/app/shared/services/category.service';
@@ -12,7 +15,7 @@ import { CreateEditBlogDetailComponent } from '../create-edit-blog-detail/create
 import { CommonHelper } from 'src/app/shared/consts/common-helper';
 import { BlogService } from 'src/app/shared/services/blog.service';
 import { BlogDto } from 'src/app/shared/models/blog/blog.dto';
-
+import { BlogFileDto } from 'src/app/shared/models/blog-file/blog-file.dto';
 
 @Component({
   templateUrl: './create-edit-blog.component.html',
@@ -38,98 +41,127 @@ export class BlogCreateEditComponent extends AppBaseComponent implements AfterVi
   selectionTableOptions: DatatableOption<BlogDetailDto> = {
     sortable: true,
     columns: [
-        {
-            name: 'code',
-            displayName: this.l('::Thứ tự'),
-            width: 200
-        },
-        {
-            name: 'name',
-            displayName: this.l('::Title bài đăng'),
-            width: 200
-        },
-        
+      {
+        name: 'code',
+        displayName: this.l('::Thứ tự'),
+        width: 200,
+      },
+      {
+        name: 'name',
+        displayName: this.l('::Title bài đăng'),
+        width: 200,
+      },
     ],
     actions: [
-        {
-            icon: 'create',
-            click: dataRow => {
-                 this.editBlogDetail(dataRow);
-            },
-            name: this.l('AbpUi::Edit'),
-            color: 'primary',
-            permission: EcommerceSourceAbpPermissions.BlogDetail.View,
+      {
+        icon: 'create',
+        click: dataRow => {
+          this.editBlogDetail(dataRow);
         },
-        {
-            icon: 'delete',
-            click: dataRow => {
-                this._delete(dataRow);
-                //   this.editSelection(dataRow.id);
-            },
-            name: this.l('AbpUi::Delete'),
-            color: 'primary',
-            // permission: NcsPermissions.SubCategory.View,
-        }
+        name: this.l('AbpUi::Edit'),
+        color: 'primary',
+        permission: EcommerceSourceAbpPermissions.BlogDetail.View,
+      },
+      {
+        icon: 'delete',
+        click: dataRow => {
+          this._delete(dataRow);
+          //   this.editSelection(dataRow.id);
+        },
+        name: this.l('AbpUi::Delete'),
+        color: 'primary',
+        // permission: NcsPermissions.SubCategory.View,
+      },
     ],
-}
-
+  };
 
   constructor(
     injector: Injector,
     private readonly appHeaderService: AppHeaderService,
     private readonly blogService: BlogService,
-    private readonly categoryService: CategoryService,
+    private readonly categoryService: CategoryService
   ) {
     super(injector);
     this.appHeaderService.option = {
-      pageTitle: this.id ? 'Chỉnh sửa sản phẩm' : 'Thêm mới sản phẩm',
+      pageTitle: this.id ? 'Chỉnh sửa bài đăng' : 'Thêm mới bài đăng',
       buttons: [],
     };
   }
 
+  get videoFiles() {
+    if (this.vm.blogFile) {
+        return this.vm.blogFile.filter(x => x.fileType === 'blogVideo');
+    }
+    return [];
+}
+
+get files() {
+  if (this.vm.blogFile) {
+      return this.vm.blogFile.filter(x => x.fileType === 'blogFile');
+  }
+  return [];
+}
+
+get subFiles() {
+  if (this.vm.blogFile) {
+      return this.vm.blogFile.filter(x => x.fileType === 'subBlogFile');
+  }
+  return [];
+}
+
+remove(item: BlogFileDto) {
+  // Delete the item from fileNames list
+  const index = this.vm.blogFile.findIndex(x => x === item);
+  this.vm.blogFile.splice(index, 1);
+}
+add(fileType: string) {
+  if (!this.vm.blogFile) this.vm.blogFile = [];
+  this.vm.blogFile.push({ fileType });
+}
+
 
   addBlogDetail(): void {
     this._openBlogDetailCreateEditDialog();
-}
-private _delete(item: BlogDetailDto) {
-
+  }
+  private _delete(item: BlogDetailDto) {
     this.openDeleteConfirm(item.name, () => {
-        const index: number = this.vm.blogDetails.indexOf(item);
-       
-        if (index !== -1) {
-            this.vm.blogDetails.splice(index, 1);
-        }
-        // this.showSuccess("Soc Report Action deleted successfully");
-        this.table.refresh();
-    });
-}
+      const index: number = this.vm.blogDetails.indexOf(item);
 
-editBlogDetail(blogId: BlogDetailDto) {
-    this._openBlogDetailCreateEditDialog( blogId);
-}
-private _openBlogDetailCreateEditDialog(item?: BlogDetailDto) {
-    const dialogRef = this.matDialog.open<CreateEditBlogDetailComponent, BlogDetailDto>(CreateEditBlogDetailComponent, {
+      if (index !== -1) {
+        this.vm.blogDetails.splice(index, 1);
+      }
+      // this.showSuccess("Soc Report Action deleted successfully");
+      this.table.refresh();
+    });
+  }
+
+  editBlogDetail(blogId: BlogDetailDto) {
+    this._openBlogDetailCreateEditDialog(blogId);
+  }
+  private _openBlogDetailCreateEditDialog(item?: BlogDetailDto) {
+    const dialogRef = this.matDialog.open<CreateEditBlogDetailComponent, BlogDetailDto>(
+      CreateEditBlogDetailComponent,
+      {
         data: { ...item, blogId: this.vm.id },
         width: '1000px',
-    });
+      }
+    );
     dialogRef.afterClosed().subscribe((result?: BlogDetailDto) => {
-        if (!result) return;
-        if (!this.vm.blogDetails) this.vm.blogDetails = [];
-        const index = this.vm.blogDetails.findIndex(x => x.id === result.id);
-        if (index > -1) {
-            this.vm.blogDetails[index] = result;
-        }
-        else {
-            this.vm.blogDetails.push(result);
-        }
-        this.vm.blogDetails = [...this.vm.blogDetails];
-        console.log(this.vm.blogDetails);
-        
-        this.table.refresh();
-    });
-}
+      if (!result) return;
+      if (!this.vm.blogDetails) this.vm.blogDetails = [];
+      const index = this.vm.blogDetails.findIndex(x => x.id === result.id);
+      if (index > -1) {
+        this.vm.blogDetails[index] = result;
+      } else {
+        this.vm.blogDetails.push(result);
+      }
+      this.vm.blogDetails = [...this.vm.blogDetails];
+      console.log(this.vm.blogDetails);
 
-  
+      this.table.refresh();
+    });
+  }
+
   private _categories: CategoryDto[] = [];
   get categories(): CategoryDto[] {
     return this._categories.filter(x => x.isBlog == true);

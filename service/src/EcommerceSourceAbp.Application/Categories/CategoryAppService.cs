@@ -47,7 +47,6 @@ namespace EcommerceSourceAbp.Categories
             var query = await Repository.GetQueryableAsync();
             var result = query.Where(x => x.Status == Status.Active)
                .OrderBy(x => x.OrderIndex);
-
             return result.Select(MapToViewOutput).ToList();
         }
     }

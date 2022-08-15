@@ -1,13 +1,15 @@
-﻿using EcommerceSourceAbp.Entities;
+﻿using EcommerceSourceAbp.Blogs.Dtos;
+using EcommerceSourceAbp.Entities;
+using EcommerceSourceAbp.Enums;
 using EcommerceSourceAbp.Permissions;
-using EcommerceSourceAbp.Blogs.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
-using EcommerceSourceAbp.Blogs;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Domain.Repositories;
 
 namespace EcommerceSourceAbp.Blogs
 {
@@ -34,12 +36,16 @@ namespace EcommerceSourceAbp.Blogs
         {
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
+                .Include(a => a.BlogFile)
+                .Include("BlogFile.FileStorage")
                 .FirstOrDefaultAsync(a => a.Id == input.Id);
         }
         protected override async Task<Blog> FilterForGet(Guid id)
         {
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
+                .Include(a => a.BlogFile)
+                .Include("BlogFile.FileStorage")
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
@@ -54,6 +60,18 @@ namespace EcommerceSourceAbp.Blogs
             if (entity == null) throw NotFoundException;
             var listIdFinding = input.BlogDetails?.Select(x => x.Id).ToList() ?? new List<Guid?>();
             entity.BlogDetails.RemoveAll(x => !listIdFinding.Contains(x.Id));
+            if (entity.BlogFile != null)
+            {
+                entity.BlogFile.Clear();
+            }
+
+            if (input.BlogFile?.Any() == true)
+            {
+                input.BlogFile.ForEach(item =>
+                {
+                    item.Id = null;
+                });
+            }
             MapToEntity(input, entity);
 
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -61,5 +79,36 @@ namespace EcommerceSourceAbp.Blogs
             return entity;
         }
 
+
+        protected override async Task<IQueryable<Blog>> CreateFilteredQueryAsync(GetBlogRequestInputDto input)
+        {
+            if (!string.IsNullOrWhiteSpace(input.Filter))
+            {
+                input.Filter = input.Filter.ToLower();
+            }
+            return (await base.CreateFilteredQueryAsync(input))
+                .Include(a => a.BlogFile)
+                .Include("BlogFile.FileStorage")
+                //.FilterPermission(CurrentUser)
+                //.Where(x => x.ItemDescription != "Contractors")
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
+                    x => x.Name.ToLower().Contains(input.Filter))
+                //.WhereIf(input.IsBlog.HasValue, x => x.IsBlog == input.IsBlog)
+                .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
+        }
+
+        public override Task<PagedResultDto<GetBlogForViewDto>> GetListPublicPaged(GetBlogRequestInputDto input)
+        {
+            return base.GetListPublicPaged(input);
+        }
+
+        [AllowAnonymous]
+        public async Task<List<GetBlogForViewDto>> GetAllBlogByView()
+        {
+            var query = await Repository.GetQueryableAsync();
+            var result = query.Where(x => x.Status == Status.Active && x.isHot == IsHot.True)
+               .OrderBy(x => x.CreationTime);
+            return result.Select(MapToViewOutput).ToList();
+        }
     }
 }
