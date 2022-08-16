@@ -1,6 +1,7 @@
 ﻿using EcommerceSourceAbp.BaseDtos;
 using EcommerceSourceAbp.Categories.Dtos;
 using EcommerceSourceAbp.Constants;
+using EcommerceSourceAbp.Enums;
 using EcommerceSourceAbp.Newses.Dtos;
 using EcommerceSourceAbp.ProductFiles.Dtos;
 using EcommerceSourceAbp.ProductProperties.Dtos;
@@ -28,7 +29,7 @@ namespace EcommerceSourceAbp.Products.Dtos
         public int ViewCount { get; set; }
         public int NumberOfReview { get; set; }
         public int StarRating { get; set; }
-        public bool IsHot { get; set; }
+        public IsHot? isHot { get; set; }
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
         public CategoryDto Category { get; set; }

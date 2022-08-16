@@ -1,5 +1,6 @@
 ﻿using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Permissions;
+using EcommerceSourceAbp.Extensions;
 using EcommerceSourceAbp.Products.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using EcommerceSourceAbp.ProductFiles.Dtos;
 using EcommerceSourceAbp.FilesStorage;
+using Volo.Abp.Domain.Entities;
 
 namespace EcommerceSourceAbp.Products
 {
@@ -77,6 +79,17 @@ namespace EcommerceSourceAbp.Products
 
         protected override async Task<Product> Create(CreateUpdateProductDto input)
         {
+            input.Slug = input.Name.ConvertToUnSign().ToLower()
+                .RemoveSpecialCharacters()
+                .Replace(" ", "-");
+
+            var index = 0;
+            while (await Repository.AnyAsync(x => x.Slug == input.Slug))
+            {
+                index++;
+                input.Slug = $"{input.Slug}-{index}";
+            }
+
             if (input.ProductFile?.Any() == false)
             {
                 var fileIds = await _fileStorageRepository.Upload(input.ProductFile.FirstOrDefault().FileType);
@@ -126,6 +139,58 @@ namespace EcommerceSourceAbp.Products
                 Id = x.Id
             }).ToList();
             return listFiles;
+        }
+
+        [AllowAnonymous]
+        public async Task<GetProductForViewDto> GetBySlugPublic(string slug)
+        {
+            var news = (await Repository.GetQueryableAsync())
+                .Include(x => x.Category)
+                 .Include(a => a.ProductFile)
+                .Include("ProductFile.FileStorage")
+                .FirstOrDefaultAsync(x => x.Slug.ToLower() == slug.ToLower());
+
+            if (news == null)
+                throw new EntityNotFoundException(L["Error:NotFound"]);
+
+            //if (_httpContextAccessor?.HttpContext != null &&
+            //    _httpContextAccessor.HttpContext.Request.Headers.Keys.Contains("is-ssr") &&
+            //    _httpContextAccessor.HttpContext.Request.Headers["is-ssr"].ToString() == "no")
+            //{
+            //    news.View++;
+            //}
+
+            var result = MapToViewOutput(await news);
+
+            //var metaSeo = await _metaSeoRepository.Where(x => x.EntityId == result.Id).ToListAsync();
+            //result.MetaSeo = metaSeo.Select(x => ObjectMapper.Map<MetaSeo, MetaSeoDto>(x)).ToList();
+
+            return result;
+        }
+
+        [AllowAnonymous]
+        public async Task<GetProductForViewDto> GetByIdPublic(Guid id)
+        {
+            var news = (await Repository.GetQueryableAsync())
+                .Include(x => x.Category)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (news == null)
+                throw new EntityNotFoundException(L["Error:NotFound"]);
+
+            //if (_httpContextAccessor?.HttpContext != null &&
+            //    _httpContextAccessor.HttpContext.Request.Headers.Keys.Contains("is-ssr") &&
+            //    _httpContextAccessor.HttpContext.Request.Headers["is-ssr"].ToString() == "no")
+            //{
+            //    news.View++;
+            //}
+
+            var result = MapToViewOutput(await news);
+
+            //var metaSeo = await _metaSeoRepository.Where(x => x.EntityId == result.Id).ToListAsync();
+            //result.MetaSeo = metaSeo.Select(x => ObjectMapper.Map<MetaSeo, MetaSeoDto>(x)).ToList();
+
+            return result;
         }
     }
 }

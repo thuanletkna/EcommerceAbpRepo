@@ -58,6 +58,10 @@ getLinkMedia(url: string|undefined) {
     return this.activatedRoute.snapshot.queryParamMap.get(param);
   }
 
+//   protected getQuerystringParam(param: string): string {
+//     return this.activatedRoute.snapshot.paramMap.get(param);
+// }
+
   protected getQueryParamToArray(param: string): string[] {
     return this.activatedRoute.snapshot.queryParamMap.getAll(param);
   }
@@ -75,4 +79,7 @@ getLinkMedia(url: string|undefined) {
     }
     return moment(date).local().format(format);
   }
+  public getPathProductDetail(slug?: string) {
+    return '/chi-tiet-san-pham/' + slug;
+}
 }

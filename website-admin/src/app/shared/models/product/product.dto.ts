@@ -1,3 +1,4 @@
+import { IsHot } from "../../enums/isHot";
 import { BaseDto, ListBaseDto } from "../app-dto";
 import { ProductTagDto } from "../new-tag/product-tag.dto";
 import { ProductFileDto } from "../product-file/product-file.dto";
@@ -11,7 +12,6 @@ export interface ProductDto extends ListBaseDto {
     comment?: string;
     price?: number;
     quantity?: number;
-    status?: number;
     newsTags?: ProductTagDto[];
     categoryId?:string;
     priceSale?:number;
@@ -21,4 +21,5 @@ export interface ProductDto extends ListBaseDto {
     tradeMarkId?:string;
     productPropertyId?:string;
     productFile?: ProductFileDto[];
+    isHot?:IsHot;
 }

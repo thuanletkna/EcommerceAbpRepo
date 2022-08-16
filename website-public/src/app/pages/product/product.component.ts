@@ -21,7 +21,10 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   categories: CategoryDto[] = [];
   @Input() category: CategoryDto | undefined;
   productFile: ProductFileDto[]| undefined = [];
-
+  productItem: ProductDto[]| undefined = [];
+  get productItems(): ProductDto|undefined {
+    return this.productItem?.[0] ;
+}
   fileId?:string;
   products: IPaginations<ProductDto> = {
     items: [],
@@ -79,6 +82,7 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
       })
       .subscribe((result) => {
         this.products = result || { items: [], totalCount: 0 };
+        this.productItem = this.products.items;
         this.products.items = this.products.items.filter((x) => x.status === Status.Active);
         this.products.items.forEach(element => {
           element.productFile = element.productFile?.filter(x=>x.fileType === 'productFile' )

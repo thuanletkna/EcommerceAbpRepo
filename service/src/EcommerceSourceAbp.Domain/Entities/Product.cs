@@ -1,5 +1,6 @@
 ﻿using EcommerceSourceAbp.BaseEntities;
 using EcommerceSourceAbp.Constants;
+using EcommerceSourceAbp.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,7 @@ namespace EcommerceSourceAbp.Entities
         public int ViewCount { get; set; }
         public int NumberOfReview { get; set; }
         public int StarRating { get; set; }
-        public bool IsHot { get; set; }
+        public IsHot? isHot { get; set; }
         public int? HotIndex { get; set; }
         public Guid? CategoryId { get; set; }
         [ForeignKey("CategoryId")]

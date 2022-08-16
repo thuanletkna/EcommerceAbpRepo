@@ -2,6 +2,7 @@
 using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Enums;
 using EcommerceSourceAbp.Permissions;
+using EcommerceSourceAbp.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -79,6 +80,20 @@ namespace EcommerceSourceAbp.Blogs
             return entity;
         }
 
+        protected override async Task<Blog> Create(CreateUpdateBlogDto input)
+        {
+            input.Slug = input.Name.ConvertToUnSign().ToLower()
+                .RemoveSpecialCharacters()
+                .Replace(" ", "-");
+
+            var index = 0;
+            while (await Repository.AnyAsync(x => x.Slug == input.Slug))
+            {
+                index++;
+                input.Slug = $"{input.Slug}-{index}";
+            }
+            return await base.Create(input);
+        }
 
         protected override async Task<IQueryable<Blog>> CreateFilteredQueryAsync(GetBlogRequestInputDto input)
         {

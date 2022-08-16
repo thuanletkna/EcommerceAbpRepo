@@ -42,6 +42,8 @@
     "Add": "Add {0}",
     "Enum:Status_0": "Không hoạt động",
     "Enum:Status_1": "Hoạt động",
+    "Enum:IsHot_0": "Bình thường",
+    "Enum:IsHot_1": "Hot",
     "Enum:NatsStatus_0": "Closed",
     "Enum:NatsStatus_1": "Open",
     "Keyword": "Keyword",

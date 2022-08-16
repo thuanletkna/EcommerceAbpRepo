@@ -9,5 +9,7 @@ namespace EcommerceSourceAbp.Products
     public interface IProductAppService : IAppListService<CreateUpdateProductDto, GetProductForViewDto, GetProductForUpdateDto, GetProductRequestInputDto>
     {
         Task<List<GetProductFileForViewDto>> GetListFile(Guid id);
+        Task<GetProductForViewDto> GetBySlugPublic(string slug);
+        Task<GetProductForViewDto> GetByIdPublic(Guid id);
     }
 }

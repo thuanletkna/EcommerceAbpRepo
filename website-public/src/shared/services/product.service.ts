@@ -43,4 +43,22 @@ export class ProductService {
         method: 'GET',
       });
     }
+    getById(id: string|undefined): Observable<ProductFileDto> {
+      return this.restService.request({
+        url: '/api/app/product/' + id + '/by-slug-public',
+        method: 'GET',
+      });
+    }
+
+    getBySlug(slug: string|undefined): Observable<ProductDto> {
+      return this.restService.request(
+          {
+              url: `/api/app/product/by-slug-public?slug=`+ slug,
+              method: 'get',
+              params: {
+                  slug,
+              },
+          }
+      );
+  }
 }

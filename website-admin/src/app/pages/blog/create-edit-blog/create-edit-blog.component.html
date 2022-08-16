@@ -11,12 +11,43 @@
                           </nz-form-control>
                         </nz-form-item>
                       </div>
-                      
+                      <div nz-col [nzSpan]="8">
+                        <nz-form-item>
+                            <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                            <nz-radio-group [(ngModel)]="vm.status" name="status">
+                                <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                                <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                            </nz-radio-group>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="8">
+                      <nz-form-item>
+                          <nz-form-label>{{ '::Bài đăng Hot' | abpLocalization }}</nz-form-label>
+                          <nz-radio-group [(ngModel)]="vm.isHot" name="status">
+                              <label nz-radio [nzValue]="1">{{ '::Enum:IsHot_1' | abpLocalization }}</label>
+                              <label nz-radio [nzValue]="0">{{ '::Enum:IsHot_0' | abpLocalization }}</label>
+                          </nz-radio-group>
+                      </nz-form-item>
+                  </div>
                       <div nz-col [nzSpan]="24" >
                         <nz-form-item>
                           <nz-form-label nzRequired>Mô tả ngắn</nz-form-label>
                           <nz-form-control>
                             <textarea nz-input name="descriptions" type="text" [(ngModel)]="vm.descriptions" required></textarea>
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <div nz-col [nzSpan]="24" >
+                        <nz-form-item>
+                          <nz-form-label nzRequired>{{ '::Danh mục bài đăng' | abpLocalization }}</nz-form-label>
+                          <nz-form-control>
+                            <nz-select name="categoryId" [(ngModel)]="vm.categoryId" nzShowSearch required>
+                              <nz-option
+                                *ngFor="let category of categories"
+                                [nzValue]="category.id"
+                                [nzLabel]="category.name"
+                              ></nz-option>
+                            </nz-select>
                           </nz-form-control>
                         </nz-form-item>
                       </div>
@@ -123,15 +154,7 @@
                       </div>
                       
                     
-                      <div class="col-12 mt-2">
-                        <nz-form-item>
-                            <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
-                            <nz-radio-group [(ngModel)]="vm.status" name="status">
-                                <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
-                                <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
-                            </nz-radio-group>
-                        </nz-form-item>
-                    </div>
+                      
                       <div nz-col [nzSpan]="24">
                         <div class="row px-3 pb-3">
                           <div class="col-12 d-flex align-items-center justify-content-between">

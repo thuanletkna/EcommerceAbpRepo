@@ -30,6 +30,9 @@ namespace EcommerceSourceAbp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Code")
                         .HasColumnType("int");
 
@@ -80,6 +83,9 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
@@ -87,6 +93,8 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("AppBlogs", (string)null);
                 });
@@ -661,6 +669,9 @@ namespace EcommerceSourceAbp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BlogId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("NewsId")
                         .HasColumnType("uniqueidentifier");
 
@@ -671,6 +682,8 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("NewsId");
 
@@ -799,9 +812,6 @@ namespace EcommerceSourceAbp.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<bool>("IsHot")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime");
@@ -845,6 +855,9 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("isHot")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -3442,6 +3455,15 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Blog", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Blog", "Blog")
@@ -3511,6 +3533,10 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.NewsTag", b =>
                 {
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", null)
+                        .WithMany("NewsTags")
+                        .HasForeignKey("BlogId");
+
                     b.HasOne("EcommerceSourceAbp.Entities.News", "News")
                         .WithMany("NewsTags")
                         .HasForeignKey("NewsId");
@@ -3884,6 +3910,8 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("BlogDetails");
 
                     b.Navigation("BlogFile");
+
+                    b.Navigation("NewsTags");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>

@@ -17,6 +17,16 @@ const routes: Routes = [
         path: 'san-pham',
         loadChildren: () => import('./pages/product/product.module').then(x => x.ProductModule),
         pathMatch: 'full'
+      },
+      {
+        path: 'chi-tiet-san-pham',
+        loadChildren: () => import('./pages/product-detail/product-detail.module').then(x => x.ProductDetailModule),
+        // pathMatch: 'full'
+      },
+      {
+        path: 'chi-tiet-bài-đăng',
+        loadChildren: () => import('./pages/product-detail/product-detail.module').then(x => x.ProductDetailModule),
+        // pathMatch: 'full'
       }
     ]
   },

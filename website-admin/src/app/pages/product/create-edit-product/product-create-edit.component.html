@@ -3,7 +3,7 @@
     <div class="body">
         <form #formEdit="ngForm" nz-form [nzLayout]="'vertical'">
             <div nz-row [nzGutter]="24">
-                    <div nz-col [nzSpan]="8" >
+                    <div nz-col [nzSpan]="16" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Tên sản phẩm</nz-form-label>
                       <nz-form-control>
@@ -19,14 +19,14 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
-                  <div nz-col [nzSpan]="8" >
+                  <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Slug</nz-form-label>
                       <nz-form-control>
                         <input nz-input name="slug" type="text" [(ngModel)]="vm.slug" required>
                       </nz-form-control>
                     </nz-form-item>
-                  </div>
+                  </div> -->
                   <div nz-col [nzSpan]="24" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Mô tả ngắn</nz-form-label>
@@ -125,6 +125,24 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
+                  <div nz-col [nzSpan]="8">
+                    <nz-form-item>
+                        <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                        <nz-radio-group [(ngModel)]="vm.status" name="status">
+                            <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                            <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                        </nz-radio-group>
+                    </nz-form-item>
+                </div>
+                <div nz-col [nzSpan]="16">
+                  <nz-form-item>
+                      <nz-form-label>{{ '::Sản phẩm Hot' | abpLocalization }}</nz-form-label>
+                      <nz-radio-group [(ngModel)]="vm.isHot" name="status">
+                          <label nz-radio [nzValue]="1">{{ '::Enum:IsHot_1' | abpLocalization }}</label>
+                          <label nz-radio [nzValue]="0">{{ '::Enum:IsHot_0' | abpLocalization }}</label>
+                      </nz-radio-group>
+                  </nz-form-item>
+              </div>
                   <div nz-col [nzSpan]="8" >
                       <nz-form-item class="w-100">
                         <nz-form-label>Video sản phẩm (.avi, .m4v, .mp4, .mkv)</nz-form-label>
@@ -225,6 +243,7 @@
                       </button>
                     </div>
                   </div>
+                  
                   <div nz-col [nzSpan]="24" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Chi tiết sản phẩm</nz-form-label>

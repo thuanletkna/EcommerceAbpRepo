@@ -13,7 +13,7 @@
                         <a routerLink="/designer"><img [src]="getLinkMedia(filePr.fileStorageId)" alt="Designer Images"></a>
                     </div>
                     <div class="designer-content">
-                        <a routerLink="/designer"><h3>{{item.name}}</h3></a>
+                        <a [routerLink]="getPathProductDetail(item.slug)"><h3>{{item.name}}</h3></a>
                         <span>Director</span>
                         <div class="social-icon">
                             <ul>
