@@ -305,30 +305,6 @@ namespace EcommerceSourceAbp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppBlogs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Descriptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Code = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppBlogs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AppCategories",
                 columns: table => new
                 {
@@ -378,6 +354,31 @@ namespace EcommerceSourceAbp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppFileStorages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppHomePageConfigs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LinkBanner = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppHomePageConfigs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -933,11 +934,14 @@ namespace EcommerceSourceAbp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppBlogDetails",
+                name: "AppBlogs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BlogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Descriptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isHot = table.Column<int>(type: "int", nullable: true),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -953,11 +957,11 @@ namespace EcommerceSourceAbp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppBlogDetails", x => x.Id);
+                    table.PrimaryKey("PK_AppBlogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppBlogDetails_AppBlogs_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "AppBlogs",
+                        name: "FK_AppBlogs_AppCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "AppCategories",
                         principalColumn: "Id");
                 });
 
@@ -1025,6 +1029,29 @@ namespace EcommerceSourceAbp.Migrations
                         name: "FK_AppTradeMarks_AppFileStorages_FileStorageId",
                         column: x => x.FileStorageId,
                         principalTable: "AppFileStorages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppImageSettings",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileStorageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    HomePageConfigId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppImageSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppImageSettings_AppFileStorages_FileStorageId",
+                        column: x => x.FileStorageId,
+                        principalTable: "AppFileStorages",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AppImageSettings_AppHomePageConfigs_HomePageConfigId",
+                        column: x => x.HomePageConfigId,
+                        principalTable: "AppHomePageConfigs",
                         principalColumn: "Id");
                 });
 
@@ -1431,18 +1458,11 @@ namespace EcommerceSourceAbp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppProductAffilates",
+                name: "AppBlogDetails",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PriceSale = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsAffilateInDetailBlog = table.Column<bool>(type: "bit", nullable: false),
-                    LinkAffilateShopee = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkAffilateLazada = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkAffilateTiki = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkAffilateOther = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BlogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -1458,11 +1478,11 @@ namespace EcommerceSourceAbp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppProductAffilates", x => x.Id);
+                    table.PrimaryKey("PK_AppBlogDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppProductAffilates_AppBlogDetails_ProductDetailId",
-                        column: x => x.ProductDetailId,
-                        principalTable: "AppBlogDetails",
+                        name: "FK_AppBlogDetails_AppBlogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "AppBlogs",
                         principalColumn: "Id");
                 });
 
@@ -1481,7 +1501,7 @@ namespace EcommerceSourceAbp.Migrations
                     ViewCount = table.Column<int>(type: "int", nullable: false),
                     NumberOfReview = table.Column<int>(type: "int", nullable: false),
                     StarRating = table.Column<int>(type: "int", nullable: false),
-                    IsHot = table.Column<bool>(type: "bit", nullable: false),
+                    isHot = table.Column<int>(type: "int", nullable: true),
                     HotIndex = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TradeMarkId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1553,17 +1573,88 @@ namespace EcommerceSourceAbp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppProductAffilates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PriceSale = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsAffilateInDetailBlog = table.Column<bool>(type: "bit", nullable: false),
+                    LinkAffilateShopee = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LinkAffilateLazada = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LinkAffilateTiki = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LinkAffilateOther = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppProductAffilates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppProductAffilates_AppBlogDetails_ProductDetailId",
+                        column: x => x.ProductDetailId,
+                        principalTable: "AppBlogDetails",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppBlogFiles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    FileStorageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BlogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppBlogFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppBlogFiles_AppBlogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "AppBlogs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AppBlogFiles_AppFileStorages_FileStorageId",
+                        column: x => x.FileStorageId,
+                        principalTable: "AppFileStorages",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AppBlogFiles_AppProducts_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "AppProducts",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppNewsTags",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NewsId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BlogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppNewsTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppNewsTags_AppBlogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "AppBlogs",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AppNewsTags_AppNewses_NewsId",
                         column: x => x.NewsId,
@@ -1823,6 +1914,26 @@ namespace EcommerceSourceAbp.Migrations
                 column: "BlogId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppBlogFiles_BlogId",
+                table: "AppBlogFiles",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppBlogFiles_FileStorageId",
+                table: "AppBlogFiles",
+                column: "FileStorageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppBlogFiles_ProductId",
+                table: "AppBlogFiles",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppBlogs_CategoryId",
+                table: "AppBlogs",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AppDistricts_ProvinceId",
                 table: "AppDistricts",
                 column: "ProvinceId");
@@ -1843,9 +1954,24 @@ namespace EcommerceSourceAbp.Migrations
                 column: "WardId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppImageSettings_FileStorageId",
+                table: "AppImageSettings",
+                column: "FileStorageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppImageSettings_HomePageConfigId",
+                table: "AppImageSettings",
+                column: "HomePageConfigId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AppNewses_CategoryId",
                 table: "AppNewses",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppNewsTags_BlogId",
+                table: "AppNewsTags",
+                column: "BlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppNewsTags_NewsId",
@@ -2001,7 +2127,13 @@ namespace EcommerceSourceAbp.Migrations
                 name: "AppAppUsers");
 
             migrationBuilder.DropTable(
+                name: "AppBlogFiles");
+
+            migrationBuilder.DropTable(
                 name: "AppECommerceProfiles");
+
+            migrationBuilder.DropTable(
+                name: "AppImageSettings");
 
             migrationBuilder.DropTable(
                 name: "AppMetaSeos");
@@ -2100,6 +2232,9 @@ namespace EcommerceSourceAbp.Migrations
                 name: "AppWards");
 
             migrationBuilder.DropTable(
+                name: "AppHomePageConfigs");
+
+            migrationBuilder.DropTable(
                 name: "AppNewses");
 
             migrationBuilder.DropTable(
@@ -2133,9 +2268,6 @@ namespace EcommerceSourceAbp.Migrations
                 name: "AppBlogs");
 
             migrationBuilder.DropTable(
-                name: "AppCategories");
-
-            migrationBuilder.DropTable(
                 name: "AppProductProperties");
 
             migrationBuilder.DropTable(
@@ -2143,6 +2275,9 @@ namespace EcommerceSourceAbp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppProvinces");
+
+            migrationBuilder.DropTable(
+                name: "AppCategories");
 
             migrationBuilder.DropTable(
                 name: "AppFileStorages");

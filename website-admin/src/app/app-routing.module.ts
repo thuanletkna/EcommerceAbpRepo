@@ -50,6 +50,11 @@ const routes: Routes = [
       canActivate: [AuthGuard],
     },
     {
+      path: 'image-setting',
+      loadChildren: () => import('./pages/image-setting/image-setting.module').then(m => m.ImageSettingModule),
+      canActivate: [AuthGuard],
+    },
+    {
       path: 'trade-mark',
       loadChildren: () =>
         import('./pages/product/trade-mark/trade-mark.module').then(m => m.TradeMarkModule),

@@ -1,6 +1,6 @@
 <section class="header">
-    <div class="home-slider owl-carousel owl-theme">
-        <div class="slider-item bg-item1">
+    <!-- <div class="home-slider owl-carousel owl-theme" *ngFor="let item of imageHomePage">
+        <div class="slider-item bg-item1" *ngFor="let image of item.imageSetting" [ngStyle]="{'background-image': 'url(' + getLinkMedia(image.fileStorageId) + ')'}" >
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
@@ -50,5 +50,26 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    <!-- <swiper 
+    [spaceBetween]="100"
+    [centeredSlides]="true"
+    [autoplay]="{
+      delay: 2500,
+      disableOnInteraction: false
+    }"
+    [pagination]="{
+      clickable: true
+    }"
+    [navigation]="true"
+    class="mySwiper"
+    [width]="700"
+  >
+    <ng-template *ngFor="let item of imageHomePage"  swiperSlide>
+        <img  *ngFor="let image of item.imageSetting" [src]="getLinkMedia(image.fileStorageId)">
+    </ng-template>
+  </swiper> -->
+
+  
 </section>

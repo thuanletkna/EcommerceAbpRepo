@@ -1,28 +1,33 @@
-import { AfterContentInit, Component, Injector } from "@angular/core";
+import { AfterContentInit, Component, Injector, OnInit, ViewEncapsulation } from "@angular/core";
+import { Status } from "src/shared/enums";
+import { HomePageConfigDto } from "src/shared/model/home-page-config/home-page-config.dto";
+import { ImageSettingDto } from "src/shared/model/image-setting/image-setting.dto";
+import { HomePageConfigService } from "src/shared/services/home-page-config.service";
 import { AppBaseComponent } from "../../app-base.component";
 @Component({
   selector: 'header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent extends AppBaseComponent implements AfterContentInit {
+export class HeaderComponent extends AppBaseComponent implements OnInit {
+  encapsulation: ViewEncapsulation.None | undefined;
+  imageHomePage: HomePageConfigDto[] | undefined;
+  ImageSettingFile: ImageSettingDto[]| undefined = [];
+  fileId?:string;
+  constructor(
+    protected override readonly injector: Injector,
+    private readonly homePageConfigService: HomePageConfigService,
 
-  constructor(injector: Injector) {
+    ) {
     super(injector);
   }
-  ngAfterContentInit(): void {
-    
+  get id() {
+    return this.getParam('id');
   }
-
-//   closeMenu() {
-//     $('.header .menu-header .navbar-bottom nav.navbar .navbar-collapse').removeClass('show');
-//   }
-
-//   private hoverDropdown() {
-//     $('.dropdown-login').on('mouseover', function(){
-//       $('.dropdown-toggle', this).trigger('click');
-//     }).on('mouseout', function(){
-//         $('.dropdown-toggle', this).trigger('click').blur();
-//     });
-//   }
-
+  
+  ngOnInit(): void {
+    this.homePageConfigService.getAllBanner().subscribe((result) => {
+      this.imageHomePage = result;
+    console.log(this.imageHomePage);
+  });
+  }
 }

@@ -104,11 +104,8 @@ namespace EcommerceSourceAbp.Blogs
             return (await base.CreateFilteredQueryAsync(input))
                 .Include(a => a.BlogFile)
                 .Include("BlogFile.FileStorage")
-                //.FilterPermission(CurrentUser)
-                //.Where(x => x.ItemDescription != "Contractors")
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
                     x => x.Name.ToLower().Contains(input.Filter))
-                //.WhereIf(input.IsBlog.HasValue, x => x.IsBlog == input.IsBlog)
                 .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
         }
 

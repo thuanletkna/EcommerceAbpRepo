@@ -21,6 +21,7 @@ import { NavbarStyleTwoComponent } from './layout/navbar-style-two/navbar-style-
 import { PreloaderComponent } from './layout/preloader/preloader.component';
 import { PaginationComponent } from './component/pagination/pagination.component';
 import SwiperCore,{ Autoplay, Pagination, Swiper } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 SwiperCore.use([Autoplay, Pagination]);
 
@@ -42,8 +43,8 @@ SwiperCore.use([Autoplay, Pagination]);
         RouterModule,
         ReactiveFormsModule,
         CommonModule,
-        NgxSpinnerModule
-
+        NgxSpinnerModule,
+        SwiperModule
     ],
     exports: [
         // FormsModule,

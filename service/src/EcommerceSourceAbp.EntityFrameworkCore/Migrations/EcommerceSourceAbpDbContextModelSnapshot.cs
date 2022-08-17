@@ -542,6 +542,94 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AppFileStorages", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LinkBanner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppHomePageConfigs", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ImageSetting", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("HomePageConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.HasIndex("HomePageConfigId");
+
+                    b.ToTable("AppImageSettings", (string)null);
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.MetaSeo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -3522,6 +3610,21 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("Ward");
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ImageSetting", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.HomePageConfig", "HomePageConfig")
+                        .WithMany("ImageSetting")
+                        .HasForeignKey("HomePageConfigId");
+
+                    b.Navigation("FileStorage");
+
+                    b.Navigation("HomePageConfig");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.News", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Category", "Category")
@@ -3922,6 +4025,11 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
                 {
                     b.Navigation("Newses");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>
+                {
+                    b.Navigation("ImageSetting");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.News", b =>

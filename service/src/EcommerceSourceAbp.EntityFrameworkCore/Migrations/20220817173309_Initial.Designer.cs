@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace EcommerceSourceAbp.Migrations
 {
     [DbContext(typeof(EcommerceSourceAbpDbContext))]
-    [Migration("20220815200459_updateIsHotBlogEnum")]
-    partial class updateIsHotBlogEnum
+    [Migration("20220817173309_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace EcommerceSourceAbp.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Code")
@@ -82,6 +85,9 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Status")
                         .HasColumnType("int");
 
@@ -89,6 +95,8 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("AppBlogs", (string)null);
                 });
@@ -536,6 +544,94 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AppFileStorages", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("LinkBanner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppHomePageConfigs", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ImageSetting", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("HomePageConfigId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.HasIndex("HomePageConfigId");
+
+                    b.ToTable("AppImageSettings", (string)null);
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.MetaSeo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -663,6 +759,9 @@ namespace EcommerceSourceAbp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BlogId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("NewsId")
                         .HasColumnType("uniqueidentifier");
 
@@ -673,6 +772,8 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("NewsId");
 
@@ -801,9 +902,6 @@ namespace EcommerceSourceAbp.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<bool>("IsHot")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("LastModificationTime");
@@ -847,6 +945,9 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("isHot")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -3444,6 +3545,15 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Blog", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Blog", "Blog")
@@ -3502,6 +3612,21 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("Ward");
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ImageSetting", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.HomePageConfig", "HomePageConfig")
+                        .WithMany("ImageSetting")
+                        .HasForeignKey("HomePageConfigId");
+
+                    b.Navigation("FileStorage");
+
+                    b.Navigation("HomePageConfig");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.News", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Category", "Category")
@@ -3513,6 +3638,10 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.NewsTag", b =>
                 {
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", null)
+                        .WithMany("NewsTags")
+                        .HasForeignKey("BlogId");
+
                     b.HasOne("EcommerceSourceAbp.Entities.News", "News")
                         .WithMany("NewsTags")
                         .HasForeignKey("NewsId");
@@ -3886,6 +4015,8 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("BlogDetails");
 
                     b.Navigation("BlogFile");
+
+                    b.Navigation("NewsTags");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogDetail", b =>
@@ -3896,6 +4027,11 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
                 {
                     b.Navigation("Newses");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>
+                {
+                    b.Navigation("ImageSetting");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.News", b =>
