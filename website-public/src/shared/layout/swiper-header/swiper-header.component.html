@@ -1,0 +1,60 @@
+
+<section class="swipe-header">
+    <!-- <swiper  
+    [spaceBetween]="100"
+    [centeredSlides]="true"
+    [autoplay]="{
+      delay: 2500,
+      disableOnInteraction: false
+    }"
+    [pagination]="{
+      clickable: true
+    }"
+    [navigation]="true"
+    class="mySwiper"
+  >
+    <ng-template *ngFor="let item of imageHomePage"  swiperSlide >
+        <img style="width: 100%;height: 500px;"  *ngFor="let image of item.imageSetting" [src]="getLinkMedia(image.fileStorageId)">
+    </ng-template>
+  </swiper> -->
+
+  <div class="blog-area " style="background-color: #fafdff;">
+    <div class="container">
+      <div class="row pt-45">
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card"  style="background-color: #d37873;">
+            <div class="blog-content" style="height: 300px;">
+              <a routerLink="/blog-details"><h3 class=" text-center" style="color: white;">Giới thiệu</h3></a>
+              <p style="color: white;">Hoa Tươi CiTi là đơn vị điện hoa hoạt động trên phạm vi toàn quốc với chi phí hợp lý, chất lượng và dịch vụ uy tín, chuyên nghiệp. Đội ngũ thợ cắm hoa tay nghề cao, nguồn hoa nội - ngoại nhập tươi mới mỗi ngày, mạng lưới điện...</p>
+              <!-- <a routerLink="/blog-details" class="read-more-btn"
+                >Xem chi tiết <i class="bx bxs-chevrons-right"></i
+              ></a> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6" >
+          <div class="blog-card">
+            <swiper  
+              [spaceBetween]="100"
+              [centeredSlides]="true"
+              [autoplay]="{
+                delay: 2500,
+                disableOnInteraction: false
+              }"
+              [pagination]="{
+                clickable: true
+              }"
+              [navigation]="true"
+              class="mySwiper"
+            >
+              <ng-template *ngFor="let item of imageHomePage"  swiperSlide >
+                  <img style="width: 100%;height: 300px;"  *ngFor="let image of item.imageSetting" [src]="getLinkMedia(image.fileStorageId)">
+              </ng-template>
+            </swiper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

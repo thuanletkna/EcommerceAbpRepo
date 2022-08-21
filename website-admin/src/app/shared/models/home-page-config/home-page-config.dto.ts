@@ -5,5 +5,4 @@ export interface HomePageConfigDto extends ListBaseDto {
     description?: string;
     linkBanner?:string;
     imageSetting?: ImageSettingDto[];
-
 }

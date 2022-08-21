@@ -17,6 +17,14 @@ export class EcommerceSourceAbpPermissions {
     //Delete: EcommerceSourceAbpPermissions.GroupName + '.Category.Delete',
   };
 
+  static HomePageConfig = {
+    Default: EcommerceSourceAbpPermissions.GroupName + '.HomePageConfig',
+    View: EcommerceSourceAbpPermissions.GroupName + '.HomePageConfig.View',
+    Create: EcommerceSourceAbpPermissions.GroupName + '.HomePageConfig.Create',
+    Edit: EcommerceSourceAbpPermissions.GroupName + '.HomePageConfig.Edit',
+    //Delete: EcommerceSourceAbpPermissions.GroupName + '.HomePageConfig.Delete',
+  };
+
   static Product = {
     Default: EcommerceSourceAbpPermissions.GroupName + '.Product',
     View: EcommerceSourceAbpPermissions.GroupName + '.Product.View',

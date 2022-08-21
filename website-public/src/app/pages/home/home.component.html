@@ -1,39 +1,22 @@
 <header></header>
-<div class="about-area pt-70 pb-70">
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-lg-7">
-          <div class="about-content about-width">
-            <span>About Us</span>
-            <h2>We Are Leading Our Agency for 15 Years</h2>
-            <p>
-              What indication best sick be project proposal in attempt, train of
-              the showed some a forth. That homeless, won't many of goals thoughts
-              volumes felt with of as he this its tend broad. Well, were make come
-              when from would area page puzzles hell in is through on the in more
-              rent mountains.
-            </p>
-            <p>
-              What indication best sick be project proposal in attempt, train of
-              the showed some a forth. That homeless, won't many of goals thoughts
-              volumes felt with of as he this its tend broad. Well, were make come
-              when from would area page puzzles hell in is through on the in more
-              rent mountains.
-            </p>
-            <div class="about-btn">
-              <a routerLink="/" class="know-more-btn">Know More</a>
-            </div>
-          </div>
+<swipe-header></swipe-header>
+<div style="background-color: #fafdff;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="blog-card">
+          <img style="width: 100%;height: 200px;" src="assets/img/home1/s-1.jpg" alt="Images" />
         </div>
-  
-        <div class="col-lg-5">
-          <div class="about-img-2">
-            <img src="assets/img/about/about2.png" alt="About Images" />
-          </div>
+      </div>
+      <div class="col-lg-6 col-md-6" >
+        <div class="blog-card">
+          <img style="width: 100%;height: 200px;" src="assets/img/home1/s-1.jpg" alt="Images" />
         </div>
       </div>
     </div>
   </div>
+</div>
+
 
 <!-- <div class="product-images ptb-100">
   <div class="container">
@@ -420,17 +403,16 @@
         <div class="designer-card">
           <div
             class="designer-img"
-            style="height: 300px"
             *ngFor="let filePr of item.productFile"
           >
-            <a routerLink="/designer"
-              ><img
+            <a [routerLink]="getPathProductDetail(item.slug)"
+              ><img style="width: 100%;height: 358px;"
                 [src]="getLinkMedia(filePr.fileStorageId)"
                 alt="Designer Images"
             /></a>
           </div>
           <div class="designer-content">
-            <a routerLink="/designer"
+            <a [routerLink]="getPathProductDetail(item.slug)"
               ><h3>{{ item.name }}</h3></a
             >
             <span>{{ item.priceSale }} VNĐ</span>

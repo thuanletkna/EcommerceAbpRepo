@@ -22,6 +22,7 @@ import { PreloaderComponent } from './layout/preloader/preloader.component';
 import { PaginationComponent } from './component/pagination/pagination.component';
 import SwiperCore,{ Autoplay, Pagination, Swiper } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
+import { SwipeHeaderComponent } from './layout/swiper-header/swiper-header.component';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 SwiperCore.use([Autoplay, Pagination]);
 
@@ -36,7 +37,8 @@ SwiperCore.use([Autoplay, Pagination]);
         PaginationComponent,
         NotificationModalComponent,
         BlankLayoutComponent,
-        NavbarStyleTwoComponent
+        NavbarStyleTwoComponent,
+        SwipeHeaderComponent
     ],
     imports: [
         FormsModule,
@@ -66,6 +68,7 @@ SwiperCore.use([Autoplay, Pagination]);
         SafeHtmlPipe,
         MainLayoutComponent,
         HeaderComponent,
+        SwipeHeaderComponent,
         FooterComponent,
         PreloaderComponent,
         PaginationComponent,
