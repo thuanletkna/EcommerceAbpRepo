@@ -1,4 +1,5 @@
 import { BaseDto, IParamFilter } from "./base.dto";
+import { ProductDto } from "./product/product.dto";
 
 export interface CategoryDto extends BaseDto {
   name?: string;
@@ -16,6 +17,7 @@ export interface CategoryDto extends BaseDto {
   publishDate?: Date;
   creatorName?: string;
   isBlog?: Boolean;
+  products?:ProductDto[];
 }
 export interface IParamFilterCategory extends IParamFilter {
   isBlog?: Boolean;

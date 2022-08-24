@@ -20,6 +20,7 @@ export class ProductService {
         });
       }
 
+      
       // getListProductPaged(groupId?: number): Observable<IPagination<ProductDto>> {
       //   return this.restService.request({
       //     url: `/api/app/management-report/public-paged`,
@@ -47,6 +48,16 @@ export class ProductService {
       return this.restService.request({
         url: '/api/app/product/' + id + '/by-slug-public',
         method: 'GET',
+      });
+    }
+
+    getByCategoryId(id: string|undefined): Observable<ProductDto[]> {
+      return this.restService.request({
+        url: '/api/app/product/' + id + '/by-category-id-public',
+        method: 'GET',
+        params: {
+          id,
+      },
       });
     }
 

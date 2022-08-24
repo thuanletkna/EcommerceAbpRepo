@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using EcommerceSourceAbp.ProductFiles.Dtos;
 using EcommerceSourceAbp.FilesStorage;
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.ObjectMapping;
 
 namespace EcommerceSourceAbp.Products
 {
@@ -191,6 +192,22 @@ namespace EcommerceSourceAbp.Products
             //result.MetaSeo = metaSeo.Select(x => ObjectMapper.Map<MetaSeo, MetaSeoDto>(x)).ToList();
 
             return result;
+        }
+
+        [AllowAnonymous]
+        public async Task<List<GetProductForViewDto>> GetByCategoryIdPublic(Guid id)
+        {
+            var news = (await Repository.GetQueryableAsync())
+                .Include(x => x.Category)
+                .Where(x => x.CategoryId == id);
+                
+
+            if (news == null)
+                throw new EntityNotFoundException(L["Error:NotFound"]);
+
+            var result =news.Select(a=>ObjectMapper.Map<Product, GetProductForViewDto>(a)).ToList();
+
+            return  result;
         }
     }
 }

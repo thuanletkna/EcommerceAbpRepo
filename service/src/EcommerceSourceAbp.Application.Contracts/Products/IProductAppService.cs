@@ -11,5 +11,6 @@ namespace EcommerceSourceAbp.Products
         Task<List<GetProductFileForViewDto>> GetListFile(Guid id);
         Task<GetProductForViewDto> GetBySlugPublic(string slug);
         Task<GetProductForViewDto> GetByIdPublic(Guid id);
+        Task<List<GetProductForViewDto>> GetByCategoryIdPublic(Guid id);
     }
 }

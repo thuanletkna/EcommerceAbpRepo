@@ -9,14 +9,19 @@ using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using System.Collections.Generic;
 using EcommerceSourceAbp.Enums;
+using Microsoft.EntityFrameworkCore;
+using EcommerceSourceAbp.Products.Dtos;
+using Volo.Abp.ObjectMapping;
 
 namespace EcommerceSourceAbp.Categories
 {
     public class CategoryAppService : AppListService<Category, CreateUpdateCategoryDto, GetCategoryForViewDto, GetCategoryForEditDto, GetCategoryRequestInputDto>,
         ICategoryAppService
     {
-        public CategoryAppService(IRepository<Category, Guid?> repository) : base(repository)
+        private readonly IRepository<Product> _productRepository;
+        public CategoryAppService(IRepository<Category, Guid?> repository, IRepository<Product> productRepository) : base(repository)
         {
+            _productRepository = productRepository;
         }
         protected override string GetPolicyName => EcommerceSourceAbpPermissions.Category.View;
         protected override string GetListPolicyName => EcommerceSourceAbpPermissions.Category.Default;
@@ -48,6 +53,15 @@ namespace EcommerceSourceAbp.Categories
             var result = query.Where(x => x.Status == Status.Active)
                .OrderBy(x => x.OrderIndex);
             return result.Select(MapToViewOutput).ToList();
+        }
+
+        [AllowAnonymous]
+        public async Task<IEnumerable<GetCategoryForViewDto>> GetAllProductByCategory()
+        {
+            var query = (await Repository.GetQueryableAsync()).Include(x=>x.Products).Where(x => x.IsBlog == false);
+
+            var data =await query.Select(a => ObjectMapper.Map<Category, GetCategoryForViewDto>(a)).ToListAsync();
+            return data;
         }
     }
 }

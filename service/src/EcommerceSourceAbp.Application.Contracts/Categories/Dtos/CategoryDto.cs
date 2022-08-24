@@ -1,5 +1,6 @@
 ﻿using EcommerceSourceAbp.BaseDtos;
 using EcommerceSourceAbp.MetaSeos.Dtos;
+using EcommerceSourceAbp.Products.Dtos;
 using System.Collections.Generic;
 
 namespace EcommerceSourceAbp.Categories.Dtos
@@ -11,5 +12,6 @@ namespace EcommerceSourceAbp.Categories.Dtos
         public bool IsBlog { get; set; }
 
         public List<MetaSeoDto> MetaSeo { get; set; }
+        //public List<GetProductForViewDto> Products { get; set; }
     }
 }

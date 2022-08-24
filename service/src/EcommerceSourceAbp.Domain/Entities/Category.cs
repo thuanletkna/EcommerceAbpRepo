@@ -12,5 +12,7 @@ namespace EcommerceSourceAbp.Entities
         public int OrderIndex { get; set; }
         public bool IsBlog { get; set; }
         public ICollection<News> Newses { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -842,7 +842,7 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PasswordResets");
+                    b.ToTable("PasswordResets", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Product", b =>

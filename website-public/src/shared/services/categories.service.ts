@@ -42,4 +42,11 @@ export class CategoriesService {
                 }),
             );
     }
+
+    getAllProductsByCategory() : Observable<CategoryDto[]> {
+        return this.restService.request({
+          url: `/api/app/category/product-by-category`,
+          method: 'GET'
+        });
+      }
 }

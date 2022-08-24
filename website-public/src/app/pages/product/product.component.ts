@@ -10,8 +10,9 @@ import { CategoriesService } from 'src/shared/services/categories.service';
 import { FileStorageService } from 'src/shared/services/file-storage.service';
 import { ProductService } from 'src/shared/services/product.service';
 
-import Swiper, { SwiperOptions } from 'swiper';
+import  { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
+
 
 @Component({
   templateUrl: './product.component.html',
@@ -21,11 +22,11 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   categories: CategoryDto[] = [];
   @Input() category: CategoryDto | undefined;
   productFile: ProductFileDto[]| undefined = [];
-  productItem: ProductDto[]| undefined = [];
-  get productItems(): ProductDto|undefined {
-    return this.productItem?.[0] ;
-}
+  productItem: ProductDto[] = [];
+  
   fileId?:string;
+  categoryId?:string;
+
   products: IPaginations<ProductDto> = {
     items: [],
     totalCount: 0,
@@ -47,6 +48,7 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   }
   page: number = 1;
   pageSize: number = 8;
+  
   constructor(
     protected override readonly injector: Injector,
     private readonly categoriesService: CategoriesService,
@@ -58,18 +60,25 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   get id() {
     return this.getParam('id');
   }
+
+  
+
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
-    
+    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
     
   }
 
 
   initData() {
-    forkJoin([this.categoriesService.getAllCategory()]).subscribe(
-      ([categories]) => {
+    forkJoin([
+      this.categoriesService.getAllProductsByCategory(),
+    ]).subscribe(
+      ([
+        categories,
+      ]) => {
         this.categories = categories;
       }
     );
@@ -89,6 +98,11 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
         });
       });
       
+      // this.productService.getByCategoryId(this.categoryId).subscribe(result =>
+      //   {
+      //     this.productItem = result|| {};
+      //   }
+      // )
       
   }
 

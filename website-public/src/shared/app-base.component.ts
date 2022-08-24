@@ -82,4 +82,8 @@ getLinkMedia(url: string|undefined) {
   public getPathProductDetail(slug?: string) {
     return '/chi-tiet-san-pham/' + slug;
 }
+
+  public getPathProductByCategoryId(categoryId?: string) {
+    return '/san-pham/' + categoryId;
+  }
 }
