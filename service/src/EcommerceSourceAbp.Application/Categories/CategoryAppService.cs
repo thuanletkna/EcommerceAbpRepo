@@ -58,9 +58,22 @@ namespace EcommerceSourceAbp.Categories
         [AllowAnonymous]
         public async Task<IEnumerable<GetCategoryForViewDto>> GetAllProductByCategory()
         {
-            var query = (await Repository.GetQueryableAsync()).Include(x=>x.Products).Where(x => x.IsBlog == false);
-
+            var query = (await Repository.GetQueryableAsync())
+                .Include(x=>x.Products)
+                .Where(x => x.IsBlog == false);
+            foreach (var item in query)
+            {
+                foreach(var file in item.Products)
+                {
+                    var prFile =  (await _productRepository.GetQueryableAsync())
+                                    .Include(x=>x.ProductFile)
+                                    .Include("ProductFile.FileStorage")
+                                    .FirstOrDefaultAsync(a => a.Id == file.Id);
+                    file.ProductFile = prFile.Result.ProductFile;
+                }    
+            }    
             var data =await query.Select(a => ObjectMapper.Map<Category, GetCategoryForViewDto>(a)).ToListAsync();
+            
             return data;
         }
     }

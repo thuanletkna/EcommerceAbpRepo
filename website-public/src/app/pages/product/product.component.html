@@ -1,61 +1,57 @@
-<div class="designer-area pb-70">
-    <div class="container">
-        <div class="scetion-title text-center">
-            <span>Our Designer</span>
-            <h2>Our Company Leads by Professional Designer</h2>
-            <p>What indication best sick be project proposal in attempt, train of the showed some a forth. That homeless, won't many of goals thoughts volumes felt.</p>
-        </div>
-
-        <!-- <div class="row pt-45">
-            <div class="col-lg-3 col-sm-6" *ngFor="let item of products.items">
-                <div class="designer-card">
-                    <div class="designer-img" *ngFor="let filePr of item.productFile">
-                        <a routerLink="/designer"><img [src]="getLinkMedia(filePr.fileStorageId)" alt="Designer Images"></a>
-                    </div>
-                    <div class="designer-content">
-                        <a [routerLink]="getPathProductDetail(item.slug)"><h3>{{item.name}}</h3></a>
+<swipe-header></swipe-header>
+<div class="designer-area pb-70 pt-45">
+  <div class="container">
+    <div *ngFor="let item of categories">
+        <div *ngIf="item">
+            <div class="tieude_giua"><h3>{{item.name}}</h3> <a href="hoa-sinh-nhat" class="xem"><h5 class="css-h5">Xem tất cả</h5></a></div>
+            <swiper
+                [slidesPerView]="5"
+                [spaceBetween]="30"
+                [autoplay]="{ delay: 3000, disableOnInteraction: false }"
+                (swiper)="setControlledSwiper($event)"
+                [navigation]="{}"
+                [scrollbar]="{ draggable: true }"
+                [watchSlidesProgress]="true"
+            >
+                <ng-template swiperSlide *ngFor="let product of item.products">
+                    <div class="designer-card" >
+                        <div class="designer-img" style="width: 100%;height: 258px;">
+                        <img 
+                            *ngFor="let filePr of product.productFile"
+                            [src]="getLinkMedia(filePr.fileStorageId)"
+                            alt="Images"
+                        />
+                        </div>
+                        <div class="designer-content">
+                        <a [routerLink]="getPathProductDetail(product.slug)"
+                            ><h3>{{ product.name }}</h3></a
+                        >
                         <span>Director</span>
                         <div class="social-icon">
                             <ul>
-                                <li><a href="#" target="_blank" ><i class='bx bxl-facebook'></i></a></li>
-                                <li><a href="#" target="_blank" ><i class='bx bx-cart' ></i></a></li>
-                                <li><a href="#" target="_blank" ><i class='bx bx-heart' ></i></a></li>
+                            <li>
+                                <a href="#" target="_blank"
+                                ><i class="bx bxl-facebook"></i
+                                ></a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank"><i class="bx bx-cart"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank"><i class="bx bx-heart"></i></a>
+                            </li>
                             </ul>
                         </div>
+                        </div>
                     </div>
-                </div>
+                </ng-template>
+            </swiper>
+            <div class="about-content about-width" style="margin-top: 0px">
+            <div class="about-btn">
+            <a routerLink="/" class="know-more-btn">Xem tất cả</a>
             </div>
-
-            
-        </div> -->
-
-        <!-- <pagination [totalCount]="products.totalCount" [pageSize]="pageSize"></pagination> -->
-        
-
-        <div class="product-images ptb-100">
-            <div class="container">
-                <div class="product-images-slider owl-carousel owl-theme" >
-                    <div class="product-images-item">
-                        <img src="assets/img/home1/s-1.jpg" alt="Images" />
-                    </div>
-
-                    <div class="product-images-item">
-                        <img src="assets/img/home1/s-2.jpg" alt="Images" />
-                    </div>
-
-                    <div class="product-images-item">
-                        <img src="assets/img/home1/s-3.jpg" alt="Images" />
-                    </div>
-
-                    <div class="product-images-item">
-                        <img src="assets/img/home1/s-4.jpg" alt="Images" />
-                    </div>
-
-                    <div class="product-images-item">
-                        <img src="assets/img/home1/s-5.jpg" alt="Images" />
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    </div>
+  </div>
 </div>

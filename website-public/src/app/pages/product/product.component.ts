@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { AppBaseComponent } from 'src/shared/app-base.component';
 import { Status } from 'src/shared/enums';
@@ -10,15 +10,12 @@ import { CategoriesService } from 'src/shared/services/categories.service';
 import { FileStorageService } from 'src/shared/services/file-storage.service';
 import { ProductService } from 'src/shared/services/product.service';
 
-import  { SwiperOptions } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
-
 
 @Component({
   templateUrl: './product.component.html',
 })
 export class ProductComponent extends AppBaseComponent implements OnInit {
-  @ViewChild(SwiperComponent, { static: false }) swiper?: SwiperComponent;
+  encapsulation: ViewEncapsulation.None | undefined;
   categories: CategoryDto[] = [];
   @Input() category: CategoryDto | undefined;
   productFile: ProductFileDto[]| undefined = [];
@@ -31,18 +28,10 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
     items: [],
     totalCount: 0,
   };
-  config: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: false,
-    autoplay: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  };
-  groupId: number = 1;
-
+controlledSwiper: any;
+  setControlledSwiper(swiper: any) {
+    this.controlledSwiper = swiper;
+  }
   get skipCount() {
     return this.pageSize * (this.currentPage - 1);
   }
@@ -84,7 +73,6 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
     );
     this.productService
       .getPaged({
-        // groupId: this.groupId,
         // sorting: 'publishDate desc',
         skipCount: this.skipCount,
         maxResultCount: this.pageSize,

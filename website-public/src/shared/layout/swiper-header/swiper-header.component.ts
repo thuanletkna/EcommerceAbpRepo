@@ -27,7 +27,6 @@ export class SwipeHeaderComponent extends AppBaseComponent implements OnInit {
   ngOnInit(): void {
     this.homePageConfigService.getAllBanner().subscribe((result) => {
       this.imageHomePage = result;
-    console.log(this.imageHomePage);
   });
   }
 }
