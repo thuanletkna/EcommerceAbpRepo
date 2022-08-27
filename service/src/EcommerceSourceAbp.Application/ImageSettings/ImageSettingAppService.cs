@@ -1,6 +1,7 @@
 ﻿using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.ImageSettings.Dto;
 using EcommerceSourceAbp.Permissions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,13 @@ namespace EcommerceSourceAbp.ImageSettings
         protected override string UpdatePolicyName => EcommerceSourceAbpPermissions.ImageSetting.Edit;
         protected override string DeletePolicyName => EcommerceSourceAbpPermissions.ImageSetting.Delete;
 
-        
+        [AllowAnonymous]
+        public async Task<List<GetImageSettingForViewDto>> GetAllPublic(Guid? id)
+        {
+            var  query = await (await Repository.GetQueryableAsync()).Include(a => a.HomePageConfig).Where(x => x.HomePageConfigId == id).ToListAsync();
+            var data =  query.Select(a => ObjectMapper.Map<ImageSetting, GetImageSettingForViewDto>(a)).ToList();
+            return data;
+        }
 
     }
 }

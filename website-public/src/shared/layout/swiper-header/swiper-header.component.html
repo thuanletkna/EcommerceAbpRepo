@@ -47,8 +47,10 @@
               [navigation]="true"
               class="mySwiper"
             >
-              <ng-template *ngFor="let item of imageHomePage"  swiperSlide >
-                  <img style="width: 100%;height: 300px;"  *ngFor="let image of item.imageSetting" [src]="getLinkMedia(image.fileStorageId)">
+              <ng-template *ngFor="let item of homepage"  swiperSlide >
+                <div *ngFor="let image of item.imageSetting">
+                  <img style="width: 100%;height: 300px;"    [src]="getLinkMedia(image.fileStorageId)">
+                </div>
               </ng-template>
             </swiper>
           </div>
