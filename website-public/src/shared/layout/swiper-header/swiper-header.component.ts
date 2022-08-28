@@ -11,7 +11,7 @@ import { AppBaseComponent } from "../../app-base.component";
 export class SwipeHeaderComponent extends AppBaseComponent implements OnInit {
   encapsulation: ViewEncapsulation.None | undefined;
   private _imageBanner: HomePageConfigDto[] = [];
-  private imageSettingFile: ImageSettingDto[] = [];
+  private _imageHeader: HomePageConfigDto[] = [];
   fileId?:string;
   constructor(
     protected override readonly injector: Injector,
@@ -25,28 +25,21 @@ export class SwipeHeaderComponent extends AppBaseComponent implements OnInit {
   }
   
   ngOnInit(): void {
-      this.homePageConfigService.getAllBanner().subscribe((result) => {
+      this.homePageConfigService.getAllBannerSlide().subscribe((result) => {
         this._imageBanner = result||[];
       });
-      this.homepage.forEach(im => {
-        if(im.imageSetting)
-        {
-          im.imageSetting.forEach(image => {
-            if(image.fileType === 'BannerSlide')
-            {
-                this.imageSettingFile == image;
-            }
-          });
-        }
+      this.homePageConfigService.getBannerHeader().subscribe((result) => {
+        this._imageHeader = result||[];
       });
-      console.log(this.imageSettingFile);
+      
+      
       
   }
 
   get homepage(): HomePageConfigDto[] {
     return this._imageBanner.filter(x => x.status == Status.Active);
   }
-  get images(): ImageSettingDto[] {
-    return this.imageSettingFile.filter(x => x.status == Status.Active);;
+  get imageHeader(): HomePageConfigDto[] {
+    return this._imageHeader.filter(x => x.status == Status.Active);
   }
 }

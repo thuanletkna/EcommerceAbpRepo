@@ -1,6 +1,7 @@
 ﻿using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Enums;
 using EcommerceSourceAbp.HomePageConfigs.Dto;
+using EcommerceSourceAbp.ImageSettings.Dto;
 using EcommerceSourceAbp.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,40 @@ namespace EcommerceSourceAbp.HomePageConfigs
                .Include(a => a.ImageSetting)
                 .Include("ImageSetting.FileStorage")
                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+        [AllowAnonymous]
+        public async Task<IEnumerable<GetHomePageConfigForViewDto>> GetHomepageBanner()
+        {
+            var banner = new ImageSettingDto();
+            var query = await (await Repository.GetQueryableAsync())
+                .Include(a => a.ImageSetting)
+                .Include("ImageSetting.FileStorage")
+                .Where(x => x.Status == Status.Active).ToListAsync();
+            var data = query.Select(a => ObjectMapper.Map<HomePageConfig, GetHomePageConfigForViewDto>(a)).ToList();
+            foreach(var item in data)
+            {
+                item.ImageSetting = item.ImageSetting.Where(x => x.FileType == "BannerSlide").ToList();
+            }
+            //var result = data.Select(x => x.ImageSetting.Where(x=>x.FileType == "BannerSlide"));
+            var result = data.Where(x => x.ImageSetting.Count>0);
+            return result;
+        }
+        [AllowAnonymous]
+        public async Task<IEnumerable<GetHomePageConfigForViewDto>> GetImageHomepageHeader()
+        {
+            var banner = new ImageSettingDto();
+            var query = await (await Repository.GetQueryableAsync())
+                .Include(a => a.ImageSetting)
+                .Include("ImageSetting.FileStorage")
+                .Where(x => x.Status == Status.Active).ToListAsync();
+            var data = query.Select(a => ObjectMapper.Map<HomePageConfig, GetHomePageConfigForViewDto>(a)).ToList();
+            foreach (var item in data)
+            {
+                item.ImageSetting = item.ImageSetting.Where(x => x.FileType == "BannerHeader").ToList();
+            }
+            //var result = data.Select(x => x.ImageSetting.Where(x=>x.FileType == "BannerSlide"));
+            var result = data.Where(x => x.ImageSetting.Count > 0);
+            return result;
         }
 
         [AllowAnonymous]

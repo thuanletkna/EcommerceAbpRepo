@@ -42,31 +42,19 @@ export class CreateEditImageSettingComponent extends AppBaseComponent implements
       buttons: [],
     };
   }
-
-  
-
-  
-
   get bannerFiles() {
     if (this.vm.imageSetting) {
         return this.vm.imageSetting.filter(x => x.fileType === 'BannerSlide');
     }
     return [];
-}
+  }
+  get bannerProduct() {
+    if (this.vm.imageSetting) {
+        return this.vm.imageSetting.filter(x => x.fileType === 'BannerHeader');
+    }
+    return [];
+  }
 
-// get files() {
-//   if (this.vm.productFile) {
-//       return this.vm.productFile.filter(x => x.fileType === 'productFile');
-//   }
-//   return [];
-// }
-
-// get subFiles() {
-//   if (this.vm.productFile) {
-//       return this.vm.productFile.filter(x => x.fileType === 'subProductFile');
-//   }
-//   return [];
-// }
 
 remove(item: ImageSettingDto) {
   // Delete the item from fileNames list
@@ -74,6 +62,16 @@ remove(item: ImageSettingDto) {
   this.vm.imageSetting.splice(index, 1);
 }
 add(fileType: string) {
+  if (!this.vm.imageSetting) this.vm.imageSetting = [];
+  this.vm.imageSetting.push({ fileType });
+}
+
+removeProduct(item: ImageSettingDto) {
+  // Delete the item from fileNames list
+  const index = this.vm.imageSetting.findIndex(x => x === item);
+  this.vm.imageSetting.splice(index, 1);
+}
+addProduct(fileType: string) {
   if (!this.vm.imageSetting) this.vm.imageSetting = [];
   this.vm.imageSetting.push({ fileType });
 }

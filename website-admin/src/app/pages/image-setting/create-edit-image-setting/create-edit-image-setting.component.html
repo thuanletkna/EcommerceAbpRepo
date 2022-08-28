@@ -2,13 +2,13 @@
     <div class="container-edit my-4">
       <div class="card">
         <div class="card-header bg-white">
-          them anh banner
+          Thâm Hình Ảnh
         </div>
         <div class="row p-3">
           
           <div class="col-md-6">
             <nz-form-item>
-              <nz-form-label nzRequired>{{ '::ten banner' | abpLocalization }}</nz-form-label>
+              <nz-form-label nzRequired>{{ '::Tên banner' | abpLocalization }}</nz-form-label>
               <nz-form-control>
                 <input
                   maxlength="255"
@@ -25,7 +25,7 @@
           
           <div class="col-md-12">
             <nz-form-item>
-              <nz-form-label>{{ '::Chi tieeet' | abpLocalization }}</nz-form-label>
+              <nz-form-label>{{ '::Chi Tiết' | abpLocalization }}</nz-form-label>
               <nz-form-control>
                 <textarea nz-input name="description" type="text" [(ngModel)]="vm.description"></textarea>
               </nz-form-control>
@@ -35,7 +35,7 @@
             
           <div class="col-6 mt-2">
             <nz-form-item class="w-100">
-              <nz-form-label>Attach File (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png, .bmp, .gif, .mp3, .wma, .aac)</nz-form-label>
+              <nz-form-label>Banner Slide Trang Chủ (.jpg, .jpeg, .png, .gif)</nz-form-label>
               <nz-form-control>
                 <div *ngFor="let item of bannerFiles; index as i" class="d-flex align-items-center">
                   <upload-file
@@ -44,7 +44,7 @@
                     style="float: left"
                     [autoUpload]="true"
                     [typeFile]="'BannerSlide'"
-                    [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png, .bmp, .gif, .mp3, .wma, .aac'" 
+                    [accept]="'.jpg, .jpeg, .png, .bmp, .gif'" 
                   ></upload-file>
                   <button
                     *ngIf="vm.imageSetting !== null"
@@ -61,6 +61,41 @@
                 type="button"
                 class="btn btn-add-more"
                 (click)="add('BannerSlide')"
+                [disabled]="disableSave">
+                <div class="icon-add mr-2"></div>
+                Add more file
+              </button>
+            </div>
+          </div>
+
+          <div class="col-6 mt-2">
+            <nz-form-item class="w-100">
+              <nz-form-label>Banner Header Trang Chủ (.jpg, .jpeg, .png, .gif)</nz-form-label>
+              <nz-form-control>
+                <div *ngFor="let item of bannerProduct; index as i" class="d-flex align-items-center">
+                  <upload-file
+                    name="imageSetting{{ i }}"
+                    [(ngModel)]="item.fileStorageId"
+                    style="float: left"
+                    [autoUpload]="true"
+                    [typeFile]="'BannerHeader'"
+                    [accept]="'.jpg, .jpeg, .png, .bmp, .gif'" 
+                  ></upload-file>
+                  <button
+                    *ngIf="vm.imageSetting !== null"
+                    mat-icon-button
+                    type="button"
+                    (click)="removeProduct(item)">
+                    <div class="icon-delete-red size-14"></div>
+                  </button>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div class="d-flex align-items-center justify-content-between" *ngIf="this.bannerProduct.length <5">
+              <button
+                type="button"
+                class="btn btn-add-more"
+                (click)="addProduct('BannerHeader')"
                 [disabled]="disableSave">
                 <div class="icon-add mr-2"></div>
                 Add more file

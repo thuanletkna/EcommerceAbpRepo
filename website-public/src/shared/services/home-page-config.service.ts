@@ -16,5 +16,17 @@ export class HomePageConfigService {
         url: `/api/app/home-page-config/public`,
         method: 'GET',
     });
-}
+  }
+  getAllBannerSlide(): Observable<HomePageConfigDto[]> {
+    return this.restService.request({
+        url: `/api/app/home-page-config/homepage-banner`,
+        method: 'GET',
+    });
+  }
+  getBannerHeader(): Observable<HomePageConfigDto[]> {
+    return this.restService.request({
+        url: `/api/app/home-page-config/image-homepage-header`,
+        method: 'GET',
+    });
+  }
 }

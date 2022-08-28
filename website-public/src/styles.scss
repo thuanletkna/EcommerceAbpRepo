@@ -915,6 +915,143 @@ About Area Style
         }
     }
 }
+.btn-buy
+{
+    // background-color: #f1a738;
+    // padding: 5px 40px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    .btn-buy-product{
+        padding: 5px 30px;
+        display: inline-block;
+        background-color: #f1a738;
+        color: $color-white;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;   
+        i {
+            font-size: 22px;
+            color: $color-white;
+            position: relative;
+            top: 3px;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0%;
+            width: 50%;
+            height: 50%;
+            background-color: $title-color;
+            z-index: -1;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }      
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            right: 0%;
+            width: 50%;
+            height: 50%;
+            background-color: $title-color;
+            z-index: -1;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        &:hover {
+            color: $color-white;
+        }
+        &:hover::before {
+            top: 0;
+            background-color: $title-color;
+            color: $color-white;
+        }
+        &:hover::after {
+            bottom: 0;
+            background-color: $title-color;
+            color: $color-white;
+        }
+    }
+    .click-btn-buy {
+            display: inline-block;
+            background-color: #f1a738;
+            padding: 5px 40px;
+            color: $color-white;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            
+            i {
+                font-size: 22px;
+                color: $color-white;
+                position: relative;
+                top: 3px;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 0%;
+                width: 50%;
+                height: 50%;
+                background-color: $title-color;
+                z-index: -1;
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+            }      
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 100%;
+                right: 0%;
+                width: 50%;
+                height: 50%;
+                background-color: $title-color;
+                z-index: -1;
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+            &:hover {
+                color: $color-white;
+            }
+            &:hover::before {
+                top: 0;
+                background-color: $title-color;
+                color: $color-white;
+            }
+            &:hover::after {
+                bottom: 0;
+                background-color: $title-color;
+                color: $color-white;
+            }
+    }
+}
+
+
+a:hover {
+    color: $color-white;
+}
+.btn-buy-a{
+    color: #ffffff;
+    text-decoration: none;
+}
+.btn-buy-a:hover{
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;        
+}
 .about-shape {
     position: absolute;
     top: -100px;

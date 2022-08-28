@@ -9,5 +9,7 @@ namespace EcommerceSourceAbp.HomePageConfigs
     public interface IHomePageConfigAppService : IAppListService<CreateUpdateHomePageConfigDto, GetHomePageConfigForViewDto, GetHomePageConfigForEditDto, GetHomePageConfigRequestInputDto>
     {
         Task<List<GetHomePageConfigForViewDto>> GetAllPublic();
+        Task<IEnumerable<GetHomePageConfigForViewDto>> GetHomepageBanner();
+        Task<IEnumerable<GetHomePageConfigForViewDto>> GetImageHomepageHeader();
     }
 }
