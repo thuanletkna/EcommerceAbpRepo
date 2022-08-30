@@ -14,13 +14,23 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'danh-sach-san-pham',
+        loadChildren: () => import('./pages/product/product-list-all/product-list-all.module').then(x => x.ProductListAllModule),
+        pathMatch: 'full'
+      },
+      {
         path: 'san-pham',
         loadChildren: () => import('./pages/product/product.module').then(x => x.ProductModule),
-        pathMatch: 'full'
+        // pathMatch: 'full'
       },
       {
         path: 'chi-tiet-san-pham',
         loadChildren: () => import('./pages/product-detail/product-detail.module').then(x => x.ProductDetailModule),
+        // pathMatch: 'full'
+      },
+      {
+        path: 'bai-dang',
+        loadChildren: () => import('./pages/blog/blog.module').then(x => x.BlogModule),
         // pathMatch: 'full'
       },
       {

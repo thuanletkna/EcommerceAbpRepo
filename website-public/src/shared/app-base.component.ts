@@ -86,4 +86,8 @@ getLinkMedia(url: string|undefined) {
   public getPathProductByCategoryId(categoryId?: string) {
     return '/san-pham/' + categoryId;
   }
+
+  public getPathBlogByCategoryId(categoryId?: string) {
+    return '/bai-dang/' + categoryId;
+  }
 }

@@ -1,0 +1,51 @@
+<swipe-header></swipe-header>
+<div class="designer-area pb-70 pt-45">
+  <div class="container">
+    <div *ngFor="let item of categories">
+        <div *ngIf="item">
+            <div class="tieude_giua"><h3>{{item.name}}</h3> <a href="hoa-sinh-nhat" class="xem"><h5 class="css-h5">Xem tất cả</h5></a></div>
+            <swiper
+                [slidesPerView]="5"
+                [spaceBetween]="50"
+                [autoplay]="{ delay: 3000, disableOnInteraction: false }"
+                (swiper)="setControlledSwiper($event)"
+                [navigation]="{}"
+                [scrollbar]="{ draggable: true }"
+                [watchSlidesProgress]="true"
+            >
+                <ng-template swiperSlide *ngFor="let product of item.products">
+                    <div class="designer-card" >
+                        <div class="designer-img" style="width: 100%;height: 258px;">
+                        <img 
+                            *ngFor="let filePr of product.productFile"
+                            [src]="getLinkMedia(filePr.fileStorageId)"
+                            alt="Images"
+                        />
+                        </div>
+                        <div class="designer-content">
+                        <a [routerLink]="getPathProductDetail(product.slug)"
+                            ><h3>{{ product.name }}</h3></a
+                        >
+                        <span>Director</span>
+                        <div class="social-icon">
+                            <div class="social-icon">
+                                <div class="btn-buy" >
+                                  <div class="btn-buy-product">
+                                    <a routerLink="/" class="btn-buy-a"><i class="bx bx-cart"></i> Mua Ngay</a>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div class="about-content about-width" style="margin-top: 0px">
+            <div class="about-btn">
+            <a routerLink="/" class="know-more-btn">Xem tất cả</a>
+            </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

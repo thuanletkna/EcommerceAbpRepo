@@ -12,7 +12,7 @@
                     <ul class="navbar-nav m-auto">
                         <li class="nav-item"><a routerLink="/" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Trang chủ</a></li>
                         <li class="nav-item"  >
-                            <a href="javascript:void(0)" routerLink="/san-pham" class="nav-link">Sản phẩm <i class='bx bx-plus'></i></a>
+                            <a href="javascript:void(0)" routerLink="/danh-sach-san-pham" class="nav-link">Sản phẩm <i class='bx bx-plus'></i></a>
 
                             <ul class="dropdown-menu">
                                 <li class="nav-item" *ngFor="let cateProduct of categoriesProduct"><a [routerLink]="getPathProductByCategoryId(cateProduct.id)" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">{{ cateProduct.name }}</a></li>
@@ -27,7 +27,7 @@
                             <a href="javascript:void(0)" class="nav-link">Bài đăng <i class='bx bx-plus'></i></a>
                             
                             <ul class="dropdown-menu">
-                                <li class="nav-item" *ngFor="let cateBlog of categoriesBlog"><a [routerLink]="getPathProductByCategoryId(cateBlog.id)" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">{{ cateBlog.name }}</a></li>
+                                <li class="nav-item" *ngFor="let cateBlog of categoriesBlog"><a [routerLink]="getPathBlogByCategoryId(cateBlog.id)" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">{{ cateBlog.name }}</a></li>
                             </ul>
                         </li>
 

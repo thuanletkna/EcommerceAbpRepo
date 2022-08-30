@@ -38,6 +38,7 @@ namespace EcommerceSourceAbp.Blogs
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
                 .Include(a => a.BlogFile)
+                .Include(a => a.Category)
                 .Include("BlogFile.FileStorage")
                 .FirstOrDefaultAsync(a => a.Id == input.Id);
         }
@@ -46,6 +47,7 @@ namespace EcommerceSourceAbp.Blogs
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
                 .Include(a => a.BlogFile)
+                .Include(a => a.Category)
                 .Include("BlogFile.FileStorage")
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
@@ -102,6 +104,8 @@ namespace EcommerceSourceAbp.Blogs
                 input.Filter = input.Filter.ToLower();
             }
             return (await base.CreateFilteredQueryAsync(input))
+                .Include(a => a.Category)
+                .WhereIf(input.CategoryId.HasValue, x => x.CategoryId == input.CategoryId)
                 .Include(a => a.BlogFile)
                 .Include("BlogFile.FileStorage")
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),

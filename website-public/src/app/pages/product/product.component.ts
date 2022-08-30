@@ -2,13 +2,15 @@ import { Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from
 import { forkJoin } from 'rxjs';
 import { AppBaseComponent } from 'src/shared/app-base.component';
 import { Status } from 'src/shared/enums';
-import { IPagination, IPaginations } from 'src/shared/model/base.dto';
+import { IPaginations } from 'src/shared/model/base.dto';
 import { CategoryDto } from 'src/shared/model/category.dto';
 import { ProductFileDto } from 'src/shared/model/product-file/product-file.dto';
-import { ProductDto } from 'src/shared/model/product/product.dto';
+import { IParamFilterNews, ProductDto } from 'src/shared/model/product/product.dto';
 import { CategoriesService } from 'src/shared/services/categories.service';
 import { FileStorageService } from 'src/shared/services/file-storage.service';
 import { ProductService } from 'src/shared/services/product.service';
+import { AppConst } from 'src/shared/utility/app.const';
+import { CommonHelper } from 'src/shared/utility/common-helper';
 
 
 @Component({
@@ -36,12 +38,13 @@ controlledSwiper: any;
     return this.pageSize * (this.currentPage - 1);
   }
   page: number = 1;
-  pageSize: number = 8;
+  pageSize: number = 12;
   
   constructor(
     protected override readonly injector: Injector,
     private readonly categoriesService: CategoriesService,
     private readonly productService: ProductService,
+    // private readonly blogService: BlogService,
     private readonly fileStorageService: FileStorageService
   ) {
     super(injector);
@@ -50,20 +53,18 @@ controlledSwiper: any;
     return this.getParam('id');
   }
 
-  
-
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
-    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
-    
   }
-
+  
 
   initData() {
     forkJoin([
-      this.categoriesService.getAllProductsByCategory(),
+      this.categoriesService.getAllCategory(),
     ]).subscribe(
       ([
         categories,
@@ -71,20 +72,34 @@ controlledSwiper: any;
         this.categories = categories;
       }
     );
-    this.productService
-      .getPaged({
-        // sorting: 'publishDate desc',
-        skipCount: this.skipCount,
-        maxResultCount: this.pageSize,
-      })
-      .subscribe((result) => {
-        this.products = result || { items: [], totalCount: 0 };
-        this.productItem = this.products.items;
-        this.products.items = this.products.items.filter((x) => x.status === Status.Active);
-        this.products.items.forEach(element => {
-          element.productFile = element.productFile?.filter(x=>x.fileType === 'productFile' )
-        });
-      });
+    
+
+    const query: IParamFilterNews = {
+      ...CommonHelper.getOffsetAndSkipByPageAndLimit(this.currentPage, this.pageSize),
+    };
+    
+    if (this.categoryId) {
+      query.categoryId = this.categoryId;
+    }
+    this.productService.getPaged(query).subscribe(result => {
+      this.products = result;
+    });
+  
+    // this.blogService.getPaged({
+    //     // groupId: this.groupId,
+    //     // sorting: 'publishDate desc',
+    //     skipCount: this.skipCount,
+    //     maxResultCount: this.pageSize,
+    //   })
+    //   .subscribe((result) => {
+    //     this.blogs = result || { items: [], totalCount: 0 };
+    //     this.blogs.items = this.blogs.items.filter(
+    //       (x) => x.status === Status.Active && x.categoryId == this.categoryId
+    //     );
+    //     this.blogs.items.forEach(element => {
+    //       element.blogFile = element.blogFile?.filter(x=>x.fileType === "blogFile")
+    //     });
+    //   });
       
       // this.productService.getByCategoryId(this.categoryId).subscribe(result =>
       //   {
@@ -93,5 +108,7 @@ controlledSwiper: any;
       // )
       
   }
-
+get categoriesBlog(): CategoryDto[] {
+    return this.categories.filter(x => x.status === Status.Active && x.isBlog == true );
+  }
 }

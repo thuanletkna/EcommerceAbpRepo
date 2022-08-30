@@ -1,0 +1,134 @@
+
+<swipe-header></swipe-header>
+  <div class="blog-dtls pt-100 ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+              <!-- <div class="container section-title-container">
+                <h3 class="section-title section-title-center">
+                  <b></b><span class="section-title-main"><i class="icon-heart">
+                  </i>Bài viết mới nhất</span>
+                  <b></b></h3>
+                </div> -->
+              <div class="row">
+                <div class="col-lg-6 col-md-6" *ngFor="let item of blogs.items">
+                  <div class="blog-card">
+                    <a routerLink="/blog-details" *ngFor="let filePr of item.blogFile"
+                      ><img
+                        style="height: 255px; width: 366px"
+                        [src]="getLinkMedia(filePr.fileStorageId)"
+                        alt="Blog Images"
+                    /></a>
+          
+                    <div class="blog-content">
+                      <a routerLink="/blog-details"
+                        ><h3 class="split-string-name">{{ item.name }}</h3></a
+                      >
+                      <!-- <ul class="blog-admin">
+                                      <li><a routerLink="/"><i class='bx bxs-user'></i> Admin</a></li>
+                                      <li><i class='bx bx-calendar-alt' ></i> 18 May 2020</li>
+                                  </ul> -->
+                      <p class="split-string">{{ item.descriptions }}</p>
+                      <a routerLink="/blog-details" class="read-more-btn"
+                        >Xem chi tiết <i class="bx bxs-chevrons-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <pagination
+                  [totalCount]="blogs.totalCount"
+                  [pageSize]="pageSize"
+                ></pagination>
+              </div>
+              
+            </div>
+
+            <div class="col-lg-4">
+                <div class="widget-area">
+                    <div class="widget widget_search">
+                        <h3 class="widget-title">Tìm kiếm bài đăng</h3>
+                        <div class="post-wrap">
+                            <form class="search-form">
+                                <label>
+                                    <span class="screen-reader-text">Search for:</span>
+                                    <input type="search" class="search-field" placeholder="Nhập từ khóa...">
+                                </label>
+                                <button type="submit"><i class='bx bx-search'></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- <section class="widget widget-popular-post">
+                        <h3 class="widget-title">Popular Posts</h3>
+
+                        <div class="post-wrap">
+                            <article class="item">
+                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg1" role="img"></span></a>
+                                <div class="info">
+                                    <time datetime="2020-06-30">Jun 20, 2020</time>
+                                    <h4 class="title usmall"><a routerLink="/blog-details">How can Design Product Packaging in the Industry</a></h4>
+                                </div>
+                            </article>
+
+                            <article class="item">
+                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg2" role="img"></span></a>
+                                <div class="info">
+                                    <time datetime="2020-06-30">Jun 21, 2020</time>
+                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Right Color for Cover Package</a></h4>
+                                </div>
+                            </article>
+
+                            <article class="item">
+                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg3" role="img"></span></a>
+                                <div class="info">
+                                    <time datetime="2020-06-30">Jun  22, 2020</time>
+                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Best Color for Product Package</a> </h4>
+                                </div>
+                            </article>
+                            
+                            <article class="item">
+                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg4" role="img"></span></a>
+                                <div class="info">
+                                    <time datetime="2020-06-30">Jun 23, 2020</time>
+                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Make Your Product Cover  Most  Attractive</a></h4>
+                                </div>
+                            </article>
+                        </div>
+                    </section> -->
+
+                   
+                    <section class="widget widget_categories">
+                        <h3 class="widget-title">Danh mục bài đăng</h3>
+
+                        <div class="post-wrap">
+                            <ul *ngFor="let cat of categoriesBlog">
+                                <li><a  [routerLink]="getPathBlogByCategoryId(cat.id)">{{cat.name}} </a></li>
+                                <!-- <li><a routerLink="/">T-shirt Design <span>(07)</span></a></li>
+                                <li><a routerLink="/">Cover Van <span>(20)</span></a></li>
+                                <li><a routerLink="/">Mug Design <span>(12)</span></a></li>
+                                <li><a routerLink="/">Book Cover Design <span>(15)</span></a></li>
+                                <li><a routerLink="/">Hoodie Design <span>(18)</span></a></li> -->
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="widget widget_tag">
+                        <h3 class="widget-title">Thẻ Tags</h3>
+
+                        <div class="post-wrap">
+                            <ul>
+                                <li><a routerLink="/">T-shirt</a></li>
+                                <li><a routerLink="/">Cover</a></li>
+                                <li><a routerLink="/">Great</a></li>
+                                <li><a routerLink="/">Print Media</a></li>
+                                <li><a routerLink="/">Hoodie Design</a></li>
+                                <li><a routerLink="/">Design</a></li>
+                                <li><a routerLink="/">Mug Design</a></li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

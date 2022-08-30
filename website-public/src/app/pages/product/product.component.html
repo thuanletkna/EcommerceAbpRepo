@@ -1,51 +1,104 @@
+
 <swipe-header></swipe-header>
-<div class="designer-area pb-70 pt-45">
-  <div class="container">
-    <div *ngFor="let item of categories">
-        <div *ngIf="item">
-            <div class="tieude_giua"><h3>{{item.name}}</h3> <a href="hoa-sinh-nhat" class="xem"><h5 class="css-h5">Xem tất cả</h5></a></div>
-            <swiper
-                [slidesPerView]="5"
-                [spaceBetween]="30"
-                [autoplay]="{ delay: 3000, disableOnInteraction: false }"
-                (swiper)="setControlledSwiper($event)"
-                [navigation]="{}"
-                [scrollbar]="{ draggable: true }"
-                [watchSlidesProgress]="true"
-            >
-                <ng-template swiperSlide *ngFor="let product of item.products">
-                    <div class="designer-card" >
-                        <div class="designer-img" style="width: 100%;height: 258px;">
-                        <img 
-                            *ngFor="let filePr of product.productFile"
-                            [src]="getLinkMedia(filePr.fileStorageId)"
-                            alt="Images"
-                        />
-                        </div>
-                        <div class="designer-content">
-                        <a [routerLink]="getPathProductDetail(product.slug)"
-                            ><h3>{{ product.name }}</h3></a
-                        >
-                        <span>Director</span>
-                        <div class="social-icon">
-                            <div class="social-icon">
-                                <div class="btn-buy" >
-                                  <div class="btn-buy-product">
-                                    <a routerLink="/" class="btn-buy-a"><i class="bx bx-cart"></i> Mua Ngay</a>
-                                  </div>
+<div class="checkout-area pt-45 ">
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="billing-details">
+                        <span>Tìm kiếm sản phẩm</span>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <!-- <label>Danh mục <span class="required">*</span></label> -->
+                                    <div class="select-box">
+                                        <select class="form-control">
+                                            <option value="5">Danh mục</option>
+                                            <option value="1">China</option>
+                                        </select>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <!-- <label>Giá tiền <span class="required">*</span></label> -->
+                                    <input type="text" class="form-control" placeholder="Giá tiền">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="form-group">
+                                    <!-- <label>Tên sản phẩm - Từ khóa...<span class="required">*</span></label> -->
+                                    <input type="text" class="form-control" placeholder="Tên sản phẩm - Từ khóa...">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <!-- <label>Danh mục <span class="required">*</span></label> -->
+                                    <div class="select-box">
+                                        <select class="form-control">
+                                            <option value="5">Sắp xếp</option>
+                                            <option value="1">China</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div> -->
                         </div>
+                        <div class="payment-box">
+                            <a routerLink="/checkout" class="default-btn three">Tìm kiếm</a>
                         </div>
                     </div>
-                </ng-template>
-            </swiper>
-            <div class="about-content about-width" style="margin-top: 0px">
-            <div class="about-btn">
-            <a routerLink="/" class="know-more-btn">Xem tất cả</a>
+                </div>
             </div>
-      </div>
     </div>
+</div>
+<div class="designer-area pb-70 " style="background-color: #fafbff;">
+    <div class="container">
+      <!-- <div class="scetion-title text-center">
+        <span>Our Designer</span>
+        <h2>Sản phẩm nổi bật</h2>
+        <p>What indication best sick be project proposal in attempt, train of the showed some a forth. That homeless, won't many of goals thoughts volumes felt.</p>
+      </div> -->
+  
+      <div class="row pt-45">
+        <div class="col-lg-3 col-sm-6" *ngFor="let item of products.items">
+          <div class="designer-card">
+            <div
+              class="designer-img"
+              *ngFor="let filePr of item.productFile"
+            >
+              <a [routerLink]="getPathProductDetail(item.slug)"
+                ><img style="width: 100%;height: 300px;"
+                  [src]="getLinkMedia(filePr.fileStorageId)"
+                  alt="Designer Images"
+              /></a>
+            </div>
+            <div class="designer-content">
+              <a [routerLink]="getPathProductDetail(item.slug)"
+                ><h3>{{ item.name }}</h3></a
+              >
+              <span>{{ item.priceSale }} VNĐ</span>
+              <div class="social-icon">
+                <div class="btn-buy">
+                  <div class="click-btn-buy">
+                    <a routerLink="/" class="btn-buy-a"><i class="bx bx-cart"></i> Mua Ngay</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="about-content about-width" style="margin-top: 0px">
+          <div class="about-btn">
+            <a routerLink="/san-pham" class="know-more-btn">Xem tất cả</a>
+          </div>
+        </div> -->
+      </div>
+  
+      <pagination [totalCount]="products.totalCount" [pageSize]="pageSize"></pagination>
     </div>
   </div>
-</div>

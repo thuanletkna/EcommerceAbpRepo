@@ -38,6 +38,7 @@ namespace EcommerceSourceAbp.Products
         protected override async Task<Product> FilteredForUpdate(CreateUpdateProductDto input)
         {
             return await (await Repository.GetQueryableAsync())
+                .Include(a => a.Category)
                 .Include(a => a.ProductProperties)
                 .Include(a => a.ProductFile)
                 .Include("ProductFile.FileStorage")
@@ -47,6 +48,7 @@ namespace EcommerceSourceAbp.Products
         protected override async Task<Product> FilterForGet(Guid id)
         {
             return await (await Repository.GetQueryableAsync())
+                .Include(a => a.Category)
                 .Include(a => a.ProductProperties)
                 .Include(a => a.ProductFile)
                 .Include("ProductFile.FileStorage")
@@ -61,6 +63,8 @@ namespace EcommerceSourceAbp.Products
                 input.Filter = input.Filter.ToLower();
             }
             var a = (await base.CreateFilteredQueryAsync(input))
+                .Include(a => a.Category)
+                .WhereIf(input.CategoryId.HasValue, x => x.CategoryId == input.CategoryId)
                 .Include(a => a.ProductFile)
                 .Include("ProductFile.FileStorage")
                 //.FilterPermission(CurrentUser)

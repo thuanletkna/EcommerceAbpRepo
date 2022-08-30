@@ -104,7 +104,7 @@ img {
 /*Default Btn Style*/
 .default-btn {
     background-color: $main-color;
-    padding: 12px 42px;
+    padding: 8px 30px;
     color: $color-white;
     border-radius: 5px;
     text-align: center;
@@ -3458,11 +3458,11 @@ Checkout Page Style
     }
 }
 .billing-details {
-    margin-bottom: 30px;
+    margin-bottom: 45px;
     background-color: $color-white;
-    padding: 50px 30px 25px 30px;
+    padding: 15px;
     box-shadow: 0 5px 28px rgba(0, 0, 0, 0.07);
-
+    border-top: 3px solid $main-color;
     h3 {
         font-size: 24px;
         color: $title-color;
@@ -5167,4 +5167,23 @@ b, strong {
     -ms-flex-pack: justify;
     justify-content: space-between;
     width: 100%;
+}
+
+.split-string{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 3;
+    height: 75px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.split-string-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    height: 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }

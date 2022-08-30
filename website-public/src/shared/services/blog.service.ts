@@ -29,7 +29,7 @@ export class BlogService {
       //     params: {groupId}
       //   })
       // }
-      getPaged(params: PagedRequest): Observable<IResponsePaginate<BlogDto>> {
+      getPaged(params: IParamFilterNews): Observable<IResponsePaginate<BlogDto>> {
         return this.restService.request(
             {
                 url: `/api/app/blog/public-paged` + CommonHelper.getUrlParams(params),
