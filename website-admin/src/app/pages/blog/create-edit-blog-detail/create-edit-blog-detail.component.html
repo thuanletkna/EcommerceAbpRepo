@@ -25,7 +25,7 @@
             <nz-form-control>
               <input
                 nz-input
-                name="actionDescription"
+                name="code"
                 type="text"
                 [(ngModel)]="vm.code"
                 maxlength="1000"
@@ -33,14 +33,17 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div class="col-12">
-            <nz-form-item>
-              <nz-form-label nzRequired>Chi tiết bài đăng</nz-form-label>
-              <nz-form-control>
-                <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.details" [height]="250"></richtextbox>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
+        <div>
+            <div class="col-12">
+              <nz-form-item>
+                <nz-form-label nzRequired>Chi tiết bài đăng</nz-form-label>
+                <nz-form-control>
+                  <richtextbox maxlength="2000" name="detail" [(ngModel)]="vm.details" [height]="250"></richtextbox>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+        </div>
+       
           <div class="col-12 mt-2">
             <nz-form-item>
                 <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
@@ -49,6 +52,19 @@
                     <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
                 </nz-radio-group>
             </nz-form-item>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="row px-3 pb-3">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+              <h5 class="font-weight-bolder">Danh sách sản phẩm Affilate</h5>
+              <button class="btn btn-add-new" (click)="addProductAffilate()">
+                <i class="fas fa-plus mr-1"></i>
+                Thêm sản phẩm Affilate
+              </button>
+            </div>
+          </div>
+          <datatable [source]="vm.productAffilates" [option]="selectionTableOptions"></datatable>
         </div>
       </div>
       <div class="row p-3">

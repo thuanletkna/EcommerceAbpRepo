@@ -1,7 +1,9 @@
 ﻿using EcommerceSourceAbp.BlogDetails.Dtos;
 using EcommerceSourceAbp.Entities;
 using EcommerceSourceAbp.Permissions;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
 namespace EcommerceSourceAbp.BlogDetails
@@ -18,19 +20,20 @@ namespace EcommerceSourceAbp.BlogDetails
         protected override string UpdatePolicyName => EcommerceSourceAbpPermissions.BlogDetail.Edit;
         protected override string DeletePolicyName => EcommerceSourceAbpPermissions.BlogDetail.Delete;
 
-        //protected override async Task<BlogDetail> FilteredForUpdate(CreateUpdateBlogDetailDto input)
-        //{
-        //    return await (await Repository.GetQueryableAsync())
-        //        .Include(a => a.BlogDetailProperties)
-        //        .Include("BlogDetailFile.FileStorage")
-        //        .FirstOrDefaultAsync(a => a.Id == input.Id);
-        //}
-        //protected override async Task<BlogDetail> FilterForGet(Guid id)
-        //{
-        //    return await (await Repository.GetQueryableAsync())
-        //        .Include(a => a.BlogDetailProperties)
-        //        .Include("BlogDetailFile.FileStorage")
-        //        .FirstOrDefaultAsync(a => a.Id == id);
-        //}
+
+        protected override async Task<BlogDetail> FilteredForUpdate(CreateUpdateBlogDetailDto input)
+        {
+            return await (await Repository.GetQueryableAsync())
+                .Include(a => a.ProductAffilates)
+                .Include("ProductAffilates.ProductAffilateFile.FileStorage")
+                .FirstOrDefaultAsync(a => a.Id == input.Id);
+        }
+        protected override async Task<BlogDetail> FilterForGet(Guid id)
+        {
+            return await (await Repository.GetQueryableAsync())
+                .Include(a => a.ProductAffilates)
+                .Include("ProductAffilates.ProductAffilateFile.FileStorage")
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
     }
 }

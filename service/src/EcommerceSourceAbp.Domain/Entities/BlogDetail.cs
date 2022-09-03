@@ -10,6 +10,7 @@ namespace EcommerceSourceAbp.Entities
         public Guid? BlogId { get; set; }
         [ForeignKey("BlogId")]
         public Blog Blog { get; set; }
+        public string Details { get; set; }
         public ICollection<ProductAffilate> ProductAffilates { get; set; }
     }
 }

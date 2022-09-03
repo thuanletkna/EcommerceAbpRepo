@@ -1,5 +1,6 @@
 ﻿using EcommerceSourceAbp.BaseEntities;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EcommerceSourceAbp.Entities
@@ -16,5 +17,6 @@ namespace EcommerceSourceAbp.Entities
         public string LinkAffilateLazada { get; set; }
         public string LinkAffilateTiki { get; set; }
         public string LinkAffilateOther { get; set; }
+        public ICollection<ProductAffilateFile> ProductAffilateFile { get; set; }
     }
 }

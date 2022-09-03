@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
+using EcommerceSourceAbp.Products.Dtos;
+using Volo.Abp.Domain.Entities;
 
 namespace EcommerceSourceAbp.Blogs
 {
@@ -37,6 +39,8 @@ namespace EcommerceSourceAbp.Blogs
         {
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
+                .Include("BlogDetails.ProductAffilates")
+                .Include("BlogDetails.ProductAffilates.ProductAffilateFile.FileStorage")
                 .Include(a => a.BlogFile)
                 .Include(a => a.Category)
                 .Include("BlogFile.FileStorage")
@@ -46,6 +50,8 @@ namespace EcommerceSourceAbp.Blogs
         {
             return await (await Repository.GetQueryableAsync())
                 .Include(a => a.BlogDetails)
+                .Include("BlogDetails.ProductAffilates")
+                .Include("BlogDetails.ProductAffilates.ProductAffilateFile.FileStorage")
                 .Include(a => a.BlogFile)
                 .Include(a => a.Category)
                 .Include("BlogFile.FileStorage")
@@ -61,8 +67,10 @@ namespace EcommerceSourceAbp.Blogs
             var entity = await FilteredForUpdate(input);
 
             if (entity == null) throw NotFoundException;
-            var listIdFinding = input.BlogDetails?.Select(x => x.Id).ToList() ?? new List<Guid?>();
-            entity.BlogDetails.RemoveAll(x => !listIdFinding.Contains(x.Id));
+
+            var listIdBlogDetails = input.BlogDetails?.Select(x => x.Id).ToList() ?? new List<Guid?>();
+            entity.BlogDetails.RemoveAll(x => !listIdBlogDetails.Contains(x.Id));
+
             if (entity.BlogFile != null)
             {
                 entity.BlogFile.Clear();
@@ -70,11 +78,28 @@ namespace EcommerceSourceAbp.Blogs
 
             if (input.BlogFile?.Any() == true)
             {
-                input.BlogFile.ForEach(item =>
+                input.BlogFile?.ForEach(item =>
                 {
                     item.Id = null;
                 });
             }
+            foreach(var productEntity in entity.BlogDetails)
+            {
+                productEntity.ProductAffilates.Clear();
+            }    
+            foreach (var blog in input.BlogDetails)
+            {
+                foreach(var product in blog.ProductAffilates)
+                {
+                    if (product.ProductAffilateFile?.Any() == true)
+                    {
+                        product.ProductAffilateFile?.ForEach(items =>
+                        {
+                            items.Id = null;
+                        });
+                    }
+                }    
+            }    
             MapToEntity(input, entity);
 
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -108,6 +133,9 @@ namespace EcommerceSourceAbp.Blogs
                 .WhereIf(input.CategoryId.HasValue, x => x.CategoryId == input.CategoryId)
                 .Include(a => a.BlogFile)
                 .Include("BlogFile.FileStorage")
+                .Include(a => a.BlogDetails)
+                .Include("BlogDetails.ProductAffilates")
+                .Include("BlogDetails.ProductAffilates.ProductAffilateFile.FileStorage")
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
                     x => x.Name.ToLower().Contains(input.Filter))
                 .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
@@ -125,6 +153,25 @@ namespace EcommerceSourceAbp.Blogs
             var result = query.Where(x => x.Status == Status.Active && x.isHot == IsHot.True)
                .OrderBy(x => x.CreationTime);
             return result.Select(MapToViewOutput).ToList();
+        }
+
+        [AllowAnonymous]
+        public async Task<GetBlogForViewDto> GetBySlugPublic(string slug)
+        {
+            var news = (await Repository.GetQueryableAsync())
+                .Include(x => x.Category)
+                 .Include(a => a.BlogFile)
+                .Include("BlogFile.FileStorage")
+                .Include(a => a.BlogDetails)
+                .Include("BlogDetails.ProductAffilates")
+                .Include("BlogDetails.ProductAffilates.ProductAffilateFile.FileStorage")
+                .FirstOrDefaultAsync(x => x.Slug.ToLower() == slug.ToLower());
+
+            if (news == null)
+                throw new EntityNotFoundException(L["Error:NotFound"]);
+
+            var result = MapToViewOutput(await news);
+            return result;
         }
     }
 }

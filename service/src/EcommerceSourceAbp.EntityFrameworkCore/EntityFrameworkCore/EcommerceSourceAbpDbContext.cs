@@ -77,6 +77,7 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<BlogDetail> BlogDetails { get; set; }
     public DbSet<ImageSetting> ImageSettings { get; set; }
     public DbSet<HomePageConfig> HomePageConfigs { get; set; }
+    public DbSet<ProductAffilateFile> ProductAffilateFiles { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
     {
@@ -174,6 +175,11 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<ProductFile>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "ProductFiles", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<ProductAffilateFile>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "ProductAffilateFiles", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
         builder.Entity<TradeMark>(b =>

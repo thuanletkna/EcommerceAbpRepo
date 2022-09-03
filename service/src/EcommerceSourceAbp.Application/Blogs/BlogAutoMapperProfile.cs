@@ -11,6 +11,7 @@ namespace EcommerceSourceAbp.Blogs
         public BlogAutoMapperProfile()
         {
             CreateMap<CreateUpdateBlogDto, Blog>(MemberList.None)
+                .ForMember(dest => dest.Category, opt => opt.Ignore())
                 .ForMember(dest => dest.BlogDetails, opt => opt.Ignore())
                 .AfterMap((src, dest, rc) => {
                     if (src.BlogDetails != null && src.BlogDetails.Any())

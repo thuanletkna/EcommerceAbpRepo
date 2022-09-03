@@ -34,8 +34,8 @@ const routes: Routes = [
         // pathMatch: 'full'
       },
       {
-        path: 'chi-tiet-bài-đăng',
-        loadChildren: () => import('./pages/product-detail/product-detail.module').then(x => x.ProductDetailModule),
+        path: 'chi-tiet-bai-dang',
+        loadChildren: () => import('./pages/blog/blog-detail/blog-detail.module').then(x => x.BlogDetailModule),
         // pathMatch: 'full'
       }
     ]

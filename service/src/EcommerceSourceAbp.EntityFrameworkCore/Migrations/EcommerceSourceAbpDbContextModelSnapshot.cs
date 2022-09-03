@@ -133,6 +133,9 @@ namespace EcommerceSourceAbp.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<string>("Details")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
@@ -842,7 +845,7 @@ namespace EcommerceSourceAbp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PasswordResets", (string)null);
+                    b.ToTable("PasswordResets");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Product", b =>
@@ -1044,6 +1047,27 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasIndex("ProductDetailId");
 
                     b.ToTable("AppProductAffilates", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductAffilateFile", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductAffilateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.HasIndex("ProductAffilateId");
+
+                    b.ToTable("AppProductAffilateFiles", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
@@ -3662,7 +3686,7 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Product", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
                     b.HasOne("EcommerceSourceAbp.Entities.ProductProperty", "ProductProperties")
@@ -3687,6 +3711,21 @@ namespace EcommerceSourceAbp.Migrations
                         .HasForeignKey("ProductDetailId");
 
                     b.Navigation("ProductDetail");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductAffilateFile", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.ProductAffilate", "ProductAffilate")
+                        .WithMany("ProductAffilateFile")
+                        .HasForeignKey("ProductAffilateId");
+
+                    b.Navigation("FileStorage");
+
+                    b.Navigation("ProductAffilate");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductFile", b =>
@@ -4025,6 +4064,8 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Category", b =>
                 {
                     b.Navigation("Newses");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>
@@ -4042,6 +4083,11 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("NewsTags");
 
                     b.Navigation("ProductFile");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductAffilate", b =>
+                {
+                    b.Navigation("ProductAffilateFile");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ProductProperty", b =>

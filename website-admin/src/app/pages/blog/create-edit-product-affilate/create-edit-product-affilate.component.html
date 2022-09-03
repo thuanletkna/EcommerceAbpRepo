@@ -1,0 +1,116 @@
+<h1 mat-dialog-title>
+    {{ (vm.id ? '::Chỉnh sửa' : '::Thêm mới') | abpLocalization: l('::Action') }}
+  </h1>
+  <div mat-dialog-content>
+    <form #formEdit="ngForm" nz-form [nzLayout]="'vertical'" class="my-3">
+      <div class="row p-3">
+        <div class="col-12">
+          <nz-form-item>
+            <nz-form-label nzRequired>{{ '::Tên sản phẩm' | abpLocalization }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                name="name"
+                type="text"
+                [(ngModel)]="vmProductAff.name"
+                required
+                maxlength="1000"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-12">
+          <nz-form-item>
+            <nz-form-label>{{ '::Thứ tự hiển thị sản phẩm' | abpLocalization }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                name="code"
+                type="text"
+                [(ngModel)]="vmProductAff.code"
+                maxlength="1000"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-12">
+            <nz-form-item>
+              <nz-form-label>{{ '::Link Affilate Lazada' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input
+                  nz-input
+                  name="code"
+                  type="text"
+                  [(ngModel)]="vmProductAff.linkAffilateLazada"
+                  maxlength="1000"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        <!-- <div>
+            <div class="col-12">
+              <nz-form-item>
+                <nz-form-label nzRequired>Chi tiết bài đăng</nz-form-label>
+                <nz-form-control>
+                  <richtextbox maxlength="2000" name="detail" [(ngModel)]="vmProductAff.name" [height]="250"></richtextbox>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+        </div> -->
+        <div nz-col [nzSpan]="8" >
+            <nz-form-item class="w-100">
+              <nz-form-label>Ảnh sản phẩm (.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png)</nz-form-label>
+              <nz-form-control>
+                <div *ngFor="let item of productAffilateFile; index as i" class="d-flex align-items-center">
+                  <upload-file
+                    name="{{ i }}"
+                    [(ngModel)]="item.fileStorageId"
+                    style="float: left"
+                    [autoUpload]="true"
+                    [typeFile]="'product_affilate'"
+                    [accept]="'.doc, .docx, .pdf, .xls, .xlsx, .jpg, .jpeg, .png'" ></upload-file>
+                  <button
+                    *ngIf="vmProductAff.productAffilateFile !== null"
+                    mat-icon-button
+                    type="button"
+                    (click)="remove(item)">
+                    <div class="icon-delete-red size-14"></div>
+                  </button>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div class="d-flex align-items-center justify-content-between" *ngIf="this.productAffilateFile.length <1">
+              <button
+                type="button"
+                class="btn btn-add-more"
+                (click)="add('product_affilate')"
+                [disabled]="disableSave">
+                <div class="icon-add mr-2"></div>
+                Thêm ảnh
+              </button>
+            </div>
+        </div>
+
+
+          <div class="col-12 mt-2">
+            <nz-form-item>
+                <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
+                <nz-radio-group [(ngModel)]="vm.status" name="status">
+                    <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                    <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+                </nz-radio-group>
+            </nz-form-item>
+        </div>
+        
+      </div>
+      <div class="row p-3">
+        <div class="col-12">(<span class="required">*</span>) Không được để trống</div>
+      </div>
+    </form>
+  </div>
+  
+  <mat-dialog-actions align="end">
+    <button class="btn btn-reset" type="button" mat-dialog-close>Trở về</button>
+    <button class="btn btn-apply ml-3" type="button" (click)="save()">Lưu</button>
+  </mat-dialog-actions>
+  

@@ -13,7 +13,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6" *ngFor="let item of blogs.items">
                   <div class="blog-card">
-                    <a routerLink="/blog-details" *ngFor="let filePr of item.blogFile"
+                    <a [routerLink]="getPathBlogDetail(item.slug)" *ngFor="let filePr of item.blogFile"
                       ><img
                         style="height: 255px; width: 366px"
                         [src]="getLinkMedia(filePr.fileStorageId)"
@@ -21,17 +21,14 @@
                     /></a>
           
                     <div class="blog-content">
-                      <a routerLink="/blog-details"
-                        ><h3 class="split-string-name">{{ item.name }}</h3></a
-                      >
+                      <a [routerLink]="getPathBlogDetail(item.slug)"><h3 class="split-string-name">{{ item.name }}</h3></a>
                       <!-- <ul class="blog-admin">
                                       <li><a routerLink="/"><i class='bx bxs-user'></i> Admin</a></li>
                                       <li><i class='bx bx-calendar-alt' ></i> 18 May 2020</li>
                                   </ul> -->
                       <p class="split-string">{{ item.descriptions }}</p>
-                      <a routerLink="/blog-details" class="read-more-btn"
-                        >Xem chi tiết <i class="bx bxs-chevrons-right"></i
-                      ></a>
+                      <a [routerLink]="getPathBlogDetail(item.slug)" class="read-more-btn">
+                        Xem chi tiết <i class="bx bxs-chevrons-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -63,34 +60,34 @@
 
                         <div class="post-wrap">
                             <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg1" role="img"></span></a>
+                                <a [routerLink]="getPathProductDetail(item.slug)" class="thumb"><span class="fullimage cover bg1" role="img"></span></a>
                                 <div class="info">
                                     <time datetime="2020-06-30">Jun 20, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How can Design Product Packaging in the Industry</a></h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathProductDetail(item.slug)">How can Design Product Packaging in the Industry</a></h4>
                                 </div>
                             </article>
 
                             <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg2" role="img"></span></a>
+                                <a [routerLink]="getPathProductDetail(item.slug)" class="thumb"><span class="fullimage cover bg2" role="img"></span></a>
                                 <div class="info">
                                     <time datetime="2020-06-30">Jun 21, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Right Color for Cover Package</a></h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathProductDetail(item.slug)">How Can Choose the Right Color for Cover Package</a></h4>
                                 </div>
                             </article>
 
                             <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg3" role="img"></span></a>
+                                <a [routerLink]="getPathProductDetail(item.slug)" class="thumb"><span class="fullimage cover bg3" role="img"></span></a>
                                 <div class="info">
                                     <time datetime="2020-06-30">Jun  22, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Best Color for Product Package</a> </h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathProductDetail(item.slug)">How Can Choose the Best Color for Product Package</a> </h4>
                                 </div>
                             </article>
                             
                             <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg4" role="img"></span></a>
+                                <a [routerLink]="getPathProductDetail(item.slug)" class="thumb"><span class="fullimage cover bg4" role="img"></span></a>
                                 <div class="info">
                                     <time datetime="2020-06-30">Jun 23, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Make Your Product Cover  Most  Attractive</a></h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathProductDetail(item.slug)">How Can Make Your Product Cover  Most  Attractive</a></h4>
                                 </div>
                             </article>
                         </div>
