@@ -24,7 +24,7 @@ export class ProductComponent extends AppBaseComponent implements OnInit {
   productItem: ProductDto[] = [];
   
   fileId?:string;
-  categoryId?:string;
+  slug?:string;
 
   products: IPaginations<ProductDto> = {
     items: [],
@@ -55,7 +55,7 @@ controlledSwiper: any;
 
   ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
+    this.slug = this.activatedRoute.snapshot.params['slug'];
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
@@ -78,12 +78,13 @@ controlledSwiper: any;
       ...CommonHelper.getOffsetAndSkipByPageAndLimit(this.currentPage, this.pageSize),
     };
     
-    if (this.categoryId) {
-      query.categoryId = this.categoryId;
+    if(this.slug) {
+      query.slug = this.slug;
+      this.productService.getPaged(query).subscribe(result => {
+        this.products = result;
+      });
     }
-    this.productService.getPaged(query).subscribe(result => {
-      this.products = result;
-    });
+    
   
     // this.blogService.getPaged({
     //     // groupId: this.groupId,

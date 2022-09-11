@@ -62,7 +62,7 @@ namespace EcommerceSourceAbp.Products
             {
                 input.Filter = input.Filter.ToLower();
             }
-            var a = (await base.CreateFilteredQueryAsync(input))
+            return (await base.CreateFilteredQueryAsync(input))
                 .Include(a => a.Category)
                 .WhereIf(input.CategoryId.HasValue, x => x.CategoryId == input.CategoryId)
                 .Include(a => a.ProductFile)
@@ -70,10 +70,12 @@ namespace EcommerceSourceAbp.Products
                 //.FilterPermission(CurrentUser)
                 //.Where(x => x.ItemDescription != "Contractors")
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
-                    x => x.Name.ToLower().Contains(input.Filter) || x.Slug.ToLower().Contains(input.Filter))
+                    x => x.Name.ToLower().Contains(input.Filter))
+                 .WhereIf(!string.IsNullOrWhiteSpace(input.Slug),
+                    x => x.Category.Slug.ToLower().Contains(input.Slug))
                 //.WhereIf(input.IsBlog.HasValue, x => x.IsBlog == input.IsBlog)
-                .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
-                return a;
+                .WhereIf(input.Status.HasValue, x => x.Status == Enums.Status.Active);
+                
         }
 
         [AllowAnonymous]

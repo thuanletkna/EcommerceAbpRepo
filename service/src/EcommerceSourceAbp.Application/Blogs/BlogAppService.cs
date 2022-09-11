@@ -136,8 +136,10 @@ namespace EcommerceSourceAbp.Blogs
                 .Include(a => a.BlogDetails)
                 .Include("BlogDetails.ProductAffilates")
                 .Include("BlogDetails.ProductAffilates.ProductAffilateFile.FileStorage")
-                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
+                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
                     x => x.Name.ToLower().Contains(input.Filter))
+                 .WhereIf(!string.IsNullOrWhiteSpace(input.Slug),
+                    x => x.Category.Slug.ToLower().Contains(input.Slug))
                 .WhereIf(input.Status.HasValue, x => x.Status == input.Status);
         }
 

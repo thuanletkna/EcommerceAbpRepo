@@ -8,7 +8,8 @@ namespace EcommerceSourceAbp.Products
     {
         public ProductAutoMapperProfile()
         {
-            CreateMap<CreateUpdateProductDto, Product>(MemberList.None);
+            CreateMap<CreateUpdateProductDto, Product>(MemberList.None)
+                .ForMember(dest => dest.Category, opt => opt.Ignore());
             CreateMap<Product, GetProductForUpdateDto>(MemberList.None);
             CreateMap<Product, GetProductForViewDto>(MemberList.None);
             CreateMap<Product, ProductDto>(MemberList.None);

@@ -24,7 +24,7 @@ export class BlogComponent extends AppBaseComponent implements OnInit {
   @Input() category: CategoryDto | undefined;
   productFile: ProductFileDto[]| undefined = [];
   productItem: ProductDto[] = [];
-  
+  slug?:string;
   fileId?:string;
   categoryId?:string;
 
@@ -57,7 +57,7 @@ controlledSwiper: any;
 
   ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.categoryId = this.activatedRoute.snapshot.params['categoryId'];
+    this.slug = this.activatedRoute.snapshot.params['slug'];
     this.activatedRoute.queryParams.subscribe(() => {
       this.initData();
     });
@@ -80,34 +80,12 @@ controlledSwiper: any;
       ...CommonHelper.getOffsetAndSkipByPageAndLimit(this.currentPage, AppConst.ITEM_PER_PAGE),
     };
     
-    if (this.categoryId) {
-      query.categoryId = this.categoryId;
+    if(this.slug) {
+      query.slug = this.slug;
+      this.blogService.getPaged(query).subscribe(result => {
+        this.blogs = result;
+      });
     }
-    this.blogService.getPaged(query).subscribe(result => {
-      this.blogs = result;
-    });
-  
-    // this.blogService.getPaged({
-    //     // groupId: this.groupId,
-    //     // sorting: 'publishDate desc',
-    //     skipCount: this.skipCount,
-    //     maxResultCount: this.pageSize,
-    //   })
-    //   .subscribe((result) => {
-    //     this.blogs = result || { items: [], totalCount: 0 };
-    //     this.blogs.items = this.blogs.items.filter(
-    //       (x) => x.status === Status.Active && x.categoryId == this.categoryId
-    //     );
-    //     this.blogs.items.forEach(element => {
-    //       element.blogFile = element.blogFile?.filter(x=>x.fileType === "blogFile")
-    //     });
-    //   });
-      
-      // this.productService.getByCategoryId(this.categoryId).subscribe(result =>
-      //   {
-      //     this.productItem = result|| {};
-      //   }
-      // )
       
   }
 get categoriesBlog(): CategoryDto[] {

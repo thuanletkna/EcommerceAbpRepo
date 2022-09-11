@@ -8,9 +8,13 @@ const routes: Routes = [
     component: BlogComponent
   },
   {
+    path: ':slug',
+    component: BlogComponent,
+  },
+  {
     path: ':categoryId',
     component: BlogComponent,
-},
+  },
 ];
 
 @NgModule({

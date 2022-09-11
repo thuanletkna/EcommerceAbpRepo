@@ -15,6 +15,7 @@ export interface BlogDto extends ListBaseDto {
 export interface IParamFilterNews extends IParamFilter {
     isBlog?: Boolean;
     categorySlug?: string;
+    slug?:string;
     categoryId?: string;
     tagSlug?: string;
 }

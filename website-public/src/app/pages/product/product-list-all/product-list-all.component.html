@@ -3,10 +3,11 @@
   <div class="container">
     <div *ngFor="let item of categories">
         <div *ngIf="item">
-            <div class="tieude_giua"><h3>{{item.name}}</h3> <a href="hoa-sinh-nhat" class="xem"><h5 class="css-h5">Xem tất cả</h5></a></div>
+          
+            <div class="tieude_giua"><h3>{{item.name}}</h3> <a [routerLink]="getPathProductByCategoryId(item.slug)" class="xem"><h5 class="css-h5">Xem tất cả</h5></a></div>
             <swiper
                 [slidesPerView]="5"
-                [spaceBetween]="50"
+                [spaceBetween]="10"
                 [autoplay]="{ delay: 3000, disableOnInteraction: false }"
                 (swiper)="setControlledSwiper($event)"
                 [navigation]="{}"
@@ -41,9 +42,9 @@
                 </ng-template>
             </swiper>
             <div class="about-content about-width" style="margin-top: 0px">
-            <div class="about-btn">
+            <!-- <div class="about-btn">
             <a routerLink="/" class="know-more-btn">Xem tất cả</a>
-            </div>
+            </div> -->
       </div>
     </div>
     </div>

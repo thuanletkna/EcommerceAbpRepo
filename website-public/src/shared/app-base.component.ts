@@ -86,8 +86,8 @@ getLinkMedia(url: string|undefined) {
     return '/chi-tiet-bai-dang/' + slug;
   }
 
-  public getPathProductByCategoryId(categoryId?: string) {
-    return '/san-pham/' + categoryId;
+  public getPathProductByCategoryId(slug?: string) {
+    return '/san-pham/' + slug;
   }
 
   public getPathBlogByCategoryId(categoryId?: string) {
