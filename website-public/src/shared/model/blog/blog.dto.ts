@@ -1,3 +1,4 @@
+import { IsHot } from "src/shared/enums/ishot";
 import { IParamFilter } from "../base.dto";
 import { BlogDetailDto } from "../blog-detail/blog-detail.dto";
 import { BlogFileDto } from "../blog-file/blog-file.dto";
@@ -10,6 +11,7 @@ export interface BlogDto extends ListBaseDto {
     categoryId?:string;
     blogFile?: BlogFileDto[];
     blogDetails?:BlogDetailDto[];
+    isHot?: IsHot;
 }
 
 export interface IParamFilterNews extends IParamFilter {

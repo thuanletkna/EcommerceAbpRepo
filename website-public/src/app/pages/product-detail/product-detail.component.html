@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <div class="product-detls-image" *ngFor="let filePr of productDetail.productFile">
-                    <img [src]="getLinkMedia(filePr.fileStorageId)" alt="Image">
+                    <img style="width: 480px; height: 438px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Image">
                 </div>
             </div>
 
@@ -26,11 +26,11 @@
                     <h3>{{productDetail.name}}</h3>
 
                     <div class="price">
-                        <span class="new-price">$120.00</span>
-                        <span class="old-price">$210.00</span>
+                        <span class="new-price">{{productDetail.priceSale}} &#8363;</span>
+                        <span class="old-price">{{productDetail.price}} &#8363;</span>
                     </div>
-
-                    <div class="product-review">
+                    <div [innerHTML]="(productDetail.description) | safeHtml"></div>
+                    <!-- <div class="product-review">
                         <div class="rating">
                             <i class='bx bxs-star'></i>
                             <i class='bx bxs-star'></i>
@@ -39,11 +39,10 @@
                             <i class='bx bxs-star-half'></i>
                         </div>
                         <a routerLink="/product-details" class="rating-count">3 reviews</a>
-                    </div>
+                    </div> -->
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p>
 
-                    <div class="input-count-area">
+                    <!-- <div class="input-count-area">
                         <h3>Quantity</h3>
 
                         <div class="input-counter">
@@ -51,11 +50,11 @@
                             <input type="text" min="1" value="1">
                             <span class="plus-btn"><i class='bx bx-plus'></i></span>
                         </div>
-                    </div>
+                    </div> -->
         
                     <div class="product-add">
                         <button type="submit" class="default-btn">
-                            <i class="fas fa-cart-plus"></i> Buy Now!
+                            <i class="fas fa-cart-plus"></i> Mua ngay!
                         </button>
 
                         <button type="submit" class="default-btn">
@@ -80,9 +79,9 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <ul class="tabs">
-                                <li><a href="#">Description</a></li>
-                                <li><a href="#">Additional information</a></li>
-                                <li><a href="#">Reviews</a></li>
+                                <li><a href="#">Chi tiết sản phẩm</a></li>
+                                <!-- <li><a href="#">Additional information</a></li>
+                                <li><a href="#">Reviews</a></li> -->
                             </ul>
                         </div>
                         
@@ -90,7 +89,7 @@
                             <div class="tab_content current active">
                                 <div class="tabs_item current">
                                     <div class="product-detls-tab-content">
-                                        <p>Design inspiration lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum.  Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Nulla libero. Vivamus pharetra posuere sapien.</p>
+                                        <div [innerHTML]="(productDetail.details) | safeHtml"></div>
                                     </div>
                                 </div>
 

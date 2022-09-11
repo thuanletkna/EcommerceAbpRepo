@@ -18,7 +18,7 @@
             <div class="col-lg-8">
                 <div class="blog-dtls-content">
                     <div class="blog-dtls-img" *ngFor="let filePr of blogDetail.blogFile">
-                        <img style="height: 500px; width: 790px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
+                        <img style=" width: 790px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
                     </div>
                     <div class="blog-text">
                         <h2>{{blogDetail.name}}</h2>
@@ -53,58 +53,21 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- <div class="row bolg-gallery">
-                        <div class="bolg-gallery-item">
-                            <img src="assets/img/blog/blog6.jpg" alt="Blog Images">
-                            
-                        </div>
-
-                        <div class="bolg-gallery-item">
-                            <img src="assets/img/blog/blog4.jpg" alt="Blog Images">
-                        </div>
-
-                        <div class="bolg-gallery-item">
-                            <img src="assets/img/blog/blog5.jpg" alt="Blog Images">
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
             <div class="col-lg-4">
                 <div class="widget-area">
                     <section class="widget widget-popular-post">
-                        <h3 class="widget-title">Bài đăng tương tự</h3>
+                        <h3 class="widget-title">Bài đăng cùng danh mục</h3>
                         <div class="post-wrap">
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg1" role="img"></span></a>
+                            <article class="item" *ngFor="let blogs of categoriesSameBlog| orderBy: 'code'">
+                                <a routerLink="/blog-details" class="thumb">
+                                    <img *ngFor="let filePr of blogs.blogFile" style="height: 80px; width: 80px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
+                                </a>
                                 <div class="info">
-                                    <time datetime="2020-06-30">Jun 20, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How can Design Product Packaging in the Industry</a></h4>
-                                </div>
-                            </article>
-
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg2" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun 21, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Right Color for Cover Package</a></h4>
-                                </div>
-                            </article>
-
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg3" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun  22, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Best Color for Product Package</a> </h4>
-                                </div>
-                            </article>
-                            
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg4" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun 23, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Make Your Product Cover  Most  Attractive</a></h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathBlogDetail(blogs.slug)">{{blogs.name}}</a></h4>
+                                    <time datetime="2020-06-30">{{blogs.creationTime| date:'dd-mm-yyyy'}}</time>
                                 </div>
                             </article>
                         </div>
@@ -112,55 +75,28 @@
                     <section class="widget widget-popular-post">
                         <h3 class="widget-title">Bài đăng phổ biến</h3>
                         <div class="post-wrap">
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg1" role="img"></span></a>
+                            <article class="item" *ngFor="let blogHot of blogHot| orderBy: 'code'">
+                                <a routerLink="/blog-details" class="thumb">
+                                    <img *ngFor="let filePr of blogHot.blogFile" style="height: 80px; width: 80px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
+                                </a>
                                 <div class="info">
-                                    <time datetime="2020-06-30">Jun 20, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How can Design Product Packaging in the Industry</a></h4>
-                                </div>
-                            </article>
-
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg2" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun 21, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Right Color for Cover Package</a></h4>
-                                </div>
-                            </article>
-
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg3" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun  22, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Choose the Best Color for Product Package</a> </h4>
-                                </div>
-                            </article>
-                            
-                            <article class="item">
-                                <a routerLink="/blog-details" class="thumb"><span class="fullimage cover bg4" role="img"></span></a>
-                                <div class="info">
-                                    <time datetime="2020-06-30">Jun 23, 2020</time>
-                                    <h4 class="title usmall"><a routerLink="/blog-details">How Can Make Your Product Cover  Most  Attractive</a></h4>
+                                    <h4 class="title usmall"><a [routerLink]="getPathBlogDetail(blogHot.slug)">{{blogHot.name}}</a></h4>
+                                    <time datetime="2020-06-30">{{blogHot.creationTime| date:'dd-mm-yyyy'}}</time>
                                 </div>
                             </article>
                         </div>
                     </section>
                     <section class="widget widget_categories">
-                        <h3 class="widget-title">Categories</h3>
+                        <h3 class="widget-title">Danh mục bài đăng</h3>
 
                         <div class="post-wrap">
-                            <ul>
-                                <li><a routerLink="/">Package Design <span>(10)</span></a></li>
-                                <li><a routerLink="/">T-shirt Design <span>(07)</span></a></li>
-                                <li><a routerLink="/">Cover Van <span>(20)</span></a></li>
-                                <li><a routerLink="/">Mug Design <span>(12)</span></a></li>
-                                <li><a routerLink="/">Book Cover Design <span>(15)</span></a></li>
-                                <li><a routerLink="/">Hoodie Design <span>(18)</span></a></li>
+                            <ul *ngFor="let cat of categoriesBlog">
+                                <li><a  [routerLink]="getPathBlogByCategoryId(cat.id)">{{cat.name}} </a></li>
                             </ul>
                         </div>
                     </section>
 
-                    <section class="widget widget_tag">
+                    <!-- <section class="widget widget_tag">
                         <h3 class="widget-title">Tags</h3>
 
                         <div class="post-wrap">
@@ -174,7 +110,7 @@
                                 <li><a routerLink="/">Mug Design</a></li>
                             </ul>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
             </div>
         </div>

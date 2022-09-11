@@ -96,20 +96,14 @@
                    
                     <section class="widget widget_categories">
                         <h3 class="widget-title">Danh mục bài đăng</h3>
-
                         <div class="post-wrap">
                             <ul *ngFor="let cat of categoriesBlog">
                                 <li><a  [routerLink]="getPathBlogByCategoryId(cat.id)">{{cat.name}} </a></li>
-                                <!-- <li><a routerLink="/">T-shirt Design <span>(07)</span></a></li>
-                                <li><a routerLink="/">Cover Van <span>(20)</span></a></li>
-                                <li><a routerLink="/">Mug Design <span>(12)</span></a></li>
-                                <li><a routerLink="/">Book Cover Design <span>(15)</span></a></li>
-                                <li><a routerLink="/">Hoodie Design <span>(18)</span></a></li> -->
                             </ul>
                         </div>
                     </section>
 
-                    <section class="widget widget_tag">
+                    <!-- <section class="widget widget_tag">
                         <h3 class="widget-title">Thẻ Tags</h3>
 
                         <div class="post-wrap">
@@ -123,7 +117,7 @@
                                 <li><a routerLink="/">Mug Design</a></li>
                             </ul>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
             </div>
         </div>

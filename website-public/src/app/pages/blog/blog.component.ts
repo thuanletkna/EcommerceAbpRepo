@@ -88,7 +88,7 @@ controlledSwiper: any;
     }
       
   }
-get categoriesBlog(): CategoryDto[] {
+  get categoriesBlog(): CategoryDto[] {
     return this.categories.filter(x => x.status === Status.Active && x.isBlog == true );
   }
 }
