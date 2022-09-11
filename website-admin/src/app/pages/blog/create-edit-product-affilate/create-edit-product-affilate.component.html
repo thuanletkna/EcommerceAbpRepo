@@ -34,6 +34,20 @@
           </nz-form-item>
         </div>
         <div class="col-12">
+          <nz-form-item>
+            <nz-form-label>{{ '::Giá bán' | abpLocalization }}</nz-form-label>
+            <nz-form-control>
+              <input
+                nz-input
+                name="code"
+                type="text"
+                [(ngModel)]="vmProductAff.price"
+                maxlength="1000"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-12">
             <nz-form-item>
               <nz-form-label>{{ '::Link Affilate Lazada' | abpLocalization }}</nz-form-label>
               <nz-form-control>
@@ -42,6 +56,34 @@
                   name="code"
                   type="text"
                   [(ngModel)]="vmProductAff.linkAffilateLazada"
+                  maxlength="1000"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12">
+            <nz-form-item>
+              <nz-form-label>{{ '::Link Affilate Shopee' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input
+                  nz-input
+                  name="code"
+                  type="text"
+                  [(ngModel)]="vmProductAff.linkAffilateShopee"
+                  maxlength="1000"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12">
+            <nz-form-item>
+              <nz-form-label>{{ '::Link Affilate Tiki' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input
+                  nz-input
+                  name="code"
+                  type="text"
+                  [(ngModel)]="vmProductAff.linkAffilateTiki"
                   maxlength="1000"
                 />
               </nz-form-control>

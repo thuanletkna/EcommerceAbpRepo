@@ -1,5 +1,6 @@
 import { BlogDetailDto } from "../blog-detail/blog-detail.dto";
 import { ListBaseDto } from "../list-base.dto";
+import { ProductAffilateFileDto } from "./product-affilate-file.dto";
 
 export interface ProductAffilateDto extends ListBaseDto {
     productDetailId?:string;
@@ -11,4 +12,5 @@ export interface ProductAffilateDto extends ListBaseDto {
     linkAffilateLazada?:string;
     linkAffilateTiki?:string;
     linkAffilateOther?:string;
+    productAffilateFile?: ProductAffilateFileDto[];
 }

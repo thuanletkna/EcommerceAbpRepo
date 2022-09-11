@@ -1036,9 +1036,87 @@ About Area Style
     }
 }
 
+.btn-buy-afilate
+{
+    // background-color: #f1a738;
+    // padding: 5px 40px;
+    color: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    .click-btn-afilate {
+        background-color: #f1a738;
+        padding: 5px 40px;
+        color: $color-white;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        
+        i {
+            font-size: 22px;
+            color: $color-white;
+            position: relative;
+            top: 3px;
+        }
+    }
+    .click-btn-tiki {
+        margin-top: 10px;background-color: #118965;
+        padding: 5px 40px;
+        color: $color-white;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        i {
+            font-size: 22px;
+            color: $color-white;
+            position: relative;
+            top: 3px;
+        }
+    }
+    .click-btn-lazada {
+        margin-top: 10px;background-color: #ed5cd1;
+        padding: 5px 40px;
+        color: $color-white;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        i {
+            font-size: 22px;
+            color: $color-white;
+            position: relative;
+            top: 3px;
+        }
+    }
+}
 
+.img-product-afilate{
+    height: 225px;
+    width: 225px
+}
+
+.product-affilate-blog{
+    background-color: aliceblue;
+    padding: 20px;
+}
+.card-buy-affilate{
+    float: right;
+    width: 450px;
+}
+.btn-buy-afilate-a{
+    color: #ffffff;
+    text-decoration: none;
+}
 a:hover {
-    color: $color-white;
+    color: inherit;
+    text-decoration: inherit;
 }
 .btn-buy-a{
     color: #ffffff;

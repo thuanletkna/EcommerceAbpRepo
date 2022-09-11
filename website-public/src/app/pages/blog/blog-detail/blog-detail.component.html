@@ -26,18 +26,38 @@
                             <!-- <li><a routerLink="/"><i class='bx bxs-user'></i> Admin</a></li> -->
                             <li><a routerLink="/"><i class='bx bx-calendar-alt'></i> {{blogDetail.creationTime| date:'dd-mm-yyyy'}}</a></li>
                         </ul>
-                        <div *ngFor="let details of blogDetail.blogDetails">
+                        <div *ngFor="let details of blogDetail.blogDetails | orderBy: 'code'">
                             <h3>{{details.name}}</h3>
-                            <p>{{details.details}}</p>
-                            <blockquote class="boxicon-quote">
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus aliquid praesentium eveniet illum asperiores, quidem, ipsum voluptatum numquam ducimus nisi exercitationem dolorum facilis Repellendus aliquid praesentium eveniet illum asperiores.</p>
-                            </blockquote>
+                            <div [innerHTML]="(details.details) | safeHtml"></div>
+                            <div class="product-affilate-blog" *ngFor="let proAff of details.productAffilates | orderBy: 'code'">
+                                <img class="img-product-afilate" *ngFor="let fileProAff of proAff.productAffilateFile" [src]="getLinkMedia(fileProAff.fileStorageId)" alt="Blog Images">
+                                <div class="card-buy-affilate">
+                                    <h4 class="title usmall"><a routerLink="/blog-details">{{proAff.name}}</a></h4>
+                                    <div>Giá bán: {{proAff.price}} &#8363;</div>
+                                    <div class="btn-buy-afilate" *ngIf="proAff.linkAffilateShopee">
+                                        <div class="click-btn-afilate">
+                                          <a [routerLink]="proAff.linkAffilateShopee" class="btn-buy-afilate-a"><i class="bx bx-cart"></i>Xem chi tiết sản phẩm tại Shopee</a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-buy-afilate" *ngIf="proAff.linkAffilateTiki">
+                                        <div class="click-btn-tiki">
+                                          <a [routerLink]="proAff.linkAffilateTiki" class="btn-buy-afilate-a"><i class="bx bx-cart"></i>Xem chi tiết sản phẩm tại Tiki</a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-buy-afilate" *ngIf="proAff.linkAffilateLazada">
+                                        <div class="click-btn-lazada">
+                                          <a [routerLink]="proAff.linkAffilateLazada" class="btn-buy-afilate-a"><i class="bx bx-cart"></i>Xem chi tiết sản phẩm tại Lazada</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="row bolg-gallery">
+                    
+                    <!-- <div class="row bolg-gallery">
                         <div class="bolg-gallery-item">
                             <img src="assets/img/blog/blog6.jpg" alt="Blog Images">
+                            
                         </div>
 
                         <div class="bolg-gallery-item">
@@ -47,7 +67,7 @@
                         <div class="bolg-gallery-item">
                             <img src="assets/img/blog/blog5.jpg" alt="Blog Images">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

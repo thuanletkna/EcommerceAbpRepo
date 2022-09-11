@@ -65,14 +65,14 @@
             /></a>
   
             <div class="blog-content">
-              <a routerLink="/blog-details"
-                ><h3>{{ item.name }}</h3></a
-              >
+              <a routerLink="/blog-details">
+                <h3 class="split-string-name">{{ item.name }}</h3>
+              </a>
               <!-- <ul class="blog-admin">
                               <li><a routerLink="/"><i class='bx bxs-user'></i> Admin</a></li>
                               <li><i class='bx bx-calendar-alt' ></i> 18 May 2020</li>
                           </ul> -->
-              <p>{{ item.descriptions }}</p>
+              <p class="split-string">{{ item.descriptions }}</p>
               <a routerLink="/blog-details" class="read-more-btn"
                 >Xem chi tiết <i class="bx bxs-chevrons-right"></i
               ></a>

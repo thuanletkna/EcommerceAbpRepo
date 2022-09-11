@@ -23,6 +23,7 @@ import { PaginationComponent } from './component/pagination/pagination.component
 import SwiperCore,{ Autoplay, Pagination, Swiper } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { SwipeHeaderComponent } from './layout/swiper-header/swiper-header.component';
+import { NgPipesModule } from 'ngx-pipes';
 // import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 SwiperCore.use([Autoplay, Pagination]);
 
@@ -46,7 +47,8 @@ SwiperCore.use([Autoplay, Pagination]);
         ReactiveFormsModule,
         CommonModule,
         NgxSpinnerModule,
-        SwiperModule
+        SwiperModule,
+        NgPipesModule
     ],
     exports: [
         // FormsModule,
@@ -75,7 +77,8 @@ SwiperCore.use([Autoplay, Pagination]);
         NavbarStyleTwoComponent,
         SidebarMenuComponent,
         NotificationModalComponent,
-        BlankLayoutComponent
+        BlankLayoutComponent,
+        NgPipesModule
     ],
     providers: [
         // {

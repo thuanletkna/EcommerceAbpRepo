@@ -3,7 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44314",
+      "applicationUrl": "https://admin.vuonhoala.vn",
+      //"applicationUrl": "https://admin.vuonhoala.vn",
       "sslPort": 44314
     }
   },
@@ -18,6 +19,7 @@
     "EcommerceSourceAbp.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
+      //"applicationUrl": "https://admin.vuonhoala.vn",
       "applicationUrl": "https://localhost:44314",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
