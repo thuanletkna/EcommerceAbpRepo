@@ -265,6 +265,85 @@ namespace EcommerceSourceAbp.Migrations
                     b.ToTable("AppCategories", (string)null);
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Contact", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Shopee")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Zalo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppContacts", (string)null);
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.District", b =>
                 {
                     b.Property<Guid?>("Id")
@@ -469,6 +548,91 @@ namespace EcommerceSourceAbp.Migrations
                     b.HasIndex("WardId");
 
                     b.ToTable("AppECommerceProfiles", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Feedback", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppFeedbacks", (string)null);
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.FeedBackFile", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FeedBackId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("FileStorageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeedBackId");
+
+                    b.HasIndex("FileStorageId");
+
+                    b.ToTable("AppFeedBackFiles", (string)null);
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.FileStorage", b =>
@@ -3634,6 +3798,21 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("Ward");
                 });
 
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.FeedBackFile", b =>
+                {
+                    b.HasOne("EcommerceSourceAbp.Entities.Feedback", "Feedback")
+                        .WithMany("FeedBackFile")
+                        .HasForeignKey("FeedBackId");
+
+                    b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
+                        .WithMany()
+                        .HasForeignKey("FileStorageId");
+
+                    b.Navigation("Feedback");
+
+                    b.Navigation("FileStorage");
+                });
+
             modelBuilder.Entity("EcommerceSourceAbp.Entities.ImageSetting", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
@@ -4066,6 +4245,11 @@ namespace EcommerceSourceAbp.Migrations
                     b.Navigation("Newses");
 
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("EcommerceSourceAbp.Entities.Feedback", b =>
+                {
+                    b.Navigation("FeedBackFile");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>

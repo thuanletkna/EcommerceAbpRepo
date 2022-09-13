@@ -65,6 +65,12 @@ public class EcommerceSourceAbpPermissionDefinitionProvider : PermissionDefiniti
         homepageconfig.AddChild(EcommerceSourceAbpPermissions.HomePageConfig.Create, L("Permission:Create"));
         homepageconfig.AddChild(EcommerceSourceAbpPermissions.HomePageConfig.Delete, L("Permission:Delete"));
         homepageconfig.AddChild(EcommerceSourceAbpPermissions.HomePageConfig.Edit, L("Permission:Edit"));
+
+        var contact = myGroup.AddPermission(EcommerceSourceAbpPermissions.Contact.Default, L("Contact"));
+        contact.AddChild(EcommerceSourceAbpPermissions.Contact.View, L("Permission:View"));
+        contact.AddChild(EcommerceSourceAbpPermissions.Contact.Create, L("Permission:Create"));
+        contact.AddChild(EcommerceSourceAbpPermissions.Contact.Delete, L("Permission:Delete"));
+        contact.AddChild(EcommerceSourceAbpPermissions.Contact.Edit, L("Permission:Edit"));
     }
 
     private static LocalizableString L(string name)

@@ -78,6 +78,9 @@ public class EcommerceSourceAbpDbContext :
     public DbSet<ImageSetting> ImageSettings { get; set; }
     public DbSet<HomePageConfig> HomePageConfigs { get; set; }
     public DbSet<ProductAffilateFile> ProductAffilateFiles { get; set; }
+    public DbSet<Contact> Contact { get; set; }
+    public DbSet<Feedback> Feedback { get; set; }
+    public DbSet<FeedBackFile> FeedBackFile { get; set; }
     public EcommerceSourceAbpDbContext(DbContextOptions<EcommerceSourceAbpDbContext> options)
         : base(options)
     {
@@ -225,6 +228,21 @@ public class EcommerceSourceAbpDbContext :
         builder.Entity<HomePageConfig>(b =>
         {
             b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "HomePageConfigs", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Contact>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Contacts", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<Feedback>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "Feedbacks", EcommerceSourceAbpConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+        });
+        builder.Entity<FeedBackFile>(b =>
+        {
+            b.ToTable(EcommerceSourceAbpConsts.DbTablePrefix + "FeedBackFiles", EcommerceSourceAbpConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
         });
     }

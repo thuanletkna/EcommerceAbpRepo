@@ -50,6 +50,12 @@ const routes: Routes = [
       canActivate: [AuthGuard],
     },
     {
+      path: 'contact',
+      loadChildren: () =>
+        import('./pages/contact/contact.module').then(m => m.ContactModule),
+      canActivate: [AuthGuard],
+    },
+    {
       path: 'image-setting',
       loadChildren: () => import('./pages/image-setting/image-setting.module').then(m => m.ImageSettingModule),
       canActivate: [AuthGuard],
