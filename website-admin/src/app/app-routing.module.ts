@@ -66,6 +66,12 @@ const routes: Routes = [
         import('./pages/product/trade-mark/trade-mark.module').then(m => m.TradeMarkModule),
       canActivate: [AuthGuard],
     },
+    {
+      path: 'feedback',
+      loadChildren: () =>
+        import('./pages/feedback/feeback.module').then(m => m.FeedBackModule),
+      canActivate: [AuthGuard],
+    },
         {
           path: 'account',
           loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),

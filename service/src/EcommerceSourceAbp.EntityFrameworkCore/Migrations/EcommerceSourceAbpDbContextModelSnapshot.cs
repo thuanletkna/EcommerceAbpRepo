@@ -180,16 +180,11 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("FileStorageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
 
                     b.HasIndex("FileStorageId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("AppBlogFiles", (string)null);
                 });
@@ -3751,7 +3746,7 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogFile", b =>
                 {
-                    b.HasOne("EcommerceSourceAbp.Entities.Blog", null)
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", "Blog")
                         .WithMany("BlogFile")
                         .HasForeignKey("BlogId");
 
@@ -3759,13 +3754,9 @@ namespace EcommerceSourceAbp.Migrations
                         .WithMany()
                         .HasForeignKey("FileStorageId");
 
-                    b.HasOne("EcommerceSourceAbp.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                    b.Navigation("Blog");
 
                     b.Navigation("FileStorage");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.District", b =>

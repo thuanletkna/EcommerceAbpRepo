@@ -87,4 +87,21 @@ public static class EcommerceSourceAbpPermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
+    public class Feedback
+    {
+        public const string Default = GroupName + ".Feedback";
+        public const string Create = Default + ".Create";
+        public const string View = Default + ".View";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public class FeedBackFile
+    {
+        public const string Default = GroupName + ".FeedBackFile";
+        public const string Create = Default + ".Create";
+        public const string View = Default + ".View";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }

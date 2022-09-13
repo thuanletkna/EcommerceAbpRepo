@@ -6,9 +6,9 @@ namespace EcommerceSourceAbp.Entities
 {
     public class BlogFile : BasicAggregateRoot<Guid?>
     {
-        public Guid? ProductId { get; set; }
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Guid? BlogId { get; set; }
+        [ForeignKey("BlogId")]
+        public Blog Blog { get; set; }
         public Guid? FileStorageId { get; set; }
         [ForeignKey("FileStorageId")]
         public FileStorage FileStorage { get; set; }

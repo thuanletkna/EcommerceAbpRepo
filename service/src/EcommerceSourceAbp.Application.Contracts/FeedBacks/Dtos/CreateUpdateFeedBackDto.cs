@@ -1,10 +1,12 @@
-﻿using System;
+﻿using EcommerceSourceAbp.BaseDtos;
+using EcommerceSourceAbp.FeedBackFiles.Dtos;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EcommerceSourceAbp.FeedBacks.Dtos
 {
-    internal class CreateUpdateFeedBackDto
+    public class CreateUpdateFeedBackDto : ListBaseDto
     {
+        public string Descriptions { get; set; }
+        public List<CreateUpdateFeedBackFileDto> FeedBackFiles { get; set; }
     }
 }

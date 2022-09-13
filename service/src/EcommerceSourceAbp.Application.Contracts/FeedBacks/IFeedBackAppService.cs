@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EcommerceSourceAbp.FeedBacks.Dtos;
 
 namespace EcommerceSourceAbp.FeedBacks
 {
-    internal interface IFeedBackAppService
+    public interface IFeedBackAppService : IAppListService<CreateUpdateFeedBackDto, GetFeedBackForEditDto, GetFeedBackForViewDto, GetFeedBackRequestInputDto>
     {
     }
 }

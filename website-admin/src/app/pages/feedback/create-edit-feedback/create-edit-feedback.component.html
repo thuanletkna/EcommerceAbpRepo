@@ -1,0 +1,69 @@
+<form #formEdit="ngForm" nz-form [nzLayout]="'vertical'">
+    <div class="container-edit my-4">
+      <div class="card">
+        <div class="row p-3">
+          <div class="col-12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Đánh giá</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="descriptions" type="text" [(ngModel)]="vm.descriptions" required>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12">
+            <nz-form-item class="w-100">
+              <nz-form-label>Banner Header Trang Chủ</nz-form-label>
+              <nz-form-control>
+                <div *ngFor="let item of files; index as i" class="d-flex align-items-center" >
+                  <upload-file
+                    name="feedBackFiles{{ i }}"
+                    [(ngModel)]="item.fileStorageId"
+                    style="float: left"
+                    [autoUpload]="true"
+                    [typeFile]="'feedback-file'"
+                    [accept]="'.jpg, .jpeg, .png, .bmp, .gif'" 
+                  ></upload-file>
+                  <button
+                    *ngIf="vm.feedBackFiles !== null"
+                    mat-icon-button
+                    type="button"
+                    (click)="remove(item)">
+                    <div class="icon-delete-red size-14"></div>
+                  </button>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div class="d-flex align-items-center justify-content-between" *ngIf="this.files.length <1">
+              <button
+                type="button"
+                class="btn btn-add-more"
+                (click)="add('feedback-file')"
+                [disabled]="disableSave">
+                <div class="icon-add mr-2"></div>
+                Add more file
+              </button>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <nz-form-item>
+              <nz-form-label>{{ '::Status' | abpLocalization }}</nz-form-label>
+              <nz-radio-group [(ngModel)]="vm.status" name="status">
+                <label nz-radio [nzValue]="1">{{ '::Enum:Status_1' | abpLocalization }}</label>
+                <label nz-radio [nzValue]="0">{{ '::Enum:Status_0' | abpLocalization }}</label>
+              </nz-radio-group>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md">
+          (<span class="required">*</span>) Required information
+        </div>
+        <div class="col-md text-right w-100 action-filter pt-0">
+          <button type="button" class="btn btn-reset" (click)="goback()">Cancel</button>
+          <button *ngIf="canSave" class="btn btn-apply ml-3" (click)="save()">{{ id ?
+            'Update' : 'Add new'}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
