@@ -4,6 +4,14 @@
         <div class="row p-3">
           <div class="col-12">
             <nz-form-item>
+              <nz-form-label nzRequired>Tên khách hàng</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="name" type="text" [(ngModel)]="vm.name" required>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12">
+            <nz-form-item>
               <nz-form-label nzRequired>Đánh giá</nz-form-label>
               <nz-form-control>
                 <input nz-input name="descriptions" type="text" [(ngModel)]="vm.descriptions" required>
@@ -12,7 +20,7 @@
           </div>
           <div class="col-12">
             <nz-form-item class="w-100">
-              <nz-form-label>Banner Header Trang Chủ</nz-form-label>
+              <nz-form-label>Ảnh khách hàng</nz-form-label>
               <nz-form-control>
                 <div *ngFor="let item of files; index as i" class="d-flex align-items-center" >
                   <upload-file

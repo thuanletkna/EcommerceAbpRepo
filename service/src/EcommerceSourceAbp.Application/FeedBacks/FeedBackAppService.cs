@@ -1,8 +1,12 @@
-﻿using EcommerceSourceAbp.Entities;
+﻿using EcommerceSourceAbp.Contacts.Dtos;
+using EcommerceSourceAbp.Entities;
+using EcommerceSourceAbp.Enums;
 using EcommerceSourceAbp.FeedBacks.Dtos;
 using EcommerceSourceAbp.Permissions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
@@ -82,6 +86,17 @@ namespace EcommerceSourceAbp.FeedBacks
 
             return entity;
         }
-        
+
+        [AllowAnonymous]
+        public async Task<List<GetFeedBackForEditDto>> GetAllPublic()
+        {
+            var query = (await Repository.GetQueryableAsync())
+                .Include(a => a.FeedBackFiles)
+                .Include("FeedBackFiles.FileStorage");
+            var result = query.Where(x => x.Status == Status.Active);
+            //.OrderBy(x => x.OrderIndex);
+            return result.Select(MapToViewOutput).ToList();
+        }
+
     }
 }

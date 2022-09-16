@@ -5,10 +5,12 @@ import { Status } from 'src/shared/enums';
 import { IPaginations } from 'src/shared/model/base.dto';
 import { BlogDto } from 'src/shared/model/blog/blog.dto';
 import { CategoryDto } from 'src/shared/model/category.dto';
+import { FeedBackDto } from 'src/shared/model/feedback/feedback.dto';
 import { ProductFileDto } from 'src/shared/model/product-file/product-file.dto';
 import { ProductDto } from 'src/shared/model/product/product.dto';
 import { BlogService } from 'src/shared/services/blog.service';
 import { CategoriesService } from 'src/shared/services/categories.service';
+import { FeedBackService } from 'src/shared/services/feedback.service';
 import { ProductService } from 'src/shared/services/product.service';
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
@@ -21,6 +23,7 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
   @ViewChild(SwiperComponent, { static: false }) swiper?: SwiperComponent;
   categories: CategoryDto[] = [];
   @Input() category: CategoryDto | undefined;
+  feedbacks: FeedBackDto[] = [];
   productFile: ProductFileDto[]| undefined = [];
   fileId?:string;
   get skipCount() {
@@ -50,7 +53,8 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
     protected override readonly injector: Injector,
     private readonly categoriesService: CategoriesService,
     private readonly productService: ProductService,
-    private readonly blogService: BlogService
+    private readonly blogService: BlogService,
+    private readonly feedBackService: FeedBackService,
     ) {
     super(injector);
   }
@@ -79,18 +83,14 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
   }
 
  initData() {
-        forkJoin([
+      forkJoin([
           this.categoriesService.getAllCategory(),
-      ]).subscribe(([categories]) => {
+          this.feedBackService.getAllFeedBack(),
+      ]).subscribe(([categories,feedbacks],) => {
           this.categories = categories;
+          this.feedbacks = feedbacks;
       });
-      this.productService
-      .getPaged({
-        // groupId: this.groupId,
-        // sorting: 'publishDate desc',
-        skipCount: this.skipCount,
-        maxResultCount: this.pageSize,
-      })
+      this.productService.getPaged({skipCount: this.skipCount,maxResultCount: this.pageSize,})
       .subscribe((result) => {
         this.products = result || { items: [], totalCount: 0 };
         this.products.items = this.products.items.filter(
@@ -103,8 +103,6 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
 
       this.blogService
       .getPaged({
-        // groupId: this.groupId,
-        // sorting: 'publishDate desc',
         skipCount: this.skipCount,
         maxResultCount: this.pageSize,
       })

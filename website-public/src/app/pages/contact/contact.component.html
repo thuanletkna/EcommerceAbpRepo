@@ -1,0 +1,38 @@
+<swipe-header></swipe-header>
+<div class="service-dtls pt-100 pb-70">
+    <div class="container">
+        <div class="row" *ngFor="let details of contact">
+            <div class="col-lg-8">
+                <div class="service-dtls-title">
+                   <div [innerHTML]="(details.descriptions) | safeHtml"></div>        
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="service-sidebar">
+                    <div class="service-sidebar-widget">
+                        <h3>Thông tin liên hệ</h3>
+                        
+                        <ul>
+                            <li>
+                                <i class='bx bxs-map'></i>
+                                28/A Street, New York City, USA
+                            </li>
+                            <li>
+                                <i class='bx bxs-phone-call'></i>
+                                <a href="tel:+19876543210">
+                                  0{{details.phone}}
+                                </a> 
+                            </li>
+                            <li>
+                                <i class='bx bxl-telegram'></i>
+                                <a href="mailto:hello@dizo.com">{{details.email}}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

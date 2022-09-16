@@ -37,6 +37,16 @@ const routes: Routes = [
         path: 'chi-tiet-bai-dang',
         loadChildren: () => import('./pages/blog/blog-detail/blog-detail.module').then(x => x.BlogDetailModule),
         // pathMatch: 'full'
+      },
+      {
+        path: 'gioi-thieu',
+        loadChildren: () => import('./pages/contact/contact.module').then(x => x.ContactModule),
+        // pathMatch: 'full'
+      },
+      {
+        path: 'lien-he',
+        loadChildren: () => import('./pages/contact/contact.module').then(x => x.ContactModule),
+        // pathMatch: 'full'
       }
     ]
   },
