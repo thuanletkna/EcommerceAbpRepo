@@ -11,22 +11,22 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
-                  <div nz-col [nzSpan]="8" >
+                  <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Mã sản phẩm</nz-form-label>
                       <nz-form-control>
                         <input nz-input name="productCode" type="text" [(ngModel)]="vm.productCode" required>
                       </nz-form-control>
                     </nz-form-item>
-                  </div>
-                  <div nz-col [nzSpan]="8" >
+                  </div> -->
+                  <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Slug</nz-form-label>
                       <nz-form-control>
                         <input nz-input name="slug" type="text" [(ngModel)]="vm.slug" required>
                       </nz-form-control>
                     </nz-form-item>
-                  </div>
+                  </div> -->
                   <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Slug</nz-form-label>
@@ -57,7 +57,7 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
-                  <div nz-col [nzSpan]="8" >
+                  <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Thuộc tính</nz-form-label>
                       <nz-form-control>
@@ -84,7 +84,7 @@
                         </nz-select>
                       </nz-form-control>
                     </nz-form-item>
-                  </div>
+                  </div> -->
                   <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Giá gốc</nz-form-label>
@@ -101,7 +101,7 @@
                       </nz-form-control>
                     </nz-form-item>
                   </div>
-                  <div nz-col [nzSpan]="8" >
+                  <!-- <div nz-col [nzSpan]="8" >
                     <nz-form-item>
                       <nz-form-label nzRequired>Số lượng</nz-form-label>
                       <nz-form-control>
@@ -132,7 +132,7 @@
                         <input nz-input name="starRating" type="text" [(ngModel)]="vm.starRating" required>
                       </nz-form-control>
                     </nz-form-item>
-                  </div>
+                  </div> -->
                   <div nz-col [nzSpan]="8">
                     <nz-form-item>
                         <nz-form-label>{{ '::Trạng thái' | abpLocalization }}</nz-form-label>
@@ -145,9 +145,9 @@
                 <div nz-col [nzSpan]="16">
                   <nz-form-item>
                       <nz-form-label>{{ '::Sản phẩm Hot' | abpLocalization }}</nz-form-label>
-                      <nz-radio-group [(ngModel)]="vm.isHot" name="status">
-                          <label nz-radio [nzValue]="1">{{ '::Enum:IsHot_1' | abpLocalization }}</label>
-                          <label nz-radio [nzValue]="0">{{ '::Enum:IsHot_0' | abpLocalization }}</label>
+                      <nz-radio-group [(ngModel)]="vm.isHot" name="isHot">
+                          <label nz-radio [nzValue]="3">{{ '::Enum:IsHot_1' | abpLocalization }}</label>
+                          <label nz-radio [nzValue]="2">{{ '::Enum:IsHot_0' | abpLocalization }}</label>
                       </nz-radio-group>
                   </nz-form-item>
               </div>

@@ -2,6 +2,7 @@ import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { AppBaseComponent } from 'src/shared/app-base.component';
 import { Status } from 'src/shared/enums';
+import { IsHot } from 'src/shared/enums/ishot';
 import { IPaginations } from 'src/shared/model/base.dto';
 import { BlogDto } from 'src/shared/model/blog/blog.dto';
 import { CategoryDto } from 'src/shared/model/category.dto';
@@ -29,8 +30,8 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
   get skipCount() {
     return this.pageSize * (this.currentPage - 1);
   }
-  page: number = 2;
-  pageSize: number = 8;
+  page: number = 1;
+  pageSize: number = 12;
   products: IPaginations<ProductDto> = {
     items: [],
     totalCount: 0,
@@ -90,12 +91,10 @@ export class HomeComponent extends AppBaseComponent implements OnInit {
           this.categories = categories;
           this.feedbacks = feedbacks;
       });
-      this.productService.getPaged({skipCount: this.skipCount,maxResultCount: this.pageSize,})
+      this.productService.getPaged({skipCount: this.skipCount,maxResultCount: this.pageSize})
       .subscribe((result) => {
         this.products = result || { items: [], totalCount: 0 };
-        this.products.items = this.products.items.filter(
-          (x) => x.status === Status.Active
-        );
+        this.products.items = this.products.items.filter(x => x.status === Status.Active && x.isHot === IsHot.True);
         this.products.items.forEach(element => {
           element.productFile = element.productFile?.filter(x=>x.fileType === "productFile")
         });

@@ -1,3 +1,4 @@
+import { IsHot } from "src/shared/enums/ishot";
 import { IParamFilter } from "../base.dto";
 import { ListBaseDto } from "../list-base.dto";
 import { ProductFileDto } from "../product-file/product-file.dto";
@@ -21,6 +22,7 @@ export interface ProductDto extends ListBaseDto {
     tradeMarkId?:string;
     productPropertyId?:string;
     productFile?: ProductFileDto[];
+    isHot?:IsHot;
 }
 
 export interface IParamFilterNews extends IParamFilter {

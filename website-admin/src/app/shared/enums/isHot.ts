@@ -1,5 +1,5 @@
 export enum IsHot {
     False,
-        True
+    True
   }
   
