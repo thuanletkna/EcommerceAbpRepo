@@ -11,5 +11,6 @@ namespace EcommerceSourceAbp.HomePageConfigs
         Task<List<GetHomePageConfigForViewDto>> GetAllPublic();
         Task<IEnumerable<GetHomePageConfigForViewDto>> GetHomepageBanner();
         Task<IEnumerable<GetHomePageConfigForViewDto>> GetImageHomepageHeader();
+        Task<IEnumerable<GetHomePageConfigForViewDto>> GetImageLogo();
     }
 }

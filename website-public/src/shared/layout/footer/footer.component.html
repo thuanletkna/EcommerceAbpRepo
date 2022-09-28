@@ -1,30 +1,20 @@
 <div class="footer">
 <div class="footer-area">
     <div class="container">
-        <!-- <div class="footer-contact">
-            <div class="newsleter-area">
-                <h2>Subscribe Our Newsletter</h2>
-                
-                <form class="newsletter-form">
-                    <input type="email" class="form-control" placeholder="Enter your email" name="EMAIL">
-                    <button class="subscribe-btn" type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div> -->
-
-        <div class="footer-top-list pt-70 pb-70">
+        <div class="footer-top-list pt-45 pb-35">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="footer-list">
-                        <h3>Services</h3>
+                        <h3>Sản Phẩm</h3>
 
                         <ul>
-                            <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">Brand Identy</a></li>
+                            <li class="bx bxs-chevron-right" *ngFor="let cateProduct of categoriesProduct"><a [routerLink]="getPathProductByCategoryId(cateProduct.slug)">{{ cateProduct.name }}</a></li>
+                            <!-- <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">Brand Identy</a></li>
                             <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">Package Design</a></li>
                             <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">Pattern Design</a></li>
                             <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">T-shirt Print</a></li>
                             <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">Book Covers</a></li>
-                            <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">CD-DVD Covers</a></li>
+                            <li><i class='bx bxs-chevron-right'></i> <a routerLink="/services">CD-DVD Covers</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -32,28 +22,28 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="footer-list">
 
-                        <h3>Quick Links</h3>
+                        <h3>Bài Đăng</h3>
                         <ul>
-                            <li><i class='bx bxs-chevron-right'></i><a routerLink="/index">Home</a></li>
+                            <li class="bx bxs-chevron-right" *ngFor="let cateBlog of categoriesBlog"><a [routerLink]="getPathBlogByCategoryId(cateBlog.slug)">{{ cateBlog.name }}</a></li>
+                            <!-- <li><i class='bx bxs-chevron-right'></i><a routerLink="/index">Home</a></li>
                             <li><i class='bx bxs-chevron-right'></i><a routerLink="/services">Service</a></li>
                             <li><i class='bx bxs-chevron-right'></i><a routerLink="/about">About Us</a></li>
                             <li><i class='bx bxs-chevron-right'></i><a routerLink="/testimonial">Testimonial</a></li>
                             <li><i class='bx bxs-chevron-right'></i><a routerLink="/blog">Blog</a></li>
-                            <li><i class='bx bxs-chevron-right'></i><a routerLink="/contact">Contact</a></li>
+                            <li><i class='bx bxs-chevron-right'></i><a routerLink="/contact">Contact</a></li> -->
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-5 col-md-5">
                     <div class="footer-side-list">
-                        <h3>Contact Us</h3>
-
-                        <ul>
-                            <li><i class='bx bxs-phone'></i> <a href="tel:+11234567891">+1 1234 56 7891</a></li>
-                            <li><i class='bx bxs-phone'></i> <a href="tel:+19876543210">+1  9876 543 210</a></li>
-                            <li><i class='bx bxl-telegram'></i> <a href="mailto:email@dizo.com">email@dizo.com</a></li>
-                            <li><i class='bx bxl-telegram'></i> <a href="mailto:hello@dizo.com">hello@dizo.com</a></li>
-                            <li><i class='bx bxs-map'></i> 28/A Street, New York, USA</li>
+                        <h3>Liên Hệ</h3>
+                        <ul *ngFor="let details of contact">
+                            <li><i class='bx bxs-phone'></i> <a href="tel:+11234567891">0{{details.phone}}</a></li>
+                            <li><i class='bx bxl-telegram'></i> <a href="mailto:email@dizo.com">{{details.email}}</a></li>
+                            <!-- <li><i class='bx bxl-zalo'></i> <a href="mailto:email@dizo.com">{{details.zalo}}</a></li> -->
+                            <li><i class='bx bxl-facebook'></i> <a href="mailto:email@dizo.com">{{details.facebook}}</a></li>
+                            <li><i class='bx bxs-map'></i> {{details.address}}</li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +51,7 @@
         </div>
     </div>
 
-    <div class="footer-bottom">
+    <!-- <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-3">
@@ -82,6 +72,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 </div>

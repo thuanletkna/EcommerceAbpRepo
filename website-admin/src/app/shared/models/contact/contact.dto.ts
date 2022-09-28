@@ -3,6 +3,7 @@ import {  ListBaseDto } from "../app-dto";
 
 export interface ContactDto{
     descriptions?: string;
+    address?:string;
     phone?:number;
     email?:string;
     facebook?:string;

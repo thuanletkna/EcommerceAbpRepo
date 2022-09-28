@@ -89,6 +89,25 @@ namespace EcommerceSourceAbp.HomePageConfigs
         }
 
         [AllowAnonymous]
+        public async Task<IEnumerable<GetHomePageConfigForViewDto>> GetImageLogo()
+        {
+            var banner = new ImageSettingDto();
+            var query = await (await Repository.GetQueryableAsync())
+                .Include(a => a.ImageSetting)
+                .Include("ImageSetting.FileStorage")
+                .Where(x => x.Status == Status.Active).ToListAsync();
+            var data = query.Select(a => ObjectMapper.Map<HomePageConfig, GetHomePageConfigForViewDto>(a)).ToList();
+            foreach (var item in data)
+            {
+                item.ImageSetting = item.ImageSetting.Where(x => x.FileType == "Logo").ToList();
+            }
+            //var result = data.Select(x => x.ImageSetting.Where(x=>x.FileType == "BannerSlide"));
+            var result = data.Where(x => x.ImageSetting.Count > 0);
+            return result;
+        }
+
+
+        [AllowAnonymous]
         protected override async Task<IQueryable<HomePageConfig>> CreateFilteredQueryAsync(GetHomePageConfigRequestInputDto input)
         {
             if (!string.IsNullOrWhiteSpace(input.Filter))
@@ -105,6 +124,37 @@ namespace EcommerceSourceAbp.HomePageConfigs
         public override Task<PagedResultDto<GetHomePageConfigForViewDto>> GetListPublicPaged(GetHomePageConfigRequestInputDto input)
         {
             return base.GetListPublicPaged(input);
+        }
+
+        protected override async Task<HomePageConfig> Update(CreateUpdateHomePageConfigDto input)
+        {
+            await CheckUpdatePolicyAsync();
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            var entity = await FilteredForUpdate(input);
+
+            if (entity == null) throw NotFoundException;
+
+
+            if (entity.ImageSetting != null)
+            {
+                entity.ImageSetting.Clear();
+            }
+
+            if (input.ImageSetting?.Any() == true)
+            {
+                input.ImageSetting?.ForEach(item =>
+                {
+                    item.Id = null;
+                });
+            }
+            
+            MapToEntity(input, entity);
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            return entity;
         }
     }
 }

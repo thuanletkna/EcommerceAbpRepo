@@ -55,6 +55,13 @@ export class CreateEditImageSettingComponent extends AppBaseComponent implements
     return [];
   }
 
+  get bannerLogo() {
+    if (this.vm.imageSetting) {
+        return this.vm.imageSetting.filter(x => x.fileType === 'Logo');
+    }
+    return [];
+  }
+
 
 remove(item: ImageSettingDto) {
   // Delete the item from fileNames list
@@ -72,6 +79,16 @@ removeProduct(item: ImageSettingDto) {
   this.vm.imageSetting.splice(index, 1);
 }
 addProduct(fileType: string) {
+  if (!this.vm.imageSetting) this.vm.imageSetting = [];
+  this.vm.imageSetting.push({ fileType });
+}
+
+removeLogo(item: ImageSettingDto) {
+  // Delete the item from fileNames list
+  const index = this.vm.imageSetting.findIndex(x => x === item);
+  this.vm.imageSetting.splice(index, 1);
+}
+addLogo(fileType: string) {
   if (!this.vm.imageSetting) this.vm.imageSetting = [];
   this.vm.imageSetting.push({ fileType });
 }

@@ -18,13 +18,13 @@
             <div class="col-lg-8">
                 <div class="blog-dtls-content">
                     <div class="blog-dtls-img" *ngFor="let filePr of blogDetail.blogFile">
-                        <img style=" width: 790px" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
+                        <img style=" width: 790px;height: 350px;" [src]="getLinkMedia(filePr.fileStorageId)" alt="Blog Images">
                     </div>
                     <div class="blog-text">
                         <h2>{{blogDetail.name}}</h2>
                         <ul>
                             <!-- <li><a routerLink="/"><i class='bx bxs-user'></i> Admin</a></li> -->
-                            <li><a routerLink="/"><i class='bx bx-calendar-alt'></i> {{blogDetail.creationTime| date:'dd-mm-yyyy'}}</a></li>
+                            <li><a routerLink="/"><i class='bx bx-calendar-alt'></i> {{blogDetail.creationTime| date:'dd-MM-yyyy'}}</a></li>
                         </ul>
                         <div *ngFor="let details of blogDetail.blogDetails | orderBy: 'code'">
                             <h3>{{details.name}}</h3>

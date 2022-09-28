@@ -245,7 +245,7 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("OrderIndex")
+                    b.Property<int?>("OrderIndex")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
@@ -265,6 +265,9 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Code")
                         .HasColumnType("int");
@@ -322,7 +325,7 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Phone")
+                    b.Property<int?>("Phone")
                         .HasColumnType("int");
 
                     b.Property<string>("Shopee")
@@ -1074,13 +1077,13 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("NumberOfReview")
+                    b.Property<int?>("NumberOfReview")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("PriceSale")
+                    b.Property<decimal?>("PriceSale")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductCode")
@@ -1089,13 +1092,13 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("ProductPropertyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StarRating")
+                    b.Property<int?>("StarRating")
                         .HasColumnType("int");
 
                     b.Property<int?>("Status")
@@ -1104,7 +1107,7 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("TradeMarkId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ViewCount")
+                    b.Property<int?>("ViewCount")
                         .HasColumnType("int");
 
                     b.Property<int?>("isHot")
@@ -3792,7 +3795,7 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.FeedBackFile", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Feedback", "Feedback")
-                        .WithMany("FeedBackFile")
+                        .WithMany("FeedBackFiles")
                         .HasForeignKey("FeedBackId");
 
                     b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
@@ -4240,7 +4243,7 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Feedback", b =>
                 {
-                    b.Navigation("FeedBackFile");
+                    b.Navigation("FeedBackFiles");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>

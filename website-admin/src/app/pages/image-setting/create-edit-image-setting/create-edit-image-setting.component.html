@@ -2,7 +2,7 @@
     <div class="container-edit my-4">
       <div class="card">
         <div class="card-header bg-white">
-          Thâm Hình Ảnh
+          Thêm Hình Ảnh
         </div>
         <div class="row p-3">
           
@@ -96,6 +96,41 @@
                 type="button"
                 class="btn btn-add-more"
                 (click)="addProduct('BannerHeader')"
+                [disabled]="disableSave">
+                <div class="icon-add mr-2"></div>
+                Add more file
+              </button>
+            </div>
+          </div>
+
+          <div class="col-6 mt-2">
+            <nz-form-item class="w-100">
+              <nz-form-label>Logo</nz-form-label>
+              <nz-form-control>
+                <div *ngFor="let item of bannerLogo; index as i" class="d-flex align-items-center" >
+                  <upload-file
+                    name="imageSetting{{ i }}"
+                    [(ngModel)]="item.fileStorageId"
+                    style="float: left"
+                    [autoUpload]="true"
+                    [typeFile]="'Logo'"
+                    [accept]="'.jpg, .jpeg, .png, .bmp, .gif'" 
+                  ></upload-file>
+                  <button
+                    *ngIf="vm.imageSetting !== null"
+                    mat-icon-button
+                    type="button"
+                    (click)="removeLogo(item)">
+                    <div class="icon-delete-red size-14"></div>
+                  </button>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div class="d-flex align-items-center justify-content-between" *ngIf="this.bannerLogo.length <1">
+              <button
+                type="button"
+                class="btn btn-add-more"
+                (click)="addLogo('Logo')"
                 [disabled]="disableSave">
                 <div class="icon-add mr-2"></div>
                 Add more file

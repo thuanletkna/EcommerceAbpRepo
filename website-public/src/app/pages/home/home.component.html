@@ -1,4 +1,4 @@
-<header></header>
+<!-- <header></header> -->
 <swipe-header></swipe-header>
 <!-- <div style="background-color: #fafdff;">
   <div class="container">
@@ -408,10 +408,6 @@
   </div>
 </div>
 
-
-
-
-
 <div class="testimonial-area pt-70 pb-70" >
   <div class="container-fluid">
     <div class="row">
@@ -420,7 +416,7 @@
             <div class="scetion-title text-center">
               <!-- <span>Testimonial</span> -->
               <h2>Đánh giá từ khách hàng</h2>
-              <p>What indication best sick be project proposal in attempt, train of the showed some a forth. That homeless, won't many of goals thoughts volumes felt.</p>
+              <p>Vuonhoala luôn quan tâm tới trải nghiệm của khách hàng, với tiêu chí mang đến sự hài lòng khi trao tới tận tay những bó hoa tươi tắn nhất cho khách hàng.</p>
             </div>
               <swiper  
               [spaceBetween]="100"
@@ -457,34 +453,20 @@
                 delay: 5000,
                 disableOnInteraction: false
               }"
-              
               class="mySwiper"
             >
               <ng-template swiperSlide class="pt-45" *ngFor="let items of feedbacks">
-
                 <div class="testimonial-img">
                   <div class="testimonial-bg-shape">
                       <img src="assets/img/testimonial/bg-shape.png" alt="Testimonial Images">
                   </div>
-    
                   <div class="testominail-man" *ngFor="let image of items.feedBackFiles">
                       <img style="width:330px;height:330px;"  [src]="getLinkMedia(image.fileStorageId)" alt="Testimonial Shape">
                   </div>
               </div>
-
-
-
-                
               </ng-template>
             </swiper>
-
-
-          
       </div>
-
-
-
-        
     </div>
   </div>
 </div>

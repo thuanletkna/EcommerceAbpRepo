@@ -13,6 +13,14 @@
           </div>
           <div class="col-12">
             <nz-form-item>
+              <nz-form-label nzRequired>{{ '::Địa chỉ' | abpLocalization }}</nz-form-label>
+              <nz-form-control>
+                <input nz-input name="address" type="text" [(ngModel)]="vm.address" required>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-12">
+            <nz-form-item>
               <nz-form-label nzRequired>{{ '::Zalo' | abpLocalization }}</nz-form-label>
               <nz-form-control>
                 <input nz-input name="zalo" type="text" [(ngModel)]="vm.zalo" required>

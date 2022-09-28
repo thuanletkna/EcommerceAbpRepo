@@ -29,4 +29,10 @@ export class HomePageConfigService {
         method: 'GET',
     });
   }
+  getLogo(): Observable<HomePageConfigDto[]> {
+    return this.restService.request({
+        url: `/api/app/home-page-config/image-logo`,
+        method: 'GET',
+    });
+  }
 }

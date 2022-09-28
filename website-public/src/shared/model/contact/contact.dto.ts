@@ -1,5 +1,4 @@
 import { ListBaseDto } from "../list-base.dto";
-
 export interface ContactDto extends ListBaseDto {
     descriptions?: string;
     phone?:number;
@@ -7,4 +6,5 @@ export interface ContactDto extends ListBaseDto {
     facebook?:string;
     zalo?:string;
     shopee?:string;
+    address?:string;
 }

@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace EcommerceSourceAbp.Migrations
 {
     [DbContext(typeof(EcommerceSourceAbpDbContext))]
-    [Migration("20220912071409_CreateContactAndFeedback")]
-    partial class CreateContactAndFeedback
+    [Migration("20220928180651_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,16 +182,11 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("FileStorageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
 
                     b.HasIndex("FileStorageId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("AppBlogFiles", (string)null);
                 });
@@ -252,7 +247,7 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("OrderIndex")
+                    b.Property<int?>("OrderIndex")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
@@ -272,6 +267,9 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Code")
                         .HasColumnType("int");
@@ -329,8 +327,8 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<string>("Shopee")
                         .HasColumnType("nvarchar(max)");
@@ -1081,13 +1079,13 @@ namespace EcommerceSourceAbp.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("NumberOfReview")
+                    b.Property<int?>("NumberOfReview")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("PriceSale")
+                    b.Property<decimal?>("PriceSale")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductCode")
@@ -1096,13 +1094,13 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("ProductPropertyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StarRating")
+                    b.Property<int?>("StarRating")
                         .HasColumnType("int");
 
                     b.Property<int?>("Status")
@@ -1111,7 +1109,7 @@ namespace EcommerceSourceAbp.Migrations
                     b.Property<Guid?>("TradeMarkId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ViewCount")
+                    b.Property<int?>("ViewCount")
                         .HasColumnType("int");
 
                     b.Property<int?>("isHot")
@@ -3753,7 +3751,7 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.BlogFile", b =>
                 {
-                    b.HasOne("EcommerceSourceAbp.Entities.Blog", null)
+                    b.HasOne("EcommerceSourceAbp.Entities.Blog", "Blog")
                         .WithMany("BlogFile")
                         .HasForeignKey("BlogId");
 
@@ -3761,13 +3759,9 @@ namespace EcommerceSourceAbp.Migrations
                         .WithMany()
                         .HasForeignKey("FileStorageId");
 
-                    b.HasOne("EcommerceSourceAbp.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                    b.Navigation("Blog");
 
                     b.Navigation("FileStorage");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.District", b =>
@@ -3803,7 +3797,7 @@ namespace EcommerceSourceAbp.Migrations
             modelBuilder.Entity("EcommerceSourceAbp.Entities.FeedBackFile", b =>
                 {
                     b.HasOne("EcommerceSourceAbp.Entities.Feedback", "Feedback")
-                        .WithMany("FeedBackFile")
+                        .WithMany("FeedBackFiles")
                         .HasForeignKey("FeedBackId");
 
                     b.HasOne("EcommerceSourceAbp.Entities.FileStorage", "FileStorage")
@@ -4251,7 +4245,7 @@ namespace EcommerceSourceAbp.Migrations
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.Feedback", b =>
                 {
-                    b.Navigation("FeedBackFile");
+                    b.Navigation("FeedBackFiles");
                 });
 
             modelBuilder.Entity("EcommerceSourceAbp.Entities.HomePageConfig", b =>

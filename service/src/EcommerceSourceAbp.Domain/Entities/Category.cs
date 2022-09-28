@@ -9,7 +9,7 @@ namespace EcommerceSourceAbp.Entities
     {
         [MaxLength(ListBaseEntityConsts.NameMaxLength)]
         public string Slug { get; set; }
-        public int OrderIndex { get; set; }
+        public int? OrderIndex { get; set; }
         public bool IsBlog { get; set; }
         public ICollection<News> Newses { get; set; }
 

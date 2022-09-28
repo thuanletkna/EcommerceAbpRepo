@@ -1,12 +1,17 @@
 <div class="navbar-area">
-    <div class="mobile-nav">
-        <a routerLink="/" class="logo"><img src="assets/img/footer-logo.png" alt="Logo"></a>
+    <div class="mobile-nav" *ngFor="let items of logo">
+        <ng-container *ngFor="let imagelogo of items.imageSetting">
+            <a routerLink="/" class="logo"><img style="width: 110px;height: 35px;" [src]="getLinkMedia(imagelogo.fileStorageId)" alt="Logo"></a>
+        </ng-container>
     </div>
 
     <div class="main-nav">
         <div class="container">
-            <nav class="navbar navbar-expand-md navbar-light ">
-                <a class="navbar-brand" routerLink="/"><img src="assets/img/logo.png" alt="Logo"></a>
+            <nav class="navbar navbar-expand-md navbar-light " *ngFor="let itemlogo of logo">
+                <ng-container *ngFor="let imageslogo of itemlogo.imageSetting">
+                    <a routerLink="/" class="navbar-brand"><img style="width: 131px;height: 42px;" [src]="getLinkMedia(imageslogo.fileStorageId)" alt="Logo"></a>
+                </ng-container>
+                <!-- <a class="navbar-brand" routerLink="/"><img src="assets/img/logo.png" alt="Logo"></a> -->
 
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto">
